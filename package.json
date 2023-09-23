@@ -1,0 +1,82 @@
+{
+  "name": "md-highlighter",
+  "displayName": "md-highlighter",
+  "description": "Highlighting file formats for molecular dynamics simulation.",
+  "version": "0.0.1",
+  "publisher": "Xufan Gao",
+  "engines": {
+    "vscode": "^1.78.0"
+  },
+  "icon": "./images/benzene.png",
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "rtf",
+      "aliases": ["NAMD topology file", "rtf"],
+      "extensions": [".rtf", ".str", ".inp", ".prm"],
+      "configuration": "./language-configuration.json"
+    },
+    {
+      "id": "pdb",
+      "aliases": ["PDB file syntax highlighting", "pdb"],
+      "extensions": [".pdb"],
+      "configuration": "./language-configuration.json"
+    },
+    {
+      "id": "mol2",
+      "aliases": ["mol2"],
+      "extensions": [".mol2"],
+      "configuration": "./language-configuration.json"
+    },
+    {
+      "id": "sdf",
+      "aliases": ["sdf"],
+      "extensions": [".sdf",".mol"],
+      "configuration": "./language-configuration.json"
+    },
+    {
+      "id": "psf",
+      "aliases": ["psf"],
+      "extensions": [".psf"],
+      "configuration": "./language-configuration.json"
+    },
+    {
+      "id": "in",
+      "aliases": ["in"],
+      "extensions": [".in"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "rtf",
+      "scopeName": "source.rtf",
+      "path": "./syntaxes/rtf.tmLanguage.json"
+    },
+    {
+      "language": "pdb",
+      "scopeName": "source.pdb",
+      "path": "./syntaxes/pdb.tmLanguage.json"
+    },
+    {
+      "language": "mol2",
+      "scopeName": "source.mol2",
+      "path": "./syntaxes/mol2.tmLanguage.json"
+    },
+    {
+      "language": "sdf",
+      "scopeName": "source.sdf",
+      "path": "./syntaxes/sdf.tmLanguage.json"
+    },
+    {
+      "language": "psf",
+      "scopeName": "source.psf",
+      "path": "./syntaxes/psf.tmLanguage.json"
+    },
+    {
+      "language": "in",
+      "scopeName": "source.in",
+      "path": "./syntaxes/in.tmLanguage.json"
+    }]
+  }
+}

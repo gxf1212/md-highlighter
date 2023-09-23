@@ -1,0 +1,49 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Amber or AmberTools (like tleap, parmed) input file",
+  "scopeName": "source.in",
+  "fileTypes": ["in"],
+  "patterns": [
+    {
+      "name": "comment.line.exclamation",
+      "match": "!.*$"
+    },
+    {
+      "name": "comment.line.numbersign",
+      "match": "#.*$"
+    },
+    {
+      "name": "entity.name.tag.asterisk",
+      "match": "^\\s&\\S+"
+    },
+    {
+      "name": "constant.numeric",
+      "match": "\\s+-?\\d+\\.\\d+\\s+|\\s+\\d+\\s+"
+    },
+    {
+      "name": "keyword.md",
+      "match": "\\b(imin|iwrap|irest|ntx|cut|ntb|ntc|ntf|tempi|temp0|ntt|gamma_ln|ig|ntp|pres0|taup|barostat|nstlim|dt|ntpr|ntwx|ntwr)\\b"
+    },
+    {
+      "name": "support.type.format",
+      "match": "\\b(pdb|mol2|prmtop|inpcrd|frcmod|itp|top|gro|psf|rtf)\\b"
+    },
+    {
+      "name": "keyword.tleap",
+      "match": "\\b(source|addAtomTypes|bond|loadamberparams|saveamberparm|solvatebox|addions|savepdb|quit|loadmol2|loadpdb)\\b"
+    },
+    {
+      "//": "not matching + !",
+      "name": "string.ions",
+      "match": "\\b(Na+|Cl-|K+)\\b"
+    },
+    {
+      "name": "keyword.parmed",
+      "match": "\\b(chamber|gromber|writeFrcmod|outparm|parmout)\\b"
+    },
+    {
+      "name": "entity.name.function.asterisk",
+      "match": "^\\S+"
+    }
+  ]
+}

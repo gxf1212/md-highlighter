@@ -1,0 +1,57 @@
+{
+    "name": "sdf",
+    "scopeName": "source.sdf",
+    "fileTypes": ["sdf"],
+    "patterns": [
+        {
+            "//": "float starting from column 1, no other",
+            "match": "^\\d+(\\.\\d+)$",
+            "name": "string.quoted.double.sdf"
+        },
+        {
+            "//": "string starting from column 1, no other",
+            "match": "^(?!\\${4})\\S+$",
+            "name": "string.quoted.double.sdf"
+        },
+        {
+            "//": "string starting from column very later, no other",
+            "match": "^\\s+\\S+$",
+            "name": "support.type.3d.sdf"
+        },
+        {
+            "match": "\\bV2000\\b",
+            "name": "keyword.other.sdf"
+        },
+        {
+            "//": "special string properties, 3/4 strings",
+            "match": "^((\\S+\\s+){2})+\\S+$|^((\\S+\\s+){3})+\\S+$",
+            "name": "string.quoted.double.sdf"
+        },
+        {
+            "//": "END and $$$$",
+            "match": "^M\\s+END$|^\\${4}$",
+            "name": "support.type.end.sdf"
+        },
+        {
+            "match": "^>\\s<.+>$",
+            "name": "keyword.other.sdf"
+        },
+        {
+            "match": "\\s+(-?\\d+\\.\\d+)\\s+(-?\\d+\\.\\d+)\\s+(-?\\d+\\.\\d+)",
+            "name": "constant.numberic.atom-coordinate.sdf"
+        },
+
+        {
+            "match": "\\b([A-Za-z]+)\\b",
+            "name": "string.quoted.element-symbol.sdf"
+        },        
+        {
+            "match": "^\\s+\\d+\\s+\\d+",
+            "name": "entity.name.tag.bond.sdf"
+        },
+        {
+            "match": "(?<=^\\s+\\d+\\s+\\d+)\\s+\\d+",
+            "name": "string.quoted.bond-order.sdf"
+        }
+    ]
+}

@@ -1,0 +1,92 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "PDB file syntax highlighting",
+  "scopeName": "source.pdb",
+  "fileTypes": [
+    "pdb"
+  ],
+  "patterns": [
+    {
+      "begin": "^CRYST|REMARK|HEADER|TITLE|COMPND|SOURCE|KEYWDS|EXPDTA|AUTHOR|REVDAT|JRNL|ORIGX|SCALE\\S*|DBREF\\b",
+      "end": "$",
+      "name": "comment.line.remark.pdb"
+    },
+    {
+      "name": "keyword.pdb",
+      "match": "\\b(ATOM|HETATM)\\b"
+    },
+    {
+      "name": "keyword.other.record-name.pdb",
+      "match": "\\b(CRYST1|TER|END|HELIX|SHEET|SSBOND)\\b"
+    },
+    {
+      "//": "should have begun with ^ATOM\\b|^HETATM\\b",
+      "begin": "\\S+",
+      "end": "$",
+      "patterns": [
+        {
+          "//": "not higlighted",
+          "name": "string.quoted.atom-number.pdb",
+          "match": "(?<=^.{6}).{5}"
+        },
+        {
+          "name": "entity.name.tag.atom-name.pdb",
+          "match": "(?<=^.{12}).{4}"
+        },
+        {
+          "name": "string.unquoted.alternate-location.pdb",
+          "match": "(?<=^.{16}).{1}"
+        },
+        {
+          "name": "support.type.residue-name.pdb",
+          "match": "(?<=^.{17}).{4}"
+        },
+        {
+          "//": "black is ok",
+          "name": "support.chain-id.pdb",
+          "match": "(?<=^.{21}).{1}"
+        },
+        {
+          "name": "variable.other.residue-number.pdb",
+          "match": "(?<=^.{22}).{4}"
+        },
+        {
+          "name": "entity.name.function.code-for-insertions-of-residues.pdb",
+          "match": "(?<=^.{26}).{1}"
+        },
+        {
+          "name": "constant.numeric.x-coordinate.pdb",
+          "match": "(?<=^.{30}).{8}"
+        },
+        {
+          "name": "constant.numeric.y-coordinate.pdb",
+          "match": "(?<=^.{38}).{8}"
+        },
+        {
+          "name": "constant.numeric.z-coordinate.pdb",
+          "match": "(?<=^.{46}).{8}"
+        },
+        {
+          "name": "string.quoted.occupancy.pdb",
+          "match": "(?<=^.{54}).{6}"
+        },
+        {
+          "name": "storage.type.temperature-factor.pdb",
+          "match": "(?<=^.{60}).{6}"
+        },
+        {
+          "name": "entity.name.tag.segment-identifier.pdb",
+          "match": "(?<=^.{72}).{4}"
+        },
+        {
+          "name": "string.quoted.element-symbol.pdb",
+          "match": "(?<=^.{76}).{2}"
+        },
+        {
+          "name": "variable.other.charge.pdb",
+          "match": "(?<=^.{78}).{2}"
+        }
+      ]
+    }
+  ]
+}
