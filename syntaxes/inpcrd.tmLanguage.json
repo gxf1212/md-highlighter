@@ -1,0 +1,16 @@
+{
+    "name": "inpcrd",
+    "scopeName": "source.inpcrd",
+    "fileTypes": ["inpcrd"],
+    "patterns": [
+        {
+            "match": "^\\s\\d+$",
+            "name": "string.quoted.number-of-atom.inpcrd"
+        },
+        {
+            "//": "float",
+            "match": "\\d+\\.\\d+$",
+            "name": "constant.numeric.coordinates.inpcrd"
+        }
+    ]
+}

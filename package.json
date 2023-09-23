@@ -1,9 +1,10 @@
 {
   "name": "md-highlighter",
   "displayName": "md-highlighter",
-  "description": "Highlighting file formats for molecular dynamics simulation.",
+  "description": "Highlighting files about molecular modeling and dynamics simulation.",
   "version": "0.0.1",
   "publisher": "Xufan Gao",
+  "repository": "https://github.com/gxf1212/md-highlighter",
   "engines": {
     "vscode": "^1.78.0"
   },
@@ -14,38 +15,49 @@
   "contributes": {
     "languages": [{
       "id": "rtf",
-      "aliases": ["NAMD topology file", "rtf"],
+      "aliases": ["NAMD force field", "rtf"],
       "extensions": [".rtf", ".str", ".inp", ".prm"],
       "configuration": "./language-configuration.json"
     },
     {
       "id": "pdb",
-      "aliases": ["PDB file syntax highlighting", "pdb"],
+      "aliases": ["PDB file", "pdb"],
       "extensions": [".pdb"],
       "configuration": "./language-configuration.json"
     },
     {
       "id": "mol2",
-      "aliases": ["mol2"],
+      "aliases": ["mol2 file"],
       "extensions": [".mol2"],
       "configuration": "./language-configuration.json"
     },
     {
       "id": "sdf",
-      "aliases": ["sdf"],
+      "aliases": ["sdf file"],
       "extensions": [".sdf",".mol"],
       "configuration": "./language-configuration.json"
     },
     {
       "id": "psf",
-      "aliases": ["psf"],
+      "aliases": ["NAMD topology file"],
       "extensions": [".psf"],
       "configuration": "./language-configuration.json"
     },
     {
       "id": "in",
-      "aliases": ["in"],
+      "aliases": ["Amber in file"],
       "extensions": [".in"],
+      "configuration": "./language-configuration.json"
+    },
+    {
+      "id": "prmtop",
+      "aliases": ["Amber topology file", "prmtop"],
+      "extensions": [".prmtop"],
+      "configuration": "./language-configuration.json"
+    },{
+      "id": "inpcrd",
+      "aliases": ["Amber input coordinate file", "inpcrd"],
+      "extensions": [".inpcrd"],
       "configuration": "./language-configuration.json"
     }],
     "grammars": [{
@@ -77,6 +89,16 @@
       "language": "in",
       "scopeName": "source.in",
       "path": "./syntaxes/in.tmLanguage.json"
+    },
+    {
+      "language": "prmtop",
+      "scopeName": "source.in",
+      "path": "./syntaxes/prmtop.tmLanguage.json"
+    },
+    {
+      "language": "inpcrd",
+      "scopeName": "source.in",
+      "path": "./syntaxes/inpcrd.tmLanguage.json"
     }]
   }
 }

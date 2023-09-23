@@ -1,0 +1,23 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "prmtop",
+    "scopeName": "source.prmtop",
+    "fileTypes": [
+        "prmtop"
+    ],
+    "patterns": [
+        {
+            "match": "VERSION|FLAG|FORMAT",
+            "name": "keyword.prmtop"
+        },
+        {
+            "//": "float",
+            "match": "\\s+\\d+\\.\\d+(\\s+|\\n)$",
+            "name": "constant.numeric.float.prmtop"
+        },
+        {
+            "match": "\\s+\\d+(\\s+|\\n)$",
+            "name": "string.quoted.integer.prmtop"
+        }
+    ]
+}
