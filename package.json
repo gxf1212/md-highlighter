@@ -3,7 +3,7 @@
   "displayName": "md-highlighter",
   "description": "Highlighting files about molecular modeling and dynamics simulation.",
   "version": "0.0.1",
-  "publisher": "Xufan Gao",
+  "publisher": "gxf1212",
   "repository": "https://github.com/gxf1212/md-highlighter",
   "engines": {
     "vscode": "^1.78.0"
