@@ -21,6 +21,11 @@
                     "name": "support.function.field"
                 },
                 {
+                    "//": "not matching",
+                    "match": "(?<=(MOLECULE\\s*\\n))\\S+",
+                    "name": "entity.name.function.molname.mol2"
+                },
+                {
                     "begin": "^@",
                     "end": "$",
                     "name": "string.quoted.orange",
@@ -28,7 +33,7 @@
                     "patterns": [
                         {
                             "match": "(?<=(>))[A-Za-z\\_]+",
-                            "name": "keyword.purple"
+                            "name": "keyword.mol2"
                         }
                     ]
                 },
@@ -36,48 +41,48 @@
                     "//": "\\s+[A-Za-z]+",
                     "begin": "^\\s+[0-9]+",
                     "end": "$",
-                    "name": "constant.character.atom",
+                    "name": "constant.character.atom.mol2",
                     "patterns": [
                         {
                             "//": "the first number is not here at all, but we might not need to highlight it.",
                             "match": "(?<=\\s+)\\d+(?=\\s[a-zA-Z]+)",
-                            "name": "string.quoted.atom-number"
+                            "name": "constant.numeric.atom-number.mol2"
                         },
                         {
                             "match": "(?<=[0-9]+[\\s]+)[a-zA-Z0-9\\']+(?=(\\s+(-?\\d+\\.\\d+)\\s+(-?\\d+\\.\\d+)))",
-                            "name": "variable.other.atom-name"
+                            "name": "variable.other.atom-name.mol2"
                         },
                         {
                             "match": "(?<=(-?\\d+\\.\\d+\\s+-?\\d+\\.\\d+\\s+))[a-zA-Z0-9\\_\\.]+((?=([\\s]+[0-9]+[\\s]+[a-zA-Z0-9\\_]+[\\s]+[\\.0-9\\-]+[\\s\\*]*$))|(?=[\\s]*$))",
-                            "name": "keyword.atom-type"
+                            "name": "support.type.atom-type.mol2"
                         },
                         {
                             "match": "(?<=\\s+)\\d+(?=\\s)",
-                            "name": "variable.other.residue-number"
+                            "name": "variable.other.residue-number.mol2"
                         },
                         {
                             "//": "support.other",
                             "match": "(?<=[0-9]+[\\s]+)[a-zA-Z0-9\\_]+(?=([\\s]+[\\-0-9]+[0-9\\.]+[\\s\\*]*$))",
-                            "name": "entity.name.type.residue-name"
+                            "name": "entity.name.type.residue-name.mol2"
                         },
                         {
                             "match": "(-?\\d+\\.\\d+)(?<=$)",
-                            "name": "variable.other.charge.pdb"
+                            "name": "string.quoted.charge.mol2"
                         }
                     ]
                 },
                 {
                     "//": "the first number is not here at all, but we might not need to highlight it.",
                     "match": "(?<=^\\s+)[0-9]+(?<=\\s+[0-9]+\\s+[0-9]+\\s+[0-9a-z]+$)",
-                    "name": "string.quoted.bond-number"
+                    "name": "string.quoted.bond-number.mol2"
                 },
                 {
                     "match": "(?<=^\\s+[0-9]+\\s+)[0-9]+(?<=\\s+[0-9a-z]+$)",
-                    "name": "variable.other.atom-number"
+                    "name": "variable.other.atom-number.mol2"
                 },
                 {
                     "match": "(?<=^\\s+[0-9]+\\s+[0-9]+\\s+[0-9]+\\s+)\\S+(?<=$)",
-                    "name": "keyword.other.bond-type"
+                    "name": "keyword.other.bond-type.mol2"
                 }
             ]
         }

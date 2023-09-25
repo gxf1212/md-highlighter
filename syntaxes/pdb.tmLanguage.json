@@ -7,7 +7,7 @@
   ],
   "patterns": [
     {
-      "begin": "^CRYST|REMARK|HEADER|TITLE|COMPND|SOURCE|KEYWDS|EXPDTA|AUTHOR|REVDAT|JRNL|ORIGX|SCALE\\S*|DBREF\\b",
+      "begin": "^(CRYST|REMARK|HEADER|TITLE|COMPND|SOURCE|KEYWDS|EXPDTA|AUTHOR|REVDAT|JRNL|ORIGX|SCALE\\S*|DBREF)\\b",
       "end": "$",
       "name": "comment.line.remark.pdb"
     },
@@ -26,7 +26,7 @@
       "patterns": [
         {
           "//": "not higlighted",
-          "name": "string.quoted.atom-number.pdb",
+          "name": "constant.numeric.atom-number.pdb",
           "match": "(?<=^.{6}).{5}"
         },
         {
@@ -38,12 +38,11 @@
           "match": "(?<=^.{16}).{1}"
         },
         {
-          "name": "support.type.residue-name.pdb",
+          "name": "entity.name.type.residue-name.pdb",
           "match": "(?<=^.{17}).{4}"
         },
         {
-          "//": "black is ok",
-          "name": "support.chain-id.pdb",
+          "name": "support.type.chain-id.pdb",
           "match": "(?<=^.{21}).{1}"
         },
         {
@@ -75,7 +74,7 @@
           "match": "(?<=^.{60}).{6}"
         },
         {
-          "name": "entity.name.tag.segment-identifier.pdb",
+          "name": "support.type.segment-name.pdb",
           "match": "(?<=^.{72}).{4}"
         },
         {

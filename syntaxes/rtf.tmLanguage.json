@@ -19,13 +19,14 @@
             "match": "^\\s*\\*.*"
         },
         {
-            "//": "all floats. put this before atom type. integers like dihedral n is not here",
+            "//": "all floats, charge, mass, etc. put this before atom type. integers like dihedral n is not here",
+            "/ ": "with \\b( )\\b, cannot match minus sign...",
             "name": "constant.numberic.rtf",
-            "match": "\\b(-?\\d+\\.\\d*)\\b"
+            "match": "-?\\d+\\.\\d*"
         },
         {
             "name": "keyword.rtf",
-            "match": "\\b(MASS|RESI|PRES|DELETE|ATOM|BOND|ANGLE(S)?|DIHE(DRAL)?|IMPR|(?i)IC|ACCE(PTOR)?|DONO(R)?|DOUBLE|DOUB|(?i)PATC(H)?|PATCHING|LONEPAIR|COLI|DIST|SCAL|DECL|DEFA|AUTO|FIRS|LAST|first|last|default)\\b"
+            "match": "\\b(MASS|RESI|PRES|DELETE|ATOM|BOND|ANGLE(S)?|DIHE(DRAL)?|IMPR|(?i)IC|BILD|ACCE(PTOR)?|DONO(R)?|DOUBLE|DOUB|(?i)PATC(H)?|PATCHING|LONEPAIR|COLI|DIST|SCAL|DECL|DEFA|AUTO|FIRS|LAST|first|last|default)\\b"
         },
         {
             "name": "keyword.prm",
@@ -42,7 +43,7 @@
         {
             "//": "floats in lines starting with those keywords",
             "name": "constant.numeric.rtf",
-            "match": "(?<=\\b(MASS|ATOM|RESI|PRES|IC|LONEPAIR)\\b.*?)\\b(-?\\d+\\.\\d*)\\b"
+            "match": "(?<=\\b(MASS|ATOM|RESI|PRES|IC|BILD|LONEPAIR)\\b.*?)\\b(-?\\d+\\.\\d*)\\b"
         },
         {
             "//": "the number after MASS, all -1, or 1,2,3...",
@@ -62,8 +63,9 @@
         {
             "//": "the several words after a keyword",
             "note": "bond: variable length of pairs; impr: four strings",
+            "///": "Maybe atom names can be de",
             "name": "entity.name.tag.atom.rtf",
-            "match": "(?<=\\bATOM\\s*)\\S+|(?<=\\bBOND\\s*)(\\S+\\s+\\S+\\s*)+|(?<=\\bANGLE\\s*)((\\S+\\s*){3})+|(?<=\\bIMPR\\s*)((\\S+\\s*){4})+|(?<=\\bCMAP\\s*)((\\S+\\s*){8})+|(?<=\\b\\s*(?i)IC\\s*)(\\S+\\s+){4}"
+            "match": "(?<=\\bATOM\\s*)\\S+|(?<=\\bBOND\\s*)(\\S+\\s+\\S+\\s*)+|(?<=\\bANGLE\\s*)((\\S+\\s*){3})+|(?<=\\bIMPR\\s*)((\\S+\\s*){4})+|(?<=\\bCMAP\\s*)((\\S+\\s*){8})+|(?<=\\b\\s*(?i)IC\\s*)(\\S+\\s+){4}|(?<=\\b\\s*BILD\\s*)(\\S+\\s+){4}"
         },
         {
             "//": "the several words after a keyword.",
@@ -76,9 +78,9 @@
             "match": "(?<=\\bDECL\\s*)(?:[+-]\\S+\\s*)|(?<=\\bDEFA\\s*)((\\S+\\s*){4})+|(?<=\\bLONEPAIR\\s+\\S+\\s+)\\S+\\s+\\S+\\s+\\S+"
         },
         {
-            "//": "all strings made up of capitalized letters and numbers. matching a lot of remaining strings...including dihedral n",
+            "//": "all strings made up of capitalized letters (in special files there are lower case letters) and numbers. matching a lot of remaining strings...including dihedral n",
             "name": "support.type.atomtype.prm",
-            "match": "\\b([A-Z0-9]+)\\b"
+            "match": "\\b([A-Za-z0-9]+)\\b"
         },
         {
             "//": "a special type",

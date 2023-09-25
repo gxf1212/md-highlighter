@@ -7,17 +7,118 @@
     ],
     "patterns": [
         {
-            "match": "VERSION|FLAG|FORMAT",
+            "match": "\\%VERSION|\\%FLAG|\\%FORMAT",
             "name": "keyword.prmtop"
         },
         {
+            "match": "(?<=\\%FORMAT)\\S+",
+            "name": "support.type.format.prmtop"
+        },
+        {
             "//": "float",
-            "match": "\\s+\\d+\\.\\d+(\\s+|\\n)$",
+            "match": "\\s+-?\\d+\\.\\d*",
             "name": "constant.numeric.float.prmtop"
         },
         {
-            "match": "\\s+\\d+(\\s+|\\n)$",
-            "name": "string.quoted.integer.prmtop"
+            "match": "\\s+-?\\d+",
+            "name": "constant.numeric.integer.prmtop"
+        },
+        {
+            "//": "(?<=E[+-])\\d\\d",
+            "match": "E[+-]\\d\\d",
+            "name": "entity.name.function.exponential.prmtop"
+        },     
+        {
+            "begin": "ATOM\\_NAME\\s+\\n",
+            "end": "CHARGE",
+            "//": "\\%FORMAT",
+            "patterns": [                
+                {
+                    "name": "keyword.prmtop",
+                    "match": "\\%VERSION|\\%FLAG|\\%FORMAT"
+                },
+                {
+                    "//": "use \\S+ instead of \\b([A-Z0-9a-z+-]+)\\b to include names with '+-",
+                    "match": "(?<=\\%FORMAT)\\S+",
+                    "name": "support.type.format.prmtop"
+                },
+                {
+                    "match": "\\S+",
+                    "name": "entity.name.tag.atom-name.prmtop"
+                }
+            ]
+        },
+        {
+            "begin": "ATOMIC\\_NUMBER\\s+\\n",
+            "end": "MASS",
+            "patterns": [                
+                {
+                    "name": "keyword.prmtop",
+                    "match": "\\%VERSION|\\%FLAG|\\%FORMAT"
+                },
+                {
+                    "match": "(?<=\\%FORMAT)\\S+",
+                    "name": "support.type.format.prmtop"
+                },
+                {
+                    "match": "\\b\\d+\\b",
+                    "name": "constant.numeric.atom-name.prmtop"
+                }
+            ]
+        },
+        {
+            "begin": "MASS\\s+\\n",
+            "end": "ATOM\\_TYPE\\_INDEX",
+            "name": "string.quoted.prmtop",
+            "patterns": [
+                {
+                    "name": "keyword.prmtop",
+                    "match": "\\%VERSION|\\%FLAG|\\%FORMAT"
+                },
+                {
+                    "match": "(?<=\\%FORMAT)\\S+",
+                    "name": "support.type.format.prmtop"
+                }
+            ]
+        },  
+        {
+            "begin": "RESIDUE\\_LABEL\\s+\\n",
+            "end": "RESIDUE\\_POINTER",
+            "//": "values of fields",
+            "patterns": [
+                {
+                    "name": "keyword.prmtop",
+                    "match": "\\%VERSION|\\%FLAG|\\%FORMAT"
+                },
+                {
+                    "match": "(?<=\\%FORMAT)\\S+",
+                    "name": "support.type.format.prmtop"
+                },
+                {
+                    "//": "todo: according to protein residue type?",
+                    "match": "\\S+",
+                    "name": "entity.name.type.residue-name.prmtop"
+                }
+            ]
+        },
+        {
+            "begin": "AMBER\\_ATOM\\_TYPE\\s+\\n",
+            "end": "TREE\\_CHAIN\\_CLASSIFICATION",
+            "//": "values of fields",
+            "patterns": [
+                {
+                    "name": "keyword.prmtop",
+                    "match": "\\%VERSION|\\%FLAG|\\%FORMAT"
+                },
+                {
+                    "match": "(?<=\\%FORMAT)\\S+",
+                    "name": "support.type.format.prmtop"
+                },
+                {
+                    "match": "\\S+",
+                    "name": "support.type.atom-type.prmtop"
+                }
+            ]
         }
     ]
 }

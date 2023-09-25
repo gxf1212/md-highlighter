@@ -56,7 +56,7 @@
       "configuration": "./language-configuration.json"
     },{
       "id": "inpcrd",
-      "aliases": ["Amber input coordinate file", "inpcrd"],
+      "aliases": ["Amber coordinate file", "inpcrd"],
       "extensions": [".inpcrd"],
       "configuration": "./language-configuration.json"
     }],
@@ -92,12 +92,12 @@
     },
     {
       "language": "prmtop",
-      "scopeName": "source.in",
+      "scopeName": "source.prmtop",
       "path": "./syntaxes/prmtop.tmLanguage.json"
     },
     {
       "language": "inpcrd",
-      "scopeName": "source.in",
+      "scopeName": "source.inpcrd",
       "path": "./syntaxes/inpcrd.tmLanguage.json"
     }]
   }
