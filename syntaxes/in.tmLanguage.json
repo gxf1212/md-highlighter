@@ -25,25 +25,29 @@
       "match": "\\b(imin|iwrap|irest|ntx|cut|ntb|ntc|ntf|tempi|temp0|ntt|gamma_ln|ig|ntp|pres0|taup|barostat|nstlim|dt|ntpr|ntwx|ntwr)\\b"
     },
     {
-      "name": "support.type.format",
+      "name": "entity.name.function.format",
       "match": "\\b(pdb|mol2|prmtop|inpcrd|frcmod|itp|top|gro|psf|rtf)\\b"
     },
     {
       "name": "keyword.tleap",
-      "match": "\\b(source|addAtomTypes|bond|loadamberparams|saveamberparm|solvatebox|addions|savepdb|quit|loadmol2|loadpdb)\\b"
+      "match": "\\b(source|loadmol2|loadpdb|addAtomTypes|bond|combine|loadamberparams|loadAmberPrep|charge|solvatebox|addIons(2|Rand)|savepdb|saveamberparm|quit)\\b"
+    },
+    {
+      "name": "string.quoted.leap",
+      "match": "\\b(leaprc.\\S+)\\b"
     },
     {
       "//": "not matching + !",
-      "name": "string.ions",
-      "match": "\\b(Na+|Cl-|K+)\\b"
+      "name": "string.other.ions",
+      "match": "\\b(Na+|Cl-|K+|Al3+|Mg2+|Ca2+)\\b"
     },
     {
       "name": "keyword.parmed",
       "match": "\\b(chamber|gromber|writeFrcmod|outparm|parmout)\\b"
     },
     {
-      "name": "entity.name.function.asterisk",
-      "match": "^\\S+"
+      "name": "support.type.variable",
+      "match": "^\\S+(?=\\s*=)"
     }
   ]
 }

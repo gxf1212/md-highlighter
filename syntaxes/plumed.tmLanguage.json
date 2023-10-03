@@ -1,0 +1,42 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "plumed",
+    "scopeName": "source.plumed",
+    "fileTypes": [
+        "plumed"
+    ],
+    "patterns": [
+        {
+            "name": "comment.line.plumed",
+            "match": "^\\#.*$"
+        },
+        {
+            "name": "string.quoted.action.plumed",
+            "match": "\\b(GROUP|MOLINFO|PRINT|ANGLE|TORSION|DISTANCE|COM|GYRATION|VOLUME)\\b"
+        },
+        {
+            "name": "string.quoted.bias.plumed",
+            "match": "\\b(LOWER_WALLS|UPPER_WALLS)\\b"
+        },
+        {
+            "name": "keyword.common.plumed",
+            "match": "\\b(ATOMS|ARG|FILE|STRIDE|NDX_FILE|NDX_GROUP|RESTRAINT|METAD)\\b"
+        },
+        {
+            "name": "support.type.argument.plumed",
+            "match": "\\b(AT|KAPPA|EXP|EPS|OFFSET)\\b"
+        },
+        {
+            "name": "variable.name.argument.plumed",
+            "match": "^\\S+(?=:)"
+        },
+        {
+            "name": "variable.name.plumed",
+            "match": "(?<=(ARG|ATOMS|FILE)=)\\S+(?=\\s+)"
+        },
+        {
+            "name": "constant.numeric.plumed",
+            "match": "-?\\d+\\.?\\d*"
+        }
+    ]
+}

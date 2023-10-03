@@ -7,7 +7,7 @@
   ],
   "patterns": [
     {
-      "begin": "^(CRYST|REMARK|HEADER|TITLE|COMPND|SOURCE|KEYWDS|EXPDTA|AUTHOR|REVDAT|JRNL|ORIGX|SCALE\\S*|DBREF)\\b",
+      "begin": "^(CRYST|REMARK|HEADER|TITLE|COMPND|SOURCE|KEYWDS|EXPDTA|AUTHOR|REVDAT|JRNL|ORIGX|SCALE\\S*|DBREF|CONECT|MASTER)\\b",
       "end": "$",
       "name": "comment.line.remark.pdb"
     },
@@ -16,6 +16,7 @@
       "match": "\\b(ATOM|HETATM)\\b"
     },
     {
+      "//": "not for MODEL ENDMDL",
       "name": "keyword.other.record-name.pdb",
       "match": "\\b(CRYST1|TER|END|HELIX|SHEET|SSBOND)\\b"
     },

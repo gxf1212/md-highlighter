@@ -4,21 +4,14 @@ All notable changes to the "md-highlighter" extension will be documented in this
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## [Unreleased]
+## 0.x
 
-Users appreciate release notes as you update your extension.
+### 0.0.1
 
-### 1.0.0
+- initial release
 
-Initial release of ...
+### 0.0.2
 
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
+- add .parm7 and .rst7, and plumed
+- fix and clear the code
 

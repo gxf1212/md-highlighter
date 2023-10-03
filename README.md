@@ -8,7 +8,9 @@ Supported format:
 
 - NAMD: rtf, pdb, prm, psf, str, inp
 - Amber: in, prmtop, inpcrd
+- PLUMED: .plumed.dat
 - small molecule: sdf, mol2 (modified from gromacs helper), ...
+- upcoming: (AmberTools leap), lib, frcmod
 
 For gromacs-related files, please install `gromacs-helper`. For VMD, install `TCL`. For Gaussian, install `Gaussian Input File (gjf)`. But maybe I'll make my own syntaxes.
 
@@ -51,10 +53,11 @@ But different file types might rendered with different colors...
 ## Known Issues
 
 - PDB: recognize lines starting with ATOM or HETATM by `"begin"` and `"end"`?
-- PSF: ATOM and BOND is not highlighted. Be careful that psf formats in vmd and charmm-gui are different
+- PSF: ATOM and BOND are not highlighted.
 - RTF: the structure depiction after ! is italic...
 - MOL2: number of atoms/bonds (2nd line); atom number not matched
-- atom names may contain `'`, `+`, `-`
+- atom names with `'`, `+`, `-` in them are matched by `\\S+`
+- Amber .in files include various types; some files have a common prefix instead of suffix
 
 TODO:
 

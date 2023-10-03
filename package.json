@@ -2,7 +2,7 @@
   "name": "md-highlighter",
   "displayName": "md-highlighter",
   "description": "Highlighting files about molecular modeling and dynamics simulation.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "gxf1212",
   "repository": "https://github.com/gxf1212/md-highlighter",
   "engines": {
@@ -52,12 +52,17 @@
     {
       "id": "prmtop",
       "aliases": ["Amber topology file", "prmtop"],
-      "extensions": [".prmtop"],
+      "extensions": [".prmtop", "parm7"],
       "configuration": "./language-configuration.json"
     },{
       "id": "inpcrd",
       "aliases": ["Amber coordinate file", "inpcrd"],
-      "extensions": [".inpcrd"],
+      "extensions": [".inpcrd", "rst7"],
+      "configuration": "./language-configuration.json"
+    },{
+      "id": "plumed",
+      "aliases": ["plumed data file", "plumed"],
+      "extensions": [".plumed.dat"],
       "configuration": "./language-configuration.json"
     }],
     "grammars": [{
@@ -99,6 +104,11 @@
       "language": "inpcrd",
       "scopeName": "source.inpcrd",
       "path": "./syntaxes/inpcrd.tmLanguage.json"
+    },
+    {
+      "language": "plumed",
+      "scopeName": "source.plumed",
+      "path": "./syntaxes/plumed.tmLanguage.json"
     }]
   }
 }
