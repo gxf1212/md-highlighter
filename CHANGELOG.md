@@ -15,3 +15,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - add .parm7 and .rst7, and plumed
 - fix and clear the code
 
+### 0.0.3
+
+- add prepin (Amber residue topology), frcmod (Amber parameter file)
+

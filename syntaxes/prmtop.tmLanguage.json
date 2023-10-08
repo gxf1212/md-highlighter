@@ -29,9 +29,9 @@
             "name": "entity.name.function.exponential.prmtop"
         },     
         {
-            "begin": "ATOM\\_NAME\\s+\\n",
+            "begin": "ATOM\\_NAME",
             "end": "CHARGE",
-            "//": "\\%FORMAT",
+            "//": "\\%FORMAT;\\s+\\n",
             "patterns": [                
                 {
                     "name": "keyword.prmtop",

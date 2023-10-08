@@ -1,0 +1,47 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "frcmod",
+    "scopeName": "source.frcmod",
+    "fileTypes": [
+        "frcmod"
+    ],
+    "patterns": [
+        {
+            "name": "comment.line.frcmod",
+            "match": "[sS]ame as.*$|Using the default.*$|(?i)remark.*$|(?i)from.*$|ff.*$|!.*$|#.*$"
+        },
+        {
+            "//": "This for mass/bond/angle, 2 floats.",
+            "name": "comment.line.mass-nonbon.frcmod",
+            "match": "(?<=^(\\s*\\S+|(\\S+\\s*-\\s*){1}\\S+|(\\S+\\s*-\\s*){2}\\S+)(\\s*-?\\d*\\.\\d*){2}\\s*).*$"
+        },
+        {
+            "//": "This for dihe/impr, 3 floats + 1 optional digit.",
+            "name": "comment.line.mass-nonbon.frcmod",
+            "match": "(?<=^(\\S+\\s*-\\s*){3}\\S+(\\s*\\d+)?(\\s*-?\\d*\\.\\d*){3}\\s*).*$"
+        },
+        {
+            "match": "MASS|BOND|ANGL(E)?|DIHE(DRAL)?|IMPROPER|IMPR|NONB(ON)?(D)?(ED)?|^CMAP|\\%FLAG",
+            "name": "keyword.frcmod"
+        },
+        {
+            "//": "bug: some files write values as integers...",
+            "match": "\\s+-?\\d*\\.\\d*",
+            "name": "constant.numeric.float.frcmod"
+        },
+        {
+            "//": "dihedral, the last two numbers",
+            "match": "(?<=(-?\\d*\\.\\d*|-?\\d*\\.\\d*\\s*\\d+))\\s+-?\\d+",
+            "name": "constant.numeric.integer.frcmod"
+        },
+        {
+            "//": "integer after dihedral, and cmap",
+            "name": "string.quoted.integer.frcmod",
+            "match": "(?<=^(\\S+\\s*-\\s*){3}\\S+\\s*)\\d+(?=\\s+-?\\d*\\.\\d*)|(?<=^\\%FLAG\\s*\\S+\\s*)\\d+(?=\\s*$)"
+        },
+        {
+            "name": "support.type.atom-type.frcmod",
+            "match": "(?<=^)(\\S+\\s*-\\s*){1}\\S+|(?<=\\s*)\\S+|(?<=^)(\\S+\\s*-\\s*){2}\\S+|(?<=^)(\\S+\\s*-\\s*){3}\\S+"
+        }
+    ]
+}

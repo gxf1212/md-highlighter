@@ -79,7 +79,7 @@
         },
         {
             "//": "all strings made up of capitalized letters (in special files there are lower case letters) and numbers. matching a lot of remaining strings...including dihedral n",
-            "name": "support.type.atomtype.prm",
+            "name": "support.type.atom-type.prm",
             "match": "\\b([A-Za-z0-9]+)\\b"
         },
         {

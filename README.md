@@ -7,10 +7,10 @@
 Supported format: 
 
 - NAMD: rtf, pdb, prm, psf, str, inp
-- Amber: in, prmtop, inpcrd
+- Amber: in, prmtop, inpcrd, prepin, frcmod
 - PLUMED: .plumed.dat
 - small molecule: sdf, mol2 (modified from gromacs helper), ...
-- upcoming: (AmberTools leap), lib, frcmod
+- upcoming: (AmberTools leap), lib,...
 
 For gromacs-related files, please install `gromacs-helper`. For VMD, install `TCL`. For Gaussian, install `Gaussian Input File (gjf)`. But maybe I'll make my own syntaxes.
 

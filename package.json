@@ -2,7 +2,7 @@
   "name": "md-highlighter",
   "displayName": "md-highlighter",
   "description": "Highlighting files about molecular modeling and dynamics simulation.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "publisher": "gxf1212",
   "repository": "https://github.com/gxf1212/md-highlighter",
   "engines": {
@@ -44,6 +44,12 @@
       "configuration": "./language-configuration.json"
     },
     {
+      "id": "plumed",
+      "aliases": ["plumed data file", "plumed"],
+      "extensions": [".plumed.dat"],
+      "configuration": "./language-configuration.json"
+    },
+    {
       "id": "in",
       "aliases": ["Amber in file"],
       "extensions": [".in"],
@@ -54,15 +60,24 @@
       "aliases": ["Amber topology file", "prmtop"],
       "extensions": [".prmtop", "parm7"],
       "configuration": "./language-configuration.json"
-    },{
+    },
+    {
       "id": "inpcrd",
       "aliases": ["Amber coordinate file", "inpcrd"],
       "extensions": [".inpcrd", "rst7"],
       "configuration": "./language-configuration.json"
-    },{
-      "id": "plumed",
-      "aliases": ["plumed data file", "plumed"],
-      "extensions": [".plumed.dat"],
+    },
+    {
+      "id": "prepin",
+      "aliases": ["prepin file", "prepin"],
+      "extensions": [".prepin", ".prepi"],
+      "configuration": "./language-configuration.json"
+    },
+    {
+      "id": "frcmod",
+      "aliases": ["frcmod file", "frcmod"],
+      "extensions": [".frcmod"],
+      "filenamePatterns": ["frcmod.*"],
       "configuration": "./language-configuration.json"
     }],
     "grammars": [{
@@ -91,6 +106,11 @@
       "path": "./syntaxes/psf.tmLanguage.json"
     },
     {
+      "language": "plumed",
+      "scopeName": "source.plumed",
+      "path": "./syntaxes/plumed.tmLanguage.json"
+    },
+    {
       "language": "in",
       "scopeName": "source.in",
       "path": "./syntaxes/in.tmLanguage.json"
@@ -106,9 +126,14 @@
       "path": "./syntaxes/inpcrd.tmLanguage.json"
     },
     {
-      "language": "plumed",
-      "scopeName": "source.plumed",
-      "path": "./syntaxes/plumed.tmLanguage.json"
+      "language": "prepin",
+      "scopeName": "source.prepin",
+      "path": "./syntaxes/prepin.tmLanguage.json"
+    },
+    {
+      "language": "frcmod",
+      "scopeName": "source.frcmod",
+      "path": "./syntaxes/frcmod.tmLanguage.json"
     }]
   }
 }

@@ -41,7 +41,7 @@
                     "//": "begin: the first number",
                     "begin": "\\d+",
                     "end": "$",
-                    "name": "constant.character.atom.mol2",
+                    "name": "constant.character.coordinates.mol2",
                     "patterns": [
                         {
                             "//": "the first number is not here at all, but we might not need to highlight it.",
@@ -58,6 +58,7 @@
                             "name": "support.type.atom-type.mol2"
                         },
                         {
+                            "//": "string.quoted. matching bond column two??",
                             "match": "(?<=\\s+)\\d+(?=\\s)",
                             "name": "variable.other.residue-number.mol2"
                         },
