@@ -41,7 +41,7 @@
         {
             "//": "avoid the following three numbers",
             "name": "keyword.tree-symbol.prepin",
-            "match": "(?<=\\d+\\s+\\S+\\s+\\S+\\s+)[EMBS3456](?!\\s+-?\\d*\\.\\d*|\\s+-?\\d*\\s+-?\\d*\\.\\d*)"
+            "match": "(?<=\\s+\\d+\\s+\\S+\\s+\\S+\\s+)[EMBS3456](?!\\s+-?\\d*\\.\\d*|\\s+-?\\d*\\s+-?\\d*\\.\\d*)"
         },
         {
             "match": "(?<=-?\\d*\\.\\d*)\\s+-?\\d*\\.\\d*(?=$)",

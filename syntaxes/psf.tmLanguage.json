@@ -66,11 +66,11 @@
                     "match": "(?<=^\\s+\\d+\\s+\\S+\\s+\\d+\\s+\\S+\\s+\\S+\\s+)\\b[A-Z0-9]+\\b(?=\\s+(-?\\d+\\.\\d*(E-01)?)\\s+(-?\\d+\\.\\d*)\\s+\\d+$)"
                 },
                 {
-                    "name": "constant.numeric.charge.psf",
+                    "name": "string.quoted.charge.psf",
                     "match": "(?<=^\\s+\\d+\\s+\\S+\\s+\\d+\\s+\\S+\\s+\\S+\\s+\\b[A-Z0-9]+\\b\\s+)(-?\\d+\\.\\d*(E-01)?)(?=\\s+(-?\\d+\\.\\d*)\\s+\\d+$)"
                 },
                 {
-                    "name": "string.atomic-mass.psf",
+                    "name": "constant.numeric.atomic-mass.psf",
                     "match": "(?<=^\\s+\\d+\\s+\\S+\\s+\\d+\\s+\\S+\\s+\\S+\\s+\\b[A-Z0-9]+\\b\\s+(-?\\d+\\.\\d*(E-01)?)\\s+)(-?\\d+\\.\\d*)(?=\\s+\\d+$)"
                 },
                 {

@@ -1,0 +1,28 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "atp",
+    "scopeName": "source.atp",
+    "fileTypes": [
+        "atp"
+    ],
+    "patterns": [
+        {
+            "name": "comment.line.semicolon",
+            "match": ";.*$"
+        },
+        {
+            "name": "constant.numberic.atp",
+            "match": "-?\\d+\\.\\d*"
+        },
+        {
+            "//": "all strings made up of capitalized letters and numbers. matching a lot of remaining strings...including dihedral n",
+            "name": "support.type.atom-type.atp",
+            "match": "\\b([A-Za-z0-9_]+)\\b"
+        },
+        {
+            "//": "in special files there are lower case letters",
+            "name": "support.type.atomtype.atp",
+            "match": "\\b(amber.*)\\b"
+        }
+    ]
+}

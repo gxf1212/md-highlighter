@@ -2,7 +2,7 @@
   "name": "md-highlighter",
   "displayName": "md-highlighter",
   "description": "Highlighting files about molecular modeling and dynamics simulation.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "publisher": "gxf1212",
   "repository": "https://github.com/gxf1212/md-highlighter",
   "engines": {
@@ -26,27 +26,9 @@
       "configuration": "./language-configuration.json"
     },
     {
-      "id": "mol2",
-      "aliases": ["mol2 file"],
-      "extensions": [".mol2"],
-      "configuration": "./language-configuration.json"
-    },
-    {
-      "id": "sdf",
-      "aliases": ["sdf file"],
-      "extensions": [".sdf",".mol"],
-      "configuration": "./language-configuration.json"
-    },
-    {
       "id": "psf",
       "aliases": ["NAMD topology file"],
       "extensions": [".psf"],
-      "configuration": "./language-configuration.json"
-    },
-    {
-      "id": "plumed",
-      "aliases": ["plumed data file", "plumed"],
-      "extensions": [".plumed.dat"],
       "configuration": "./language-configuration.json"
     },
     {
@@ -79,6 +61,42 @@
       "extensions": [".frcmod"],
       "filenamePatterns": ["frcmod.*"],
       "configuration": "./language-configuration.json"
+    },
+    {
+      "id": "atp",
+      "aliases": ["Gromacs atomtype file"],
+      "extensions": [".atp"],
+      "configuration": "./language-configuration.json"
+    },
+    {
+      "id": "rtp",
+      "aliases": ["Gromacs residue type file"],
+      "extensions": [".rtp"],
+      "configuration": "./language-configuration.json"
+    },
+    {
+      "id": "mtp",
+      "aliases": ["Gromacs atomtype file"],
+      "extensions": [".mtp"],
+      "configuration": "./language-configuration.json"
+    },
+    {
+      "id": "mol2",
+      "aliases": ["mol2 file"],
+      "extensions": [".mol2"],
+      "configuration": "./language-configuration.json"
+    },
+    {
+      "id": "sdf",
+      "aliases": ["sdf file"],
+      "extensions": [".sdf",".mol"],
+      "configuration": "./language-configuration.json"
+    },
+    {
+      "id": "plumed",
+      "aliases": ["plumed data file", "plumed"],
+      "extensions": [".plumed.dat"],
+      "configuration": "./language-configuration.json"
     }],
     "grammars": [{
       "language": "rtf",
@@ -91,24 +109,9 @@
       "path": "./syntaxes/pdb.tmLanguage.json"
     },
     {
-      "language": "mol2",
-      "scopeName": "source.mol2",
-      "path": "./syntaxes/mol2.tmLanguage.json"
-    },
-    {
-      "language": "sdf",
-      "scopeName": "source.sdf",
-      "path": "./syntaxes/sdf.tmLanguage.json"
-    },
-    {
       "language": "psf",
       "scopeName": "source.psf",
       "path": "./syntaxes/psf.tmLanguage.json"
-    },
-    {
-      "language": "plumed",
-      "scopeName": "source.plumed",
-      "path": "./syntaxes/plumed.tmLanguage.json"
     },
     {
       "language": "in",
@@ -134,6 +137,36 @@
       "language": "frcmod",
       "scopeName": "source.frcmod",
       "path": "./syntaxes/frcmod.tmLanguage.json"
+    },
+    {
+      "language": "atp",
+      "scopeName": "source.atp",
+      "path": "./syntaxes/atp.tmLanguage.json"
+    },
+    {
+      "language": "rtp",
+      "scopeName": "source.rtp",
+      "path": "./syntaxes/rtp.tmLanguage.json"
+    },
+    {
+      "language": "mtp",
+      "scopeName": "source.mtp",
+      "path": "./syntaxes/mtp.tmLanguage.json"
+    },
+    {
+      "language": "mol2",
+      "scopeName": "source.mol2",
+      "path": "./syntaxes/mol2.tmLanguage.json"
+    },
+    {
+      "language": "sdf",
+      "scopeName": "source.sdf",
+      "path": "./syntaxes/sdf.tmLanguage.json"
+    },
+    {
+      "language": "plumed",
+      "scopeName": "source.plumed",
+      "path": "./syntaxes/plumed.tmLanguage.json"
     }]
   }
 }

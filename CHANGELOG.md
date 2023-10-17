@@ -19,3 +19,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - add prepin (Amber residue topology), frcmod (Amber parameter file)
 
+### 0.0.4
+
+- add atp (Gromacs atom type), rtp (Gromacs residue type), mtp (pmx mutation type)
+- `string` for charges
+

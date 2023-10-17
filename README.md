@@ -8,8 +8,9 @@ Supported format:
 
 - NAMD: rtf, pdb, prm, psf, str, inp
 - Amber: in, prmtop, inpcrd, prepin, frcmod
-- PLUMED: .plumed.dat
+- Gromacs: atp, rtp, mtp (pmx), ...
 - small molecule: sdf, mol2 (modified from gromacs helper), ...
+- PLUMED: .plumed.dat
 - upcoming: (AmberTools leap), lib,...
 
 For gromacs-related files, please install `gromacs-helper`. For VMD, install `TCL`. For Gaussian, install `Gaussian Input File (gjf)`. But maybe I'll make my own syntaxes.
@@ -19,6 +20,8 @@ Tested in theme "Atom One Light".
 This extension is created with the help of ChatGPT and New Bing.
 
 ## Gallery
+
+Install to explore more file types!
 
 ![ph-pdb](https://cdn.jsdelivr.net/gh/gxf1212/md-highlighter@master/images/pdb.png)
 
@@ -43,7 +46,8 @@ This extension is created with the help of ChatGPT and New Bing.
 - constant.numeric.atom-number
 - entity.name.tag.atom-name
 - support.type.atom-type
-- constant.numeric.charge (except mol2)
+- constant.numeric.mass
+- string.quoted.charge (rtf,psf,mol2,prepi, except rtf)
 - string.quoted.element-symbol
 - support.type.segment-name (except psf)
 - entity.name.function: a different kind of blue
@@ -56,12 +60,19 @@ But different file types might rendered with different colors...
 - PSF: ATOM and BOND are not highlighted.
 - RTF: the structure depiction after ! is italic...
 - MOL2: number of atoms/bonds (2nd line); atom number not matched
-- atom names with `'`, `+`, `-` in them are matched by `\\S+`
-- Amber .in files include various types; some files have a common prefix instead of suffix
+- atom names
+  - with `'`, `+`, `-` in them are matched by `\\S+` but not `[A-Z+-']`
+  - not always start with numbers (`-?\\+?[A-Z]+[0-9]*[A-Z0-9_]*`)
+  - MTP: the last word in rotations
+- Amber .in files include various types; so do Gromacs .itp file
+- PRMTOP: E-01, normal `constant`?
+- MTP/RTP: cannot match the last atom name?
+- not fully tested files for OPLS series and more force field, where naming conventions might be different
 
 TODO:
 
 - add self-defined colors for aminoacids types (polar, nonpolar, etc.)
+- add self-defined colors like pink, etc.
 
 ## Release Notes
 

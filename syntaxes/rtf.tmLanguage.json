@@ -19,12 +19,6 @@
             "match": "^\\s*\\*.*"
         },
         {
-            "//": "all floats, charge, mass, etc. put this before atom type. integers like dihedral n is not here",
-            "/ ": "with \\b( )\\b, cannot match minus sign...",
-            "name": "constant.numberic.rtf",
-            "match": "-?\\d+\\.\\d*"
-        },
-        {
             "name": "keyword.rtf",
             "match": "\\b(MASS|RESI|PRES|DELETE|ATOM|BOND|ANGLE(S)?|DIHE(DRAL)?|IMPR|(?i)IC|BILD|ACCE(PTOR)?|DONO(R)?|DOUBLE|DOUB|(?i)PATC(H)?|PATCHING|LONEPAIR|COLI|DIST|SCAL|DECL|DEFA|AUTO|FIRS|LAST|first|last|default)\\b"
         },
@@ -52,13 +46,18 @@
         },
         {
             "//": "element symbol in MASS line",
-            "name": "string.quoted.element-symbol.pdb",
+            "name": "string.quoted.element-symbol.rtf",
             "match": "(?<=^MASS\\s+-?\\d+\\s+\\S+\\s+\\b(-?\\d+\\.\\d*)\\b\\s+)\\S+"
         },
         {
             "//": "the word after RESI|PRES",
             "name": "entity.name.type.resname.rtf",
             "match": "(?<=\\b(RESI|PRES)\\s)\\S+"
+        },
+        {
+            "//": "the number after RESI|PRES resname",
+            "name": "string.quoted.charge.rtf",
+            "match": "(?<=\\b(RESI|PRES)\\s+\\S+\\s+)-?\\d+.\\d+"
         },
         {
             "//": "the several words after a keyword",
@@ -76,6 +75,13 @@
             "//": "rarer keywords",
             "name": "entity.name.tag.atom.rtf",
             "match": "(?<=\\bDECL\\s*)(?:[+-]\\S+\\s*)|(?<=\\bDEFA\\s*)((\\S+\\s*){4})+|(?<=\\bLONEPAIR\\s+\\S+\\s+)\\S+\\s+\\S+\\s+\\S+"
+        },        
+        {
+            "//": "all floats, charge, mass, etc. put this before atom type. integers like dihedral n is not here",
+            "//": "with \\b( )\\b, cannot match minus sign...",
+            "//": "after charge, before atom-type.prm, otherwise overwritten...",
+            "name": "constant.numberic.rtf",
+            "match": "-?\\d+\\.\\d*"
         },
         {
             "//": "all strings made up of capitalized letters (in special files there are lower case letters) and numbers. matching a lot of remaining strings...including dihedral n",
