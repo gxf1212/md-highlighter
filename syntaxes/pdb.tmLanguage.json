@@ -12,21 +12,16 @@
       "name": "comment.line.remark.pdb"
     },
     {
-      "name": "keyword.pdb",
-      "match": "\\b(ATOM|HETATM)\\b"
-    },
-    {
       "//": "not for MODEL ENDMDL",
       "name": "keyword.other.record-name.pdb",
       "match": "\\b(CRYST1|TER|END|HELIX|SHEET|SSBOND)\\b"
     },
     {
-      "//": "should have begun with ^ATOM\\b|^HETATM\\b",
-      "begin": "\\S+",
+      "begin": "^ATOM  |^HETATM",
       "end": "$",
+      "name": "keyword.atom.pdb",
       "patterns": [
         {
-          "//": "not higlighted",
           "name": "constant.numeric.atom-number.pdb",
           "match": "(?<=^.{6}).{5}"
         },

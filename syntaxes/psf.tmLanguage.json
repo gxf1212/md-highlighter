@@ -26,8 +26,8 @@
         },
         {
             "begin": "(!NATOM\\s*$)", 
-            "end": "(bonds\\s*$)",
-            "//": "no need to add ^\\s*\\d+\\s+ before, enabling it to highlight this number (still needs another definition for that before NBOND)!",
+            "end": "(!NBOND)",
+            "name": "keyword.atom.psf",
             "//": "atom names use \\S+ instead of \\b[A-Z0-9]+\\b to include names with '",
             "//": "format: atomid segname resid resname atomname atomtype charge mass unknown",
             "//": "^\\s+\\d+\\s+\\S+\\s+\\d+\\s+\\S+\\s+\\S+\\s+\\b[A-Z0-9]+\\b\\s+(-?\\d+\\.\\d*(E-01)?)\\s+(-?\\d+\\.\\d*)\\s+\\d+$",

@@ -24,3 +24,9 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - add atp (Gromacs atom type), rtp (Gromacs residue type), mtp (pmx mutation type)
 - `string` for charges
 
+### 0.0.5
+
+- add Amber leaprc.*, lib/off, ac file; Gromacs gro file
+- fixed mol2,frcmod bugs
+- fixed pdb/psf highlight by section (begin/end but keyword cannot be highlighted) problem
+

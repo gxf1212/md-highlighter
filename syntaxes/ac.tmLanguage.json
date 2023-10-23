@@ -1,0 +1,104 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Amber ac file",
+  "scopeName": "source.ac",
+  "fileTypes": [
+    "ac"
+  ],
+  "patterns": [
+    {
+      "name": "keyword.ac",
+      "match": "\\b(CHARGE|Formula)\\b"
+    },
+    {
+      "match": "(?<=CHARGE|Formula).*$",
+      "name": "comment.line.remark.ac"
+    },
+    {
+      "begin": "^ATOM  |^HETATM",
+      "end": "$",
+      "name": "keyword.atom.ac",
+      "patterns": [
+        {
+          "name": "constant.numeric.atom-number.ac",
+          "match": "(?<=^.{6}).{5}"
+        },
+        {
+          "name": "entity.name.tag.atom-name.ac",
+          "match": "(?<=^.{12}).{4}"
+        },
+        {
+          "name": "string.unquoted.alternate-location.ac",
+          "match": "(?<=^.{16}).{1}"
+        },
+        {
+          "name": "entity.name.type.residue-name.ac",
+          "match": "(?<=^.{17}).{4}"
+        },
+        {
+          "name": "support.type.chain-id.ac",
+          "match": "(?<=^.{21}).{1}"
+        },
+        {
+          "name": "variable.other.residue-number.ac",
+          "match": "(?<=^.{22}).{4}"
+        },
+        {
+          "name": "entity.name.function.code-for-insertions-of-residues.ac",
+          "match": "(?<=^.{26}).{1}"
+        },
+        {
+          "name": "constant.numeric.x-coordinate.ac",
+          "match": "(?<=^.{30}).{8}"
+        },
+        {
+          "name": "constant.numeric.y-coordinate.ac",
+          "match": "(?<=^.{38}).{8}"
+        },
+        {
+          "name": "constant.numeric.z-coordinate.ac",
+          "match": "(?<=^.{46}).{8}"
+        },
+        {
+          "name": "string.quoted.charge.ac",
+          "match": "(?<=^.{55}).{10}"
+        },
+        {
+          "name": "support.type.atom-type.ac",
+          "match": "(?<=^.{68}).{6}"
+        }
+      ]
+    },
+    {
+      "begin": "^BOND",
+      "end": "$",
+      "name": "keyword.bond.ac",
+      "patterns": [
+        {
+          "name": "string.other.bond-number.acconstant.numeric.atom-number.ac",
+          "match": "(?<=^.{6}).{4}"
+        },
+        {
+          "name": "constant.numeric.atom-number1.ac",
+          "match": "(?<=^.{10}).{5}"
+        },
+        {
+          "name": "constant.numeric.atom-number2.ac",
+          "match": "(?<=^.{15}).{5}"
+        },
+        {
+          "name": "entity.name.function.bond-type.ac",
+          "match": "(?<=^.{20}).{5}"
+        },
+        {
+          "name": "entity.name.tag.atom-name1.ac",
+          "match": "(?<=^.{26}).{6}"
+        },
+        {
+          "name": "entity.name.tag.atom-name2.ac",
+          "match": "(?<=^.{32}).{4}"
+        }
+      ]
+    }
+  ]
+}

@@ -1,47 +1,101 @@
 {
-    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-    "name": "frcmod",
-    "scopeName": "source.frcmod",
-    "fileTypes": [
-        "frcmod"
-    ],
-    "patterns": [
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "frcmod",
+  "scopeName": "source.frcmod",
+  "fileTypes": [
+    "frcmod"
+  ],
+  "patterns": [
+    {
+      "match": "MASS|BOND|ANGL(E)?|DIHE(DRAL)?|IMPROPER|IMPR|NONB(ON)?(D)?(ED)?|^CMAP|\\%FLAG|END|SOURCE\\d",
+      "name": "keyword.frcmod"
+    },
+    {
+      "//": "We don't want to include the number in begin, so the last \\s+ might be a space after an atomtype",
+      "//": "I know atomtypes can only be 1/2 characters long",
+      "//": "bug: some files like OPLS write values as integers/nothing after point",
+      "begin": "^[A-Za-z0-9*]+[ ]*-[A-Za-z0-9*]+[ ]*-[A-Za-z0-9*]+[ ]*-[A-Za-z0-9*]+[ ]*\\s+",
+      "end": "$",
+      "name": "support.type.atom-type.dihedral.frcmod",
+      "patterns": [
         {
-            "name": "comment.line.frcmod",
-            "match": "[sS]ame as.*$|Using the default.*$|(?i)remark.*$|(?i)from.*$|ff.*$|!.*$|#.*$"
+          "//": "sometimes k = .25, cannot be shown as constant...",
+          "//": "sometimes phi = 180",
+          "match": "\\s*\\d+(?=\\s+-?\\d*\\.\\d*\\s+(-?\\d+\\.\\d*|\\d+))",
+          "name": "variable.other.redundancy.frcmod"
         },
         {
-            "//": "This for mass/bond/angle, 2 floats.",
-            "name": "comment.line.mass-nonbon.frcmod",
-            "match": "(?<=^(\\s*\\S+|(\\S+\\s*-\\s*){1}\\S+|(\\S+\\s*-\\s*){2}\\S+)(\\s*-?\\d*\\.\\d*){2}\\s*).*$"
+          "match": "(?<=\\s+\\d+\\s+-?\\d*\\.\\d*\\s+(-?\\d+\\.\\d*|\\d+)\\s+)-?\\d+",
+          "name": "string.quoted.dihedral-n.frcmod"
         },
         {
-            "//": "This for dihe/impr, 3 floats + 1 optional digit.",
-            "name": "comment.line.mass-nonbon.frcmod",
-            "match": "(?<=^(\\S+\\s*-\\s*){3}\\S+(\\s*\\d+)?(\\s*-?\\d*\\.\\d*){3}\\s*).*$"
+          "//": "all previous in this line, correspond to above. sometimes no nonbond, only one number",
+          "match": "(?<=^[A-Za-z0-9*]+[ ]*-[A-Za-z0-9*]+[ ]*-[A-Za-z0-9*]+[ ]*-[A-Za-z0-9*]+[ ]*(\\s+\\d+)?\\s+-?\\d*\\.\\d*\\s+(-?\\d+\\.\\d*|\\d+)\\s+-?\\d+.?\\d*).*$",
+          "name": "comment.line.dihedral-improper.frcmod"
         },
         {
-            "match": "MASS|BOND|ANGL(E)?|DIHE(DRAL)?|IMPROPER|IMPR|NONB(ON)?(D)?(ED)?|^CMAP|\\%FLAG",
-            "name": "keyword.frcmod"
-        },
-        {
-            "//": "bug: some files write values as integers...",
-            "match": "\\s+-?\\d*\\.\\d*",
-            "name": "constant.numeric.float.frcmod"
-        },
-        {
-            "//": "dihedral, the last two numbers",
-            "match": "(?<=(-?\\d*\\.\\d*|-?\\d*\\.\\d*\\s*\\d+))\\s+-?\\d+",
-            "name": "constant.numeric.integer.frcmod"
-        },
-        {
-            "//": "integer after dihedral, and cmap",
-            "name": "string.quoted.integer.frcmod",
-            "match": "(?<=^(\\S+\\s*-\\s*){3}\\S+\\s*)\\d+(?=\\s+-?\\d*\\.\\d*)|(?<=^\\%FLAG\\s*\\S+\\s*)\\d+(?=\\s*$)"
-        },
-        {
-            "name": "support.type.atom-type.frcmod",
-            "match": "(?<=^)(\\S+\\s*-\\s*){1}\\S+|(?<=\\s*)\\S+|(?<=^)(\\S+\\s*-\\s*){2}\\S+|(?<=^)(\\S+\\s*-\\s*){3}\\S+"
+          "match": "\\b(-?\\d*\\.\\d*)\\b|\\b\\d+\\b",
+          "name": "constant.numeric.parameter.frcmod"
         }
-    ]
+      ]
+    },
+    {
+      "//": "angle incorrectly matches dihedral/... section",
+      "begin": "^[A-Za-z0-9*]+[ ]*-[A-Za-z0-9*]+[ ]*-[A-Za-z0-9*]+[ ]*\\s+",
+      "end": "$",
+      "name": "support.type.atom-type.angle.frcmod",
+      "patterns": [
+        {
+          "match": "(?<=^[A-Za-z0-9*]+[ ]*-[A-Za-z0-9*]+[ ]*-[A-Za-z0-9*]+[ ]*\\s+-?\\d*\\.\\d*\\s+-?\\d*\\.\\d*).*$",
+          "name": "comment.line.angle.frcmod"
+        },
+        {
+          "match": "\\b(-?\\d*\\.\\d*)\\b|\\b\\d+\\b",
+          "name": "constant.numeric.parameter.frcmod"
+        }
+      ]
+    },
+    {
+      "//": "bond incorrectly matches angle/... section",
+      "begin": "^[A-Za-z0-9*]+[ ]*-[A-Za-z0-9*]+[ ]*\\s+",
+      "end": "$",
+      "name": "support.type.atom-type.bond.frcmod",
+      "patterns": [
+        {
+          "match": "(?<=^[A-Za-z0-9*]+[ ]*-[A-Za-z0-9*]+[ ]*\\s+-?\\d*\\.\\d*\\s+-?\\d*\\.\\d*).*$",
+          "name": "comment.line.angle.frcmod"
+        },
+        {
+          "match": "\\b(-?\\d*\\.\\d*)\\b|\\b\\d+\\b",
+          "name": "constant.numeric.parameter.frcmod"
+        }
+      ]
+    },
+    {
+      "//": "atom incorrectly matches bond/angle/... section or comment",
+      "//": "ions may also contain +- but no bond/angle/...",
+      "begin": "^\\s*[A-Za-z0-9*+-]+\\s+",
+      "end": "$",
+      "name": "support.type.atom-type.atom.frcmod",
+      "patterns": [
+        {
+          "match": "\\b(-?\\d*\\.\\d*)\\b",
+          "name": "constant.numeric.parameter.frcmod"
+        },
+        {
+          "//": "after float but not starting with number",
+          "match": "(?<=-?\\d*\\.\\d*\\s+)[a-zA-Z#!;\\$].*$",
+          "name": "comment.line.mass-nonbon.frcmod"
+        }
+      ]
+    },
+    {
+      "match": "\\s+-?\\d*\\.\\d*",
+      "name": "constant.numeric.cmap-float.frcmod"
+    },
+    {
+      "name": "string.quoted.cmap-integer.frcmod",
+      "match": "(?<=^\\%FLAG\\s*\\S+\\s*)\\d+(?=\\s*$)"
+    }
+  ]
 }

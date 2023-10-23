@@ -8,7 +8,7 @@ Supported format:
 
 - NAMD: rtf, pdb, prm, psf, str, inp
 - Amber: in, prmtop, inpcrd, prepin, frcmod
-- Gromacs: atp, rtp, mtp (pmx), ...
+- Gromacs: gro, atp, rtp, mtp (pmx), ...
 - small molecule: sdf, mol2 (modified from gromacs helper), ...
 - PLUMED: .plumed.dat
 - upcoming: (AmberTools leap), lib,...
@@ -41,14 +41,17 @@ Install to explore more file types!
 
 ## Conventions
 
-- variable.other.residue-number (except psf)
+- variable.other.residue-number (except psf,gro)
 - entity.name.type.residue-name
-- constant.numeric.atom-number
+- constant.numeric.atom-number (except gro,lib)
 - entity.name.tag.atom-name
 - support.type.atom-type
 - constant.numeric.mass
+- constant.numeric.coordinate
 - string.quoted.charge (rtf,psf,mol2,prepi, except rtf)
 - string.quoted.element-symbol
+- string.quoted.bond-number
+- string.quoted.velocity
 - support.type.segment-name (except psf)
 - entity.name.function: a different kind of blue
 
@@ -56,16 +59,17 @@ But different file types might rendered with different colors...
 
 ## Known Issues
 
-- PDB: recognize lines starting with ATOM or HETATM by `"begin"` and `"end"`?
-- PSF: ATOM and BOND are not highlighted.
+- **Are the files too colorful?**
+- PDB: CONNECT and TER highlight later terms
 - RTF: the structure depiction after ! is italic...
-- MOL2: number of atoms/bonds (2nd line); atom number not matched
 - atom names
   - with `'`, `+`, `-` in them are matched by `\\S+` but not `[A-Z+-']`
   - not always start with numbers (`-?\\+?[A-Z]+[0-9]*[A-Z0-9_]*`)
   - MTP: the last word in rotations
 - Amber .in files include various types; so do Gromacs .itp file
 - PRMTOP: E-01, normal `constant`?
+- FRCMOD: I know atomtypes can only be 1/2 characters long. Matching with this may solve the mismatching problem
+- LIB: later section not read and implemented
 - MTP/RTP: cannot match the last atom name?
 - not fully tested files for OPLS series and more force field, where naming conventions might be different
 
@@ -73,6 +77,7 @@ TODO:
 
 - add self-defined colors for aminoacids types (polar, nonpolar, etc.)
 - add self-defined colors like pink, etc.
+- sdf file?
 
 ## Release Notes
 

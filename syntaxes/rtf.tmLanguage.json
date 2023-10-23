@@ -84,7 +84,12 @@
             "match": "-?\\d+\\.\\d*"
         },
         {
-            "//": "all strings made up of capitalized letters (in special files there are lower case letters) and numbers. matching a lot of remaining strings...including dihedral n",
+            "//": "dihedral n",
+            "name": "string.quoted.dihedral-n.prm",
+            "match": "(?<=-?\\d+\\.\\d*\\s+)\\d(?=\\s+-?\\d+\\.\\d*)"
+        },
+        {
+            "//": "all strings made up of capitalized letters (in special files there are lower case letters) and numbers. matching a lot of remaining strings...put them before this!",
             "name": "support.type.atom-type.prm",
             "match": "\\b([A-Za-z0-9]+)\\b"
         },

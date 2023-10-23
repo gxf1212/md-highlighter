@@ -2,7 +2,7 @@
   "name": "md-highlighter",
   "displayName": "md-highlighter",
   "description": "Highlighting files about molecular modeling and dynamics simulation.",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "publisher": "gxf1212",
   "repository": "https://github.com/gxf1212/md-highlighter",
   "engines": {
@@ -35,6 +35,7 @@
       "id": "in",
       "aliases": ["Amber in file"],
       "extensions": [".in"],
+      "filenamePatterns": ["leaprc.*"],
       "configuration": "./language-configuration.json"
     },
     {
@@ -51,15 +52,33 @@
     },
     {
       "id": "prepin",
-      "aliases": ["prepin file", "prepin"],
+      "aliases": ["Amber prepin file", "prepin"],
       "extensions": [".prepin", ".prepi"],
       "configuration": "./language-configuration.json"
     },
     {
       "id": "frcmod",
-      "aliases": ["frcmod file", "frcmod"],
+      "aliases": ["Amber parameter file", "frcmod"],
       "extensions": [".frcmod"],
-      "filenamePatterns": ["frcmod.*"],
+      "filenamePatterns": ["frcmod.*", "parm*.dat", "*parm.dat", "gaff*.dat", "lipid*.dat", "GLYCAM*.dat"],
+      "configuration": "./language-configuration.json"
+    },
+    {
+      "id": "lib",
+      "aliases": ["Amber topology type file"],
+      "extensions": [".lib", ".off"],
+      "configuration": "./language-configuration.json"
+    },
+    {
+      "id": "ac",
+      "aliases": ["Antechamber file"],
+      "extensions": [".ac", ".AC"],
+      "configuration": "./language-configuration.json"
+    },
+    {
+      "id": "gro",
+      "aliases": ["Gromacs coordinate file"],
+      "extensions": [".gro"],
       "configuration": "./language-configuration.json"
     },
     {
@@ -94,7 +113,7 @@
     },
     {
       "id": "plumed",
-      "aliases": ["plumed data file", "plumed"],
+      "aliases": ["plumed input file", "plumed"],
       "extensions": [".plumed.dat"],
       "configuration": "./language-configuration.json"
     }],
@@ -137,6 +156,21 @@
       "language": "frcmod",
       "scopeName": "source.frcmod",
       "path": "./syntaxes/frcmod.tmLanguage.json"
+    },
+    {
+      "language": "lib",
+      "scopeName": "source.lib",
+      "path": "./syntaxes/lib.tmLanguage.json"
+    },
+    {
+      "language": "ac",
+      "scopeName": "source.ac",
+      "path": "./syntaxes/ac.tmLanguage.json"
+    },
+    {
+      "language": "gro",
+      "scopeName": "source.gro",
+      "path": "./syntaxes/gro.tmLanguage.json"
     },
     {
       "language": "atp",

@@ -24,7 +24,7 @@
             "name": "constant.numeric.integer.prmtop"
         },
         {
-            "//": "(?<=E[+-])\\d\\d",
+            "//": "use constant as itp?",
             "match": "E[+-]\\d\\d",
             "name": "entity.name.function.exponential.prmtop"
         },     
