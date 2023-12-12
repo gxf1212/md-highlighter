@@ -30,3 +30,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - fixed mol2,frcmod bugs
 - fixed pdb/psf highlight by section (begin/end but keyword cannot be highlighted) problem
 
+### 0.0.6
+
+- add hdb, r2b, tdb, arn
+

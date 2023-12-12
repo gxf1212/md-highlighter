@@ -1,0 +1,47 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "Gromacs terminal database",
+    "scopeName": "source.tdb",
+    "fileTypes": [
+        "tdb"
+    ],
+    "patterns": [
+        {
+            "name": "comment.line.semicolon",
+            "match": ";.*$"
+        },
+		{
+			"//": "section",
+			"match": "\\[.*\\]",
+			"name": "entity.name.class"
+		},
+        {
+            "//": "deltete (one space); replace (before type mass charge)",
+            "name": "entity.name.tag.atom-name.tdb",
+            "match": "(?<=^\\s)[0-9]*[A-Z]+[A-Z0-9_']*|[0-9]*[A-Z]+[A-Z0-9_']*(?=\\s+[0-9]*[A-Z]+[A-Z0-9_'*]*\\s+-?\\d+\\.\\d*)"
+        },
+        {
+            "//": "add (4/5, after two numbers), improper (4)",
+            "name": "entity.name.tag.atom-name2.tdb",
+            "match": "(\\s*-?\\+?[0-9]*[A-Z]+[A-Z0-9_'\\+]*){4}(\\s*-?\\+?[0-9]*[A-Z]+[A-Z0-9_'\\+]*)?"
+        },
+        {
+            "//": "after atom name, match any of these strings",
+            "name": "support.type.atom-type.tdb",
+            "match": "[0-9]*[A-Z]+[A-Z0-9_'*]*(?=\\s+-?\\d+\\.\\d*)"
+        },
+        {
+            "name": "constant.numeric.atomic-mass.tdb",
+            "match": "(?<=[0-9]*[A-Z]+[A-Z0-9_'*]*\\s+)-?\\d+\\.\\d*"
+        },
+        {
+            "name": "string.quoted.charge.tdb",
+            "match": "(?<=[0-9]*[A-Z]+[A-Z0-9_'*]*\\s+-?\\d+\\.\\d*\\s+)-?\\d+\\.\\d*"
+        },
+		{
+			"//": "number",
+			"match": "(\\b|\\-)\\d+\\.?\\d*([eE][\\+\\-]?\\d+)?",
+			"name": "constant.language.tdb"
+		}
+    ]
+}

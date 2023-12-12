@@ -20,11 +20,11 @@
         },
         {
             "name": "keyword.rtf",
-            "match": "\\b(MASS|RESI|PRES|DELETE|ATOM|BOND|ANGLE(S)?|DIHE(DRAL)?|IMPR|(?i)IC|BILD|ACCE(PTOR)?|DONO(R)?|DOUBLE|DOUB|(?i)PATC(H)?|PATCHING|LONEPAIR|COLI|DIST|SCAL|DECL|DEFA|AUTO|FIRS|LAST|first|last|default)\\b"
+            "match": "\\b(MASS|RESI|PRES|DELETE|ATOM|BOND|ANGLE(S)?|DIHE(DRAL)?|IMPR|IMPH|(?i)IC|BILD|ACCE(PTOR)?|DONO(R)?|DOUBLE|DOUB|(?i)PATC(H)?|PATCHING|LONEPAIR|COLI|DIST|SCAL|DECL|DEFA|AUTO|FIRS|LAST|first|last|default)\\b"
         },
         {
             "name": "keyword.prm",
-            "match": "(MASS|ATOMS|BONDS|ANGLES|DIHEDRALS|IMPROPERS|CMAP|NONBONDED|NBFIX|HBOND|CUTHB)"
+            "match": "(MASS|ATOMS|BONDS|ANGLES|DIHEDRALS|IMPROPER(S)?|CMAP|NONBONDED|NBFIX|HBOND|CUTHB)"
         },
         {
             "name": "entity.name.section.prm",
@@ -64,7 +64,7 @@
             "note": "bond: variable length of pairs; impr: four strings",
             "///": "Maybe atom names can be de",
             "name": "entity.name.tag.atom.rtf",
-            "match": "(?<=\\bATOM\\s*)\\S+|(?<=\\bBOND\\s*)(\\S+\\s+\\S+\\s*)+|(?<=\\bANGLE\\s*)((\\S+\\s*){3})+|(?<=\\bIMPR\\s*)((\\S+\\s*){4})+|(?<=\\bCMAP\\s*)((\\S+\\s*){8})+|(?<=\\b\\s*(?i)IC\\s*)(\\S+\\s+){4}|(?<=\\b\\s*BILD\\s*)(\\S+\\s+){4}"
+            "match": "(?<=\\bATOM\\s*)\\S+|(?<=\\bBOND\\s*)(\\S+\\s+\\S+\\s*)+|(?<=\\bANGLE\\s*)((\\S+\\s*){3})+|(?<=\\bIMPR\\s*)((\\S+\\s*){4})+|(?<=\\bIMPH\\s*)((\\S+\\s*){4})+|(?<=\\bCMAP\\s*)((\\S+\\s*){8})+|(?<=\\b\\s*(?i)IC\\s*)(\\S+\\s+){4}|(?<=\\b\\s*BILD\\s*)(\\S+\\s+){4}"
         },
         {
             "//": "the several words after a keyword.",

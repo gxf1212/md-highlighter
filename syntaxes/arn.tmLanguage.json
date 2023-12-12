@@ -1,0 +1,33 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "arn",
+    "scopeName": "source.arn",
+    "fileTypes": [
+        "arn"
+    ],
+    "patterns": [
+        {
+            "name": "comment.line.semicolon",
+            "match": ";.*$"
+        },
+        {
+            "name": "constant.numberic.arn",
+            "match": "-?\\d+\\.\\d*"
+        },
+        {
+            "//": "the word after RESI|PRES",
+            "name": "entity.name.type.residue-name.rtf",
+            "match": "(?<=^\\s*)\\S+"
+        },
+        {
+            "//": "add (4/5, after two numbers), improper (4)",
+            "name": "entity.name.tag.atom-name.tdb",
+            "match": "(?<=^\\s*\\S+\\s*)[0-9]*[A-Z]+[A-Z0-9_'*]*"
+        },
+        {
+            "//": "all strings made up of capitalized letters and numbers. matching a lot of remaining strings...including dihedral n",
+            "name": "support.type.atom-type.arn",
+            "match": "(?<=^\\s*\\S+\\s*[0-9]*[A-Z]+[A-Z0-9_'*]*\\s*)[0-9]*[A-Z]+[A-Z0-9_'*]*"
+        }
+    ]
+}

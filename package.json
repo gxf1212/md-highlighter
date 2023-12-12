@@ -2,7 +2,7 @@
   "name": "md-highlighter",
   "displayName": "md-highlighter",
   "description": "Highlighting files about molecular modeling and dynamics simulation.",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "publisher": "gxf1212",
   "repository": "https://github.com/gxf1212/md-highlighter",
   "engines": {
@@ -16,7 +16,7 @@
     "languages": [{
       "id": "rtf",
       "aliases": ["NAMD force field", "rtf"],
-      "extensions": [".rtf", ".str", ".inp", ".prm"],
+      "extensions": [".rtf", ".str", ".inp", ".prm", ".par"],
       "configuration": "./language-configuration.json"
     },
     {
@@ -41,13 +41,13 @@
     {
       "id": "prmtop",
       "aliases": ["Amber topology file", "prmtop"],
-      "extensions": [".prmtop", "parm7"],
+      "extensions": [".prmtop", ".parm7"],
       "configuration": "./language-configuration.json"
     },
     {
       "id": "inpcrd",
       "aliases": ["Amber coordinate file", "inpcrd"],
-      "extensions": [".inpcrd", "rst7"],
+      "extensions": [".inpcrd", ".rst7"],
       "configuration": "./language-configuration.json"
     },
     {
@@ -76,6 +76,12 @@
       "configuration": "./language-configuration.json"
     },
     {
+      "id": "mc",
+      "aliases": ["Antechamber mainchain file"],
+      "extensions": [".mc"],
+      "configuration": "./language-configuration.json"
+    },
+    {
       "id": "gro",
       "aliases": ["Gromacs coordinate file"],
       "extensions": [".gro"],
@@ -88,9 +94,33 @@
       "configuration": "./language-configuration.json"
     },
     {
+      "id": "arn",
+      "aliases": ["Gromacs atom renaming specification"],
+      "extensions": [".arn"],
+      "configuration": "./language-configuration.json"
+    },
+    {
       "id": "rtp",
       "aliases": ["Gromacs residue type file"],
       "extensions": [".rtp"],
+      "configuration": "./language-configuration.json"
+    },    
+    {
+      "id": "hdb",
+      "aliases": ["Gromacs hydrogen database"],
+      "extensions": [".hdb"],
+      "configuration": "./language-configuration.json"
+    },
+    {
+      "id": "r2b",
+      "aliases": ["Gromacs r2b file"],
+      "extensions": [".r2b"],
+      "configuration": "./language-configuration.json"
+    },
+    {
+      "id": "tdb",
+      "aliases": ["Gromacs terminal database"],
+      "extensions": [".tdb"],
       "configuration": "./language-configuration.json"
     },
     {
@@ -168,6 +198,11 @@
       "path": "./syntaxes/ac.tmLanguage.json"
     },
     {
+      "language": "mc",
+      "scopeName": "source.mc",
+      "path": "./syntaxes/mc.tmLanguage.json"
+    },
+    {
       "language": "gro",
       "scopeName": "source.gro",
       "path": "./syntaxes/gro.tmLanguage.json"
@@ -178,9 +213,29 @@
       "path": "./syntaxes/atp.tmLanguage.json"
     },
     {
+      "language": "arn",
+      "scopeName": "source.arn",
+      "path": "./syntaxes/arn.tmLanguage.json"
+    },
+    {
       "language": "rtp",
       "scopeName": "source.rtp",
       "path": "./syntaxes/rtp.tmLanguage.json"
+    },
+    {
+      "language": "hdb",
+      "scopeName": "source.hdb",
+      "path": "./syntaxes/hdb.tmLanguage.json"
+    },
+    {
+      "language": "r2b",
+      "scopeName": "source.r2b",
+      "path": "./syntaxes/r2b.tmLanguage.json"
+    },
+    {
+      "language": "tdb",
+      "scopeName": "source.tdb",
+      "path": "./syntaxes/tdb.tmLanguage.json"
     },
     {
       "language": "mtp",

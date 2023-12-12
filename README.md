@@ -1,23 +1,20 @@
 # md-highlighter README
 
-`md-highlighter` is a simple extension to highlight files about molecular modeling and molecular dynamics simulation. Specially, it supports NAMD/CHARMM and some of Amber file formats.
+`md-highlighter` is a simple extension to highlight the most various file types about molecular modeling and molecular dynamics simulation. This extension provides comprehensive coverage of commonly used file formats under various popular tools, including Gromacs, Amber, AmberTools, NAMD, VMD, and more. It also performs detailed keyword parsing, helping users to locate and edit information within files more quickly. Users can even identify syntax errors quickly based on different display colors. Feel free to download and try it out, and don't hesitate to recommend it to your colleagues!
 
 ## Features
 
 Supported format: 
 
 - NAMD: rtf, pdb, prm, psf, str, inp
-- Amber: in, prmtop, inpcrd, prepin, frcmod
-- Gromacs: gro, atp, rtp, mtp (pmx), ...
+- Amber: in, prmtop, inpcrd, prepin, frcmod, lib/off, ac, mc
+- Gromacs: gro, atp, arn, rtp, hdb, r2b, tdb, mtp (pmx), ...
 - small molecule: sdf, mol2 (modified from gromacs helper), ...
 - PLUMED: .plumed.dat
-- upcoming: (AmberTools leap), lib,...
 
-For gromacs-related files, please install `gromacs-helper`. For VMD, install `TCL`. For Gaussian, install `Gaussian Input File (gjf)`. But maybe I'll make my own syntaxes.
+For gromacs `.top`/`.itp` files, you may also install `gromacs-helper`. For VMD, install `TCL`. For Gaussian, install `Gaussian Input File (gjf)`. But maybe I make my own syntaxes.
 
 Tested in theme "Atom One Light".
-
-This extension is created with the help of ChatGPT and New Bing.
 
 ## Gallery
 
@@ -42,7 +39,7 @@ Install to explore more file types!
 ## Conventions
 
 - variable.other.residue-number (except psf,gro)
-- entity.name.type.residue-name
+- entity.name.type.residue-name (except hdb)
 - constant.numeric.atom-number (except gro,lib)
 - entity.name.tag.atom-name
 - support.type.atom-type
@@ -78,6 +75,8 @@ TODO:
 - add self-defined colors for aminoacids types (polar, nonpolar, etc.)
 - add self-defined colors like pink, etc.
 - sdf file?
+
+This extension is created with the help of ChatGPT and New Bing in the beginning.
 
 ## Release Notes
 
