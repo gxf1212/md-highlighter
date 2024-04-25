@@ -34,3 +34,6 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - add hdb, r2b, tdb, arn
 
+### 0.0.7
+
+- add vsd
