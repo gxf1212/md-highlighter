@@ -1,0 +1,171 @@
+%!TEX root = document.tex
+
+\section{安装和配置}
+
+\subsection{系统要求}
+
+md-highlighter作为Visual Studio Code扩展，具有以下系统要求：
+
+\begin{table}[h]
+\centering
+\caption{md-highlighter系统要求}
+\begin{tabular}{p{3cm}p{8cm}}
+\toprule
+\textbf{要求项目} & \textbf{规格} \\
+\midrule
+操作系统 & Windows 7+, macOS 10.10+, Linux \\
+VS Code版本 & 1.70.0及以上版本 \\
+内存要求 & 最小512MB可用内存 \\
+存储空间 & 约10MB磁盘空间 \\
+网络要求 & 仅安装时需要网络连接 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{软件特性}
+
+md-highlighter 扩展为分子仿真领域的主要文件格式提供专业级语法高亮，支持超过 20 种文件类型，覆盖 NAMD/CHARMM、Amber、Gromacs、PLUMED 等主流工具。
+
+\subsubsection{支持的文件格式概览}
+\begin{table}[h]
+\centering
+\caption{支持的文件格式概览}
+\label{tab:file_format}
+\begin{longtable}{p{2.5cm}p{3.5cm}p{8cm}}
+\toprule
+\textbf{软件平台} & \textbf{文件类型} & \textbf{主要格式} \\
+\midrule
+NAMD & 拓扑和参数文件 & .rtf, .pdb, .prm, .psf, .str, .inp \\
+Amber & 拓扑和坐标文件 & .in, .prmtop, .inpcrd, .prepin, .frcmod, .lib, .ac \\
+Gromacs & 专业格式集合 & .gro, .atp, .arn, .rtp, .hdb, .r2b, .tdb, .mtp \\
+小分子等 & 化学结构格式 & .mol2, .sdf, .plumed.dat \\
+\bottomrule
+\end{longtable}
+\end{table}
+
+\subsubsection{智能颜色编码系统}
+
+扩展使用基于语义作用域的颜色编码，为不同数据类型提供一致且直观的视觉标识：
+
+\begin{itemize}
+    \item \textbf{结构信息}：残基编号、原子名称、元素符号
+    \item \textbf{数值数据}：坐标、质量、电荷、速度
+    \item \textbf{拓扑连接}：键编号、段名称、连接关系
+    \item \textbf{力场参数}：原子类型、参数值、相互作用定义
+\end{itemize}
+
+\subsubsection{主题兼容性与自定义}
+
+扩展在 \textbf{Atom One Light} 主题下经过优化测试，同时兼容大多数 VS Code 主题。用户可通过设置自定义颜色方案：
+\newpage
+
+\begin{lstlisting}[style=blockstyle,language=json]
+{
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            {
+                "scope": "entity.name.tag.atom-name",
+                "settings": {
+                    "foreground": "#0066CC",
+                    "fontStyle": "bold"
+                }
+            }
+        ]
+    }
+}
+\end{lstlisting}
+
+\subsection{安装方法}
+
+\subsubsection{从Visual Studio Marketplace安装（推荐）}
+
+\begin{itemize}
+    \item 打开Visual Studio Code
+    \item 点击左侧活动栏中的扩展图标（或按\texttt{Ctrl+Shift+X}）
+    \item 在搜索框中输入"md-highlighter"
+    \item 找到由gxf1212发布的md-highlighter扩展
+    \item 点击"安装"按钮
+    \item 安装完成后重启VS Code（可选）
+\end{itemize}
+
+\subsubsection{从VSIX文件安装}
+
+\begin{itemize}
+    \item 下载md-highlighter的VSIX安装包
+    \item 打开VS Code
+    \item 按\texttt{Ctrl+Shift+P}打开命令面板
+    \item 输入"Extensions: Install from VSIX..."
+    \item 选择下载的VSIX文件
+    \item 等待安装完成
+\end{itemize}
+
+\subsubsection{从命令行安装}
+
+使用VS Code的命令行工具进行安装：
+\begin{lstlisting}[style=blockstyle,language=bash]
+code --install-extension gxf1212.md-highlighter
+\end{lstlisting}
+
+\subsection{验证安装}
+
+安装完成后，可以通过以下方式验证安装是否成功：
+
+\begin{itemize}
+    \item 在VS Code中打开任意一个支持的分子模拟文件（如.pdb、.rtf等）
+    \item 确认文件内容显示了彩色语法高亮
+    \item 在VS Code的扩展列表中查看md-highlighter是否显示为"已启用"状态
+\end{itemize}
+
+\subsection{配置选项}
+
+md-highlighter采用零配置设计，安装后即可直接使用。但用户可以根据需要进行以下可选配置：
+
+\subsubsection{主题适配}
+
+md-highlighter与VS Code的主题系统完全兼容。推荐在以下主题中使用以获得最佳视觉效果：
+\begin{itemize}
+    \item Atom One Light（测试主题）
+    \item Default Dark+
+    \item Default Light+
+    \item Monokai
+    \item Solarized Dark/Light
+\end{itemize}
+
+\subsubsection{文件关联配置}
+
+扩展会自动识别如表\ref{tab:file_format}所示的文件扩展名。如需为特殊命名的文件启用语法高亮，可以手动指定语言模式：
+\begin{itemize}
+    \item 打开目标文件
+    \item 点击状态栏右下角的语言标识
+    \item 从列表中选择相应的语言模式（如"NAMD force field"、"PDB file"等）
+\end{itemize}
+
+\subsection{更新和维护}
+
+\subsubsection{自动更新}
+
+VS Code会自动检查并提示扩展更新。用户也可以在扩展管理界面手动检查更新。
+
+\subsubsection{版本管理}
+
+用户可以在扩展详情页面查看版本历史和更新日志，了解每个版本的新增功能和修复的问题。
+
+\subsubsection{问题反馈}
+
+如遇到使用问题或希望请求新功能，可以通过以下渠道反馈：
+\begin{itemize}
+    \item GitHub Issues：https://github.com/gxf1212/md-highlighter
+    \item 邮件联系：gxf1212@zju.edu.cn
+\end{itemize}
+
+\subsection{卸载}
+
+如需卸载md-highlighter：
+\begin{itemize}
+    \item 打开VS Code扩展管理界面
+    \item 找到md-highlighter扩展
+    \item 点击齿轮图标，选择"卸载"
+    \item 重启VS Code完成卸载
+\end{itemize}
+
+卸载过程不会影响用户的文件内容，仅移除语法高亮功能。

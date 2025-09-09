@@ -1,0 +1,76 @@
+%!TEX root = document.tex
+
+\section{软件基本信息}
+
+\subsection{软件名称和版本信息}
+
+\begin{table}[h]
+\centering
+\caption{md-highlighter 软件基本信息}
+\begin{tabular}{p{3cm}p{10cm}}
+\toprule
+\textbf{项目} & \textbf{描述} \\
+\midrule
+软件全称 & 分子动力学文件语法高亮VScode插件 \\
+软件简称 & md-highlighter \\
+版本号 & 0.0.7 \\
+软件分类 & 应用软件 \\
+软件类型 & Visual Studio Code 扩展插件 \\
+开发语言 & JSON（配置文件）\\
+运行环境 & Visual Studio Code 1.70.0及以上版本 \\
+开发者 & 高旭帆 (gxf1212) \\
+开发单位 & 个人开发者 \\
+仓库地址 & \href{https://github.com/gxf1212/md-highlighter}{https://github.com/gxf1212/md-highlighter} \\
+软件规模 & 1336行代码 \\
+开发完成日期 & 2024年 \\
+首次发表日期 & 2023年 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{软件功能概述}
+
+md-highlighter是一款专为计算化学和分子动力学研究人员设计的Visual Studio Code扩展插件。该软件为分子建模和分子动力学模拟中使用的各种专业文件格式提供语法高亮功能，支持Amber、Gromacs、NAMD、VMD、PLUMED等主流模拟软件的文件格式。
+
+该扩展的核心价值在于解决科研工作者在编辑复杂分子模拟文件时面临的痛点：
+\begin{itemize}
+    \item 缺乏针对分子建模专业文件格式的语法高亮支持
+    \item 难以在大量数值和参数中快速定位语法错误
+    \item 文件内容结构复杂，缺少视觉层次区分
+    \item 编辑效率低下，容易出现人为错误
+\end{itemize}
+
+\subsection{软件主要特点}
+
+\begin{itemize}
+    \item \textbf{广泛的格式支持}：支持20多种分子模拟文件格式的语法高亮，覆盖主流计算化学软件生态系统
+    \item \textbf{智能语法识别}：提供智能的语法错误识别功能，通过颜色编码帮助用户快速发现问题
+    \item \textbf{增强可读性}：显著提高代码可读性和编辑效率，降低人工编辑错误率
+    \item \textbf{标准化配色}：采用统一的颜色编码方案，保证不同文件类型间的视觉一致性
+    \item \textbf{零配置安装}：即装即用，无需复杂配置过程
+    \item \textbf{主题兼容}：完全兼容VS Code主题系统，适应用户个性化需求
+\end{itemize}
+
+\subsection{软件创新点}
+
+\begin{itemize}
+    \item \textbf{领域专业性}：首个专门针对分子动力学文件格式的VS Code语法高亮扩展
+    \item \textbf{架构创新}：基于TextMate语法规则的模块化架构设计，采用纯声明式配置方法
+    \item \textbf{生态整合}：覆盖多个分子模拟软件生态系统的综合性支持
+    \item \textbf{性能优化}：零运行时代码执行，确保最小性能开销
+    \item \textbf{标准化实现}：建立了分子模拟文件语法高亮的标准化实现范式
+\end{itemize}
+
+\subsection{技术特征}
+
+md-highlighter采用完全基于配置的架构模式，具有以下技术特征：
+
+\begin{itemize}
+    \item \textbf{声明式语法定义}：使用JSON格式的TextMate语法文件定义高亮规则
+    \item \textbf{模块化结构}：每种文件格式拥有独立的语法定义文件
+    \item \textbf{正则表达式驱动}：基于正则表达式的模式匹配实现精确的标记化
+    \item \textbf{作用域映射系统}：通过语义作用域实现与颜色主题的解耦
+    \item \textbf{扩展性设计}：新文件格式可以无缝添加而不影响现有功能
+\end{itemize}
+
+该软件填补了计算化学领域代码编辑工具的重要空白，为相关研究人员提供了专业、高效的文件编辑解决方案。
