@@ -70,7 +70,7 @@ API接口或使用方法
 - 代码块格式：软著正文使用 `lstlisting` 环境展示代码块，要求使用`style=blockstyle`，如：  
   ```latex
   \begin{lstlisting}[language=bash,style=blockstyle]
-  conda create -n download python==3.9
+  conda create -n download python==3.9 -c https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
   \end{lstlisting}
   ```  
 - 行内代码也要用，如 `\lstinline|PATH|`。  
@@ -87,7 +87,9 @@ API接口或使用方法
 - 代码也是不要用各种奇怪的手动换行，`\\` 什么的，就正常地用空格控制就行。  
 - 一般不要用 `\newline`。  
 
-- 所有表格都用三线表居中，caption在表的上方，Figure的caption在图片下方，总之得符合论文的标准。  
+- 所有表格都用三线表居中，caption在表的上方，Figure的caption在图片下方，总之得符合论文的标准。
+- 如\ref{fig:theme_pie_chart}就行了，杜绝“如图图 2所示”这种编译结果
+- 调整图大小，使用!h之类的，甚至可多写点文字，使得图片显示位置尽量在原位，相关文字的附近
 
 自动检查  
 在生成文档时，确保以下内容符合规范：  
@@ -97,3 +99,12 @@ API接口或使用方法
 
 最终输出  
 请按照上述要求，以规范化、条理化的形式输出整篇软件著作权说明文档，并确保内容符合 LaTeX 格式规范。
+
+software-copyright\code_simplified.tex只需要大概这样就行了
+\section{扩展配置模块}
+\subsection{package.json - 扩展主配置文件}
+\lstinputlisting{../package.json}
+\subsection{language-configuration.json - 语言通用配置}
+\lstinputlisting{../language-configuration.json}
+……
+然后总代码量不用超过三千行，多了就注释掉部分文件，或显示源码略

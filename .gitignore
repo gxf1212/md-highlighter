@@ -3,3 +3,4 @@
 .vscodeignore
 vsc-extension-quickstart.md
 .qoder
+deprecated/**

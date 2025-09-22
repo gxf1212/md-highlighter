@@ -1,22 +1,22 @@
 {
-    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-    "name": "Gromacs r2b file",
-    "scopeName": "source.r2b",
-    "fileTypes": [
-        "r2b"
-    ],
-    "patterns": [
-        {
-            "name": "comment.line.exclamation",
-            "match": ";.*$"
-        },
-        {
-            "name": "entity.name.type.residue-name.r2b",
-            "match": "\\S+"
-        },
-        {
-            "name": "constant.numeric.r2b",
-            "match": "\\b\\d+\\b|(?<=^\\s*)\\d+|(\\b|\\-)\\d+\\.?\\d*([eE][\\+\\-]?\\d+)?"
-        }
-    ]
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Gromacs r2b file",
+  "scopeName": "source.r2b",
+  "fileTypes": [
+    "r2b"
+  ],
+  "patterns": [
+    {
+      "name": "comment.line.exclamation",
+      "match": ";.*$"
+    },
+    {
+      "name": "entity.name.type.residue-name.r2b",
+      "match": "\\S+"
+    },
+    {
+      "name": "constant.numeric.r2b",
+      "match": "\\b\\d+\\b|(?<=^\\s*)\\d+|(\\b|\\-)\\d+\\.?\\d*([eE][\\+\\-]?\\d+)?"
+    }
+  ]
 }

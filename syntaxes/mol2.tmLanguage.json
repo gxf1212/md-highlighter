@@ -1,87 +1,87 @@
 {
-    "patterns": [
-        {
-            "include": "#structure"
-        }
-    ],
-    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-    "scopeName": "source.mol2",
-    "name": "mol2",
-    "repository": {
-        "structure": {
-            "patterns": [
-                {
-                    "begin": "^#",
-                    "end": "$",
-                    "name": "comment.line"
-                },
-                {
-                    "//": "not matching",
-                    "match": "(?<=(MOLECULE\\s*\\n))\\S+",
-                    "name": "entity.name.function.molname.mol2"
-                },
-                {
-                    "begin": "^@",
-                    "end": "$",
-                    "name": "string.quoted.orange",
-                    "//": "values of fields",
-                    "patterns": [
-                        {
-                            "match": "(?<=(>))[A-Za-z\\_]+",
-                            "name": "keyword.mol2"
-                        }
-                    ]
-                },
-                {
-                    "//": "in the follwing big section, the first number is matched and screened...maybe use a new color",
-                    "match": "\\d+(?=\\s+\\d+\\s+\\d+\\s+[0-9a-z]+$)",
-                    "name": "string.quoted.bond-number.mol2"
-                },
-                {
-                    "//": "all lines beginning with a number, including bond section and mol info",
-                    "begin": "\\d+",
-                    "end": "$",
-                    "name": "constant.character.coordinates.mol2",
-                    "patterns": [
-                        {
-                            "//": "the first number is not here at all, but we might not need to highlight it.",
-                            "match": "(?<=\\s*)\\d+(?=\\s[A-Z]+[A-Za-z0-9_'\\.]*)",
-                            "name": "constant.numeric.atom-number.mol2"
-                        },
-                        {
-                            "match": "(?<=\\d+\\s+)[A-Z]+[A-Za-z0-9_'\\.]*+(?=(\\s+(-?\\d+\\.\\d*)\\s+(-?\\d+\\.\\d*)\\s+(-?\\d+\\.\\d*)))",
-                            "name": "variable.other.atom-name.mol2"
-                        },
-                        {
-                            "//": "No ((?=(\\s+\\d+\\s+[a-zA-Z0-9\\_]+\\s+[\\.0-9\\-]+[\\s\\*]*$))|(?=[\\s]*$)), sometimes no charge",
-                            "match": "(?<=(-?\\d+\\.\\d+\\s+-?\\d+\\.\\d+\\s+-?\\d+\\.\\d+\\s+))[A-Z]+[A-Za-z0-9_\\.]*",
-                            "name": "support.type.atom-type.mol2"
-                        },
-                        {
-                            "match": "(?<=[A-Z]+[A-Za-z0-9_\\.]*\\s+)\\d+(?=\\s+[A-Z]+[A-Z0-9_'\\+]*)",
-                            "name": "variable.other.residue-number.mol2"
-                        },
-                        {
-                            "//": "(?=(\\s+(-?\\d+\\.\\d*)+\\s*$)) charge is optional",
-                            "match": "(?<=\\s+\\d+\\s+)[A-Z]+[A-Z0-9_'\\+]*",
-                            "name": "entity.name.type.residue-name.mol2"
-                        },
-                        {
-                            "match": "(?<=\\s+\\d+\\s+[a-zA-Z0-9\\_]+\\s+)(-?\\d+\\.\\d+)(?<=$)",
-                            "name": "string.quoted.charge.mol2"
-                        },
-                        {
-                            "match": "(?<=^\\s*\\d+\\s+\\d+\\s+\\d+\\s+)[0-9a-z]+(?=\\s*$)",
-                            "name": "entity.name.function.bond-type.mol2"
-                        }
-                    ]
-                },
-                {
-                    "//": "^[a-zA-Z_']+, too blue!",
-                    "match": "",
-                    "name": "support.function.field"
-                }
-            ]
-        }
+  "patterns": [
+    {
+      "include": "#structure"
     }
+  ],
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "scopeName": "source.mol2",
+  "name": "mol2",
+  "repository": {
+    "structure": {
+      "patterns": [
+        {
+          "begin": "^#",
+          "end": "$",
+          "name": "comment.line"
+        },
+        {
+          "//": "not matching",
+          "match": "(?<=(MOLECULE\\s*\\n))\\S+",
+          "name": "entity.name.function.molname.mol2"
+        },
+        {
+          "begin": "^@",
+          "end": "$",
+          "name": "string.quoted.orange",
+          "//": "values of fields",
+          "patterns": [
+            {
+              "match": "(?<=(>))[A-Za-z\\_]+",
+              "name": "keyword.mol2"
+            }
+          ]
+        },
+        {
+          "//": "in the follwing big section, the first number is matched and screened...maybe use a new color",
+          "match": "\\d+(?=\\s+\\d+\\s+\\d+\\s+[0-9a-z]+$)",
+          "name": "string.quoted.bond-number.mol2"
+        },
+        {
+          "//": "all lines beginning with a number, including bond section and mol info",
+          "begin": "\\d+",
+          "end": "$",
+          "name": "constant.character.coordinates.mol2",
+          "patterns": [
+            {
+              "//": "the first number is not here at all, but we might not need to highlight it.",
+              "match": "(?<=\\s*)\\d+(?=\\s[A-Z]+[A-Za-z0-9_'\\.]*)",
+              "name": "constant.numeric.atom-number.mol2"
+            },
+            {
+              "match": "(?<=\\d+\\s+)[A-Z]+[A-Za-z0-9_'\\.]*+(?=(\\s+(-?\\d+\\.\\d*)\\s+(-?\\d+\\.\\d*)\\s+(-?\\d+\\.\\d*)))",
+              "name": "variable.other.atom-name.mol2"
+            },
+            {
+              "//": "No ((?=(\\s+\\d+\\s+[a-zA-Z0-9\\_]+\\s+[\\.0-9\\-]+[\\s\\*]*$))|(?=[\\s]*$)), sometimes no charge",
+              "match": "(?<=(-?\\d+\\.\\d+\\s+-?\\d+\\.\\d+\\s+-?\\d+\\.\\d+\\s+))[A-Z]+[A-Za-z0-9_\\.]*",
+              "name": "support.type.atom-type.mol2"
+            },
+            {
+              "match": "(?<=[A-Z]+[A-Za-z0-9_\\.]*\\s+)\\d+(?=\\s+[A-Z]+[A-Z0-9_'\\+]*)",
+              "name": "variable.other.residue-number.mol2"
+            },
+            {
+              "//": "(?=(\\s+(-?\\d+\\.\\d*)+\\s*$)) charge is optional",
+              "match": "(?<=\\s+\\d+\\s+)[A-Z]+[A-Z0-9_'\\+]*",
+              "name": "entity.name.type.residue-name.mol2"
+            },
+            {
+              "match": "(?<=\\s+\\d+\\s+[a-zA-Z0-9\\_]+\\s+)(-?\\d+\\.\\d+)(?<=$)",
+              "name": "string.quoted.charge.mol2"
+            },
+            {
+              "match": "(?<=^\\s*\\d+\\s+\\d+\\s+\\d+\\s+)[0-9a-z]+(?=\\s*$)",
+              "name": "entity.name.function.bond-type.mol2"
+            }
+          ]
+        },
+        {
+          "//": "^[a-zA-Z_']+, too blue!",
+          "match": "",
+          "name": "support.function.field"
+        }
+      ]
+    }
+  }
 }

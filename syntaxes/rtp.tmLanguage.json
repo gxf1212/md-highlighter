@@ -1,47 +1,47 @@
 {
-    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-    "name": "Gromacs mutation file",
-    "scopeName": "source.rtp",
-    "fileTypes": [
-        "rtp"
-    ],
-    "patterns": [
-        {
-            "name": "comment.line.semicolon",
-            "match": ";.*$"
-        },
-        {
-            "name": "comment.line.other",
-            "match": "torsion.*$|un.*$"
-        },
-		{
-			"//": "section",
-			"match": "\\[.*\\]",
-			"name": "entity.name.class"
-		},
-        {
-            "//": "atoms section; bonds",
-            "name": "entity.name.tag.atom-name.rtp",
-            "match": "[0-9]*[A-Z]+[A-Z0-9_']*(?=\\s+[0-9]*[A-Z]+[A-Z0-9_'*]*\\s+-?\\d+\\.\\d*)|(\\s+-?\\+?[0-9]*[A-Z]+[A-Z0-9_'\\+]*){2}(?=\\s*($|;))"
-        },
-        {
-            "//": "impropers/dihedrals; cmap",
-            "name": "entity.name.tag.atom-name2.rtp",
-            "match": "(\\s+-?\\+?[0-9]*[A-Z]+[A-Z0-9_'\\+]*){4}|(-?\\+?[0-9]*[A-Z]+[A-Z0-9_'\\+]*\\s+){4}-?\\+?[0-9]*[A-Z]+[A-Z0-9_'\\+]*"
-        },
-        {
-            "//": "after atom name, match any of these strings",
-            "name": "support.type.atom-type.rtp",
-            "match": "[0-9]*[A-Z]+[A-Z0-9_'*]*(?=\\s+-?\\d+\\.\\d*)"
-        },
-        {
-            "name": "string.quoted.charge.rtp",
-            "match": "(?<=[0-9]*[A-Z]+[A-Z0-9_'*]*\\s+)-?\\d+\\.\\d*"
-        },
-		{
-			"//": "number",
-			"match": "(\\b|\\-)\\d+\\.?\\d*([eE][\\+\\-]?\\d+)?",
-			"name": "constant.language.rtp"
-		}
-    ]
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Gromacs mutation file",
+  "scopeName": "source.rtp",
+  "fileTypes": [
+    "rtp"
+  ],
+  "patterns": [
+    {
+      "name": "comment.line.semicolon",
+      "match": ";.*$"
+    },
+    {
+      "name": "comment.line.other",
+      "match": "torsion.*$|un.*$"
+    },
+    {
+      "//": "section",
+      "match": "\\[.*\\]",
+      "name": "entity.name.class"
+    },
+    {
+      "//": "atoms section; bonds",
+      "name": "entity.name.tag.atom-name.rtp",
+      "match": "[0-9]*[A-Z]+[A-Z0-9_']*(?=\\s+[0-9]*[A-Z]+[A-Z0-9_'*]*\\s+-?\\d+\\.\\d*)|(\\s+-?\\+?[0-9]*[A-Z]+[A-Z0-9_'\\+]*){2}(?=\\s*($|;))"
+    },
+    {
+      "//": "impropers/dihedrals; cmap",
+      "name": "entity.name.tag.atom-name2.rtp",
+      "match": "(\\s+-?\\+?[0-9]*[A-Z]+[A-Z0-9_'\\+]*){4}|(-?\\+?[0-9]*[A-Z]+[A-Z0-9_'\\+]*\\s+){4}-?\\+?[0-9]*[A-Z]+[A-Z0-9_'\\+]*"
+    },
+    {
+      "//": "after atom name, match any of these strings",
+      "name": "support.type.atom-type.rtp",
+      "match": "[0-9]*[A-Z]+[A-Z0-9_'*]*(?=\\s+-?\\d+\\.\\d*)"
+    },
+    {
+      "name": "string.quoted.charge.rtp",
+      "match": "(?<=[0-9]*[A-Z]+[A-Z0-9_'*]*\\s+)-?\\d+\\.\\d*"
+    },
+    {
+      "//": "number",
+      "match": "(\\b|\\-)\\d+\\.?\\d*([eE][\\+\\-]?\\d+)?",
+      "name": "constant.language.rtp"
+    }
+  ]
 }

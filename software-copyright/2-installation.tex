@@ -13,7 +13,7 @@ md-highlighter作为Visual Studio Code扩展，具有以下系统要求：
 \toprule
 \textbf{要求项目} & \textbf{规格} \\
 \midrule
-操作系统 & Windows 7+, macOS 10.10+, Linux \\
+操作系统 & Windows 10+, macOS 10.10+, Linux \\
 VS Code版本 & 1.70.0及以上版本 \\
 内存要求 & 最小512MB可用内存 \\
 存储空间 & 约10MB磁盘空间 \\
@@ -31,14 +31,14 @@ md-highlighter 扩展为分子仿真领域的主要文件格式提供专业级�
 \centering
 \caption{支持的文件格式概览}
 \label{tab:file_format}
-\begin{longtable}{p{2.5cm}p{3.5cm}p{8cm}}
+\begin{longtable}{p{3cm}p{11cm}}
 \toprule
-\textbf{软件平台} & \textbf{文件类型} & \textbf{主要格式} \\
+\textbf{软件平台} & \textbf{主要格式} \\
 \midrule
-NAMD & 拓扑和参数文件 & .rtf, .pdb, .prm, .psf, .str, .inp \\
-Amber & 拓扑和坐标文件 & .in, .prmtop, .inpcrd, .prepin, .frcmod, .lib, .ac \\
-Gromacs & 专业格式集合 & .gro, .atp, .arn, .rtp, .hdb, .r2b, .tdb, .mtp \\
-小分子等 & 化学结构格式 & .mol2, .sdf, .plumed.dat \\
+NAMD & .rtf, .pdb, .prm, .psf, .str, .inp \\
+Amber & .in, .prmtop, .inpcrd, .prepin, .frcmod, .lib, .ac \\
+Gromacs & .gro, .atp, .arn, .rtp, .hdb, .r2b, .tdb, .mtp \\
+小分子等 & .mol2, .sdf, .plumed.dat \\
 \bottomrule
 \end{longtable}
 \end{table}
@@ -91,7 +91,7 @@ Gromacs & 专业格式集合 & .gro, .atp, .arn, .rtp, .hdb, .r2b, .tdb, .mtp \\
 \subsubsection{从VSIX文件安装}
 
 \begin{itemize}
-    \item 下载md-highlighter的VSIX安装包
+    \item 下载md-highlighter的VSIX安装包：\url{https://github.com/gxf1212/md-highlighter/releases}
     \item 打开VS Code
     \item 按\texttt{Ctrl+Shift+P}打开命令面板
     \item 输入"Extensions: Install from VSIX..."
@@ -133,7 +133,7 @@ md-highlighter与VS Code的主题系统完全兼容。推荐在以下主题中�
 
 \subsubsection{文件关联配置}
 
-扩展会自动识别如表\ref{tab:file_format}所示的文件扩展名。如需为特殊命名的文件启用语法高亮，可以手动指定语言模式：
+扩展会自动识别如\ref{tab:file_format}所示的文件扩展名。如需为特殊命名的文件启用语法高亮，可以手动指定语言模式：
 \begin{itemize}
     \item 打开目标文件
     \item 点击状态栏右下角的语言标识

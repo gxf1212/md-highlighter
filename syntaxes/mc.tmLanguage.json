@@ -1,30 +1,30 @@
 {
-    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-    "name": "mc",
-    "scopeName": "source.mc",
-    "fileTypes": [
-        "mc"
-    ],
-    "patterns": [
-        {
-            "match": "HEAD_NAME|TAIL_NAME|PRE_HEAD_TYPE|POST_TAIL_TYPE|CHARGE",
-            "name": "keyword.other.mc"
-        },
-        {
-            "match": "OMIT_NAME",
-            "name": "string.other.mc"
-        },
-        {
-            "name": "entity.name.tag.atom-name.mc",
-            "match": "(?<=NAME\\s*)\\b\\S+\\b"
-        },
-        {
-            "name": "support.type.atomtype.mc",
-            "match": "(?<=TYPE\\s*)\\b\\S+\\b"
-        },
-        {
-            "name": "constant.numeric.mc",
-            "match": "\\b(-?\\d*\\.\\d*)\\b|\\b\\d+\\b"
-        }
-    ]
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "mc",
+  "scopeName": "source.mc",
+  "fileTypes": [
+    "mc"
+  ],
+  "patterns": [
+    {
+      "match": "HEAD_NAME|TAIL_NAME|PRE_HEAD_TYPE|POST_TAIL_TYPE|CHARGE",
+      "name": "keyword.other.mc"
+    },
+    {
+      "match": "OMIT_NAME",
+      "name": "string.other.mc"
+    },
+    {
+      "name": "entity.name.tag.atom-name.mc",
+      "match": "(?<=NAME\\s*)\\b\\S+\\b"
+    },
+    {
+      "name": "support.type.atomtype.mc",
+      "match": "(?<=TYPE\\s*)\\b\\S+\\b"
+    },
+    {
+      "name": "constant.numeric.mc",
+      "match": "\\b(-?\\d*\\.\\d*)\\b|\\b\\d+\\b"
+    }
+  ]
 }

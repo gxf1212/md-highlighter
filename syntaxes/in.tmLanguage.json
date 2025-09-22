@@ -2,7 +2,9 @@
   "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
   "name": "Amber or AmberTools (like tleap, parmed) input file",
   "scopeName": "source.in",
-  "fileTypes": ["in"],
+  "fileTypes": [
+    "in"
+  ],
   "patterns": [
     {
       "name": "comment.line.exclamation",

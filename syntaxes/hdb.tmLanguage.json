@@ -1,30 +1,30 @@
 {
-    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-    "name": "Gromacs hdb file",
-    "scopeName": "source.hdb",
-    "fileTypes": [
-        "hdb"
-    ],
-    "patterns": [
-        {
-            "name": "comment.line.exclamation",
-            "match": ";.*$"
-        },
-        {
-            "name": "support.type.residue-name.hdb",
-            "match": "(?<=^)\\S+(?=\\s*\\d+\\s*$)"
-        },        
-        {
-            "name": "string.other.count.hdb",
-            "match": "(?<=^\\S+\\s*)\\d+(?=\\s*$)"
-        },
-        {
-            "name": "entity.name.tag.atom-name.hdb",
-            "match": "(?<=^\\d+\\s+\\d+\\s+)\\S+\\s+\\S+(\\s+\\S+\\s+\\S+)?(\\s+\\S+)?(?=\\s*$)"
-        },
-        {
-            "name": "constant.numeric.hdb",
-            "match": "\\b\\d+\\b|(?<=^\\s*)\\d+|(\\b|\\-)\\d+\\.?\\d*([eE][\\+\\-]?\\d+)?"
-        }
-    ]
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Gromacs hdb file",
+  "scopeName": "source.hdb",
+  "fileTypes": [
+    "hdb"
+  ],
+  "patterns": [
+    {
+      "name": "comment.line.exclamation",
+      "match": ";.*$"
+    },
+    {
+      "name": "support.type.residue-name.hdb",
+      "match": "(?<=^)\\S+(?=\\s*\\d+\\s*$)"
+    },
+    {
+      "name": "string.other.count.hdb",
+      "match": "(?<=^\\S+\\s*)\\d+(?=\\s*$)"
+    },
+    {
+      "name": "entity.name.tag.atom-name.hdb",
+      "match": "(?<=^\\d+\\s+\\d+\\s+)\\S+\\s+\\S+(\\s+\\S+\\s+\\S+)?(\\s+\\S+)?(?=\\s*$)"
+    },
+    {
+      "name": "constant.numeric.hdb",
+      "match": "\\b\\d+\\b|(?<=^\\s*)\\d+|(\\b|\\-)\\d+\\.?\\d*([eE][\\+\\-]?\\d+)?"
+    }
+  ]
 }

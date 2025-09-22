@@ -1,64 +1,64 @@
 {
-    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-    "name": "tLeap lib file",
-    "scopeName": "source.lib",
-    "fileTypes": [
-        "lib"
-    ],
-    "patterns": [
-        {
-            "name": "comment.line.exclamation",
-            "match": "(?<=\\!entry\\.[A-Z0-9]+).*$|!!.*$"
-        },
-        {
-            "name": "entity.name.type.residue-names.lib",
-            "match": "(?<=^\\s*\")\\S+(?=\"\\s*$)"
-        },
-        {
-            "name": "keyword.lib",
-            "match": "!entry"
-        },
-        {
-            "name": "entity.name.type.residue-name.lib",
-            "match": "(?<=!entry.)[A-Z0-9]+"
-        },
-        {
-            "//": "overwritten by comment",
-            "name": "entity.name.tag.type.lib",
-            "match": "(?<=!entry.[A-Z0-9]+.unit.)[a-z]+"
-        },
-        {
-            "name": "entity.name.tag.atom-name.lib",
-            "match": "(?<=^\\s+\")\\S+(?=\"\\s+\"\\S+\")"
-        },
-        {
-            "name": "support.type.residue-number.lib",
-            "match": "(?<=^\\s+\"\\S+\"\\s+\"\\S+\"\\s\\d\\s)-?\\d+(?=\\s\\d+\\s\\d+\\s-?\\d+\\s-?\\d+\\.\\d*(E-0\\d)?)"
-        },
-        {
-            "name": "entity.name.function.atom-number.lib",
-            "match": "(?<=^\\s+\"\\S+\"\\s+\"\\S+\"\\s\\d\\s-?\\d+\\s\\d+\\s)\\d+(?=\\s-?\\d+\\s-?\\d+\\.\\d*(E-0\\d)?)"
-        },
-        {
-            "name": "entity.name.tag.element-number.lib",
-            "match": "(?<=^\\s+\"\\S+\"\\s+\"\\S+\"\\s\\d\\s-?\\d+\\s\\d+\\s\\d+\\s)-?\\d+(?=\\s-?\\d+\\.\\d*(E-0\\d)?)"
-        },
-        {
-            "name": "string.quoted.charge.lib",
-            "match": "(?<=^\\s+\"\\S+\"\\s+\"\\S+\"\\s\\d\\s-?\\d+\\s\\d+\\s\\d+\\s-?\\d+\\s)(-?\\d+\\.\\d*(E-0\\d)?)"
-        },
-        {
-            "name": "support.type.atom-type.lib",
-            "match": "(?<=^\\s+\"\\S+\"\\s+\")\\S+(?=\")"
-        },
-        {
-            "//": "purely number lines. atom number in other places",
-            "match": "(?<=^)[\\s\\d+]+(?=\\s*$)",
-            "name": "variable.other.atom-number-index.lib"
-        },
-        {
-            "name": "constant.numeric.lib",
-            "match": "\\b\\d+\\b|(?<=^\\s*)\\d+|(\\b|\\-)\\d+\\.?\\d*([eE][\\+\\-]?\\d+)?"
-        }
-    ]
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "tLeap lib file",
+  "scopeName": "source.lib",
+  "fileTypes": [
+    "lib"
+  ],
+  "patterns": [
+    {
+      "name": "comment.line.exclamation",
+      "match": "(?<=\\!entry\\.[A-Z0-9]+).*$|!!.*$"
+    },
+    {
+      "name": "entity.name.type.residue-names.lib",
+      "match": "(?<=^\\s*\")\\S+(?=\"\\s*$)"
+    },
+    {
+      "name": "keyword.lib",
+      "match": "!entry"
+    },
+    {
+      "name": "entity.name.type.residue-name.lib",
+      "match": "(?<=!entry.)[A-Z0-9]+"
+    },
+    {
+      "//": "overwritten by comment",
+      "name": "entity.name.tag.type.lib",
+      "match": "(?<=!entry.[A-Z0-9]+.unit.)[a-z]+"
+    },
+    {
+      "name": "entity.name.tag.atom-name.lib",
+      "match": "(?<=^\\s+\")\\S+(?=\"\\s+\"\\S+\")"
+    },
+    {
+      "name": "support.type.residue-number.lib",
+      "match": "(?<=^\\s+\"\\S+\"\\s+\"\\S+\"\\s\\d\\s)-?\\d+(?=\\s\\d+\\s\\d+\\s-?\\d+\\s-?\\d+\\.\\d*(E-0\\d)?)"
+    },
+    {
+      "name": "entity.name.function.atom-number.lib",
+      "match": "(?<=^\\s+\"\\S+\"\\s+\"\\S+\"\\s\\d\\s-?\\d+\\s\\d+\\s)\\d+(?=\\s-?\\d+\\s-?\\d+\\.\\d*(E-0\\d)?)"
+    },
+    {
+      "name": "entity.name.tag.element-number.lib",
+      "match": "(?<=^\\s+\"\\S+\"\\s+\"\\S+\"\\s\\d\\s-?\\d+\\s\\d+\\s\\d+\\s)-?\\d+(?=\\s-?\\d+\\.\\d*(E-0\\d)?)"
+    },
+    {
+      "name": "string.quoted.charge.lib",
+      "match": "(?<=^\\s+\"\\S+\"\\s+\"\\S+\"\\s\\d\\s-?\\d+\\s\\d+\\s\\d+\\s-?\\d+\\s)(-?\\d+\\.\\d*(E-0\\d)?)"
+    },
+    {
+      "name": "support.type.atom-type.lib",
+      "match": "(?<=^\\s+\"\\S+\"\\s+\")\\S+(?=\")"
+    },
+    {
+      "//": "purely number lines. atom number in other places",
+      "match": "(?<=^)[\\s\\d+]+(?=\\s*$)",
+      "name": "variable.other.atom-number-index.lib"
+    },
+    {
+      "name": "constant.numeric.lib",
+      "match": "\\b\\d+\\b|(?<=^\\s*)\\d+|(\\b|\\-)\\d+\\.?\\d*([eE][\\+\\-]?\\d+)?"
+    }
+  ]
 }

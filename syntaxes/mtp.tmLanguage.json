@@ -1,42 +1,42 @@
 {
-    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-    "name": "Gromacs mutation file",
-    "scopeName": "source.mtp",
-    "fileTypes": [
-        "mtp"
-    ],
-    "patterns": [
-        {
-            "name": "comment.line.semicolon",
-            "match": ";.*$"
-        },
-        {
-            "name": "keyword.mtp",
-            "match": "default\\S+"
-        },
-		{
-			"//": "section",
-			"match": "\\[.*\\]",
-			"name": "entity.name.class"
-		},
-        {
-            "//": "atoms section; impropers/rotations/etc; the last word in rotation is not matched? sometimes -XX is connected to the previous name",
-            "name": "entity.name.tag.atom-name.mtp",
-            "match": "[0-9]*[A-Z]+[A-Z0-9_']*(?=\\s+[0-9]*[A-Z]+[A-Z0-9_*]*)|\\S+.gone\\S*|(\\s+-?\\+?[0-9]*[A-Z]+[A-Z0-9_-]*){4}"
-        },
-        {
-            "//": "after atom name, match any of these strings",
-            "name": "support.type.atom-type.mtp",
-            "match": "[0-9]*[A-Z]+[A-Z0-9_'*]*"
-        },
-        {
-            "name": "string.quoted.charge.mtp",
-            "match": "(?<=[0-9]*[A-Z]+[A-Z0-9_*]*\\s+)-?\\d+\\.\\d*"
-        },
-		{
-			"//": "number",
-			"match": "(\\b|\\-)\\d+\\.?\\d*([eE][\\+\\-]?\\d+)?",
-			"name": "constant.language.mtp"
-		}
-    ]
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Gromacs mutation file",
+  "scopeName": "source.mtp",
+  "fileTypes": [
+    "mtp"
+  ],
+  "patterns": [
+    {
+      "name": "comment.line.semicolon",
+      "match": ";.*$"
+    },
+    {
+      "name": "keyword.mtp",
+      "match": "default\\S+"
+    },
+    {
+      "//": "section",
+      "match": "\\[.*\\]",
+      "name": "entity.name.class"
+    },
+    {
+      "//": "atoms section; impropers/rotations/etc; the last word in rotation is not matched? sometimes -XX is connected to the previous name",
+      "name": "entity.name.tag.atom-name.mtp",
+      "match": "[0-9]*[A-Z]+[A-Z0-9_']*(?=\\s+[0-9]*[A-Z]+[A-Z0-9_*]*)|\\S+.gone\\S*|(\\s+-?\\+?[0-9]*[A-Z]+[A-Z0-9_-]*){4}"
+    },
+    {
+      "//": "after atom name, match any of these strings",
+      "name": "support.type.atom-type.mtp",
+      "match": "[0-9]*[A-Z]+[A-Z0-9_'*]*"
+    },
+    {
+      "name": "string.quoted.charge.mtp",
+      "match": "(?<=[0-9]*[A-Z]+[A-Z0-9_*]*\\s+)-?\\d+\\.\\d*"
+    },
+    {
+      "//": "number",
+      "match": "(\\b|\\-)\\d+\\.?\\d*([eE][\\+\\-]?\\d+)?",
+      "name": "constant.language.mtp"
+    }
+  ]
 }

@@ -1,52 +1,52 @@
 {
-    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-    "name": "Gromacs mutation file",
-    "scopeName": "source.gro",
-    "fileTypes": [
-        "gro"
-    ],
-    "patterns": [
-        {
-			"name": "keyword.timestep",
-			"match": "t=.*$"
-		},
-        {
-            "//": "the first line? not starting with number or space",
-            "name": "comment.line.gro",
-            "match": "^[^0-9 ].*$"
-        },
-        {
-			"name": "keyword.total_number",
-			"match": "^\\d+\\s*$"
-		},
-        {
-            "name": "keyword.other.box-vector.gro",
-            "match": "^(\\s+-?\\d+\\.\\d+)+\\s*$"
-        },        
-        {
-            "name": "support.type.residue-number.gro",
-            "match": "^.{5}"
-        },
-        {
-            "name": "entity.name.type.residue-name.gro",
-            "match": "(?<=^.{5}).{5}"
-        },
-        {
-            "name": "entity.name.tag.atom-name.gro",
-            "match": "(?<=^.{10}).{5}"
-        },
-        {
-            "//": "(?<=^.{15}).{5}. Use black",
-            "name": "constant.numeric.atom-number.gro",
-            "match": ""
-        },
-        {
-            "name": "constant.numeric.coordinate.gro",
-            "match": "(?<=^.{20}).{8}|(?<=^.{28}).{8}|(?<=^.{36}).{8}"
-        },
-        {
-            "name": "string.quoted.velocity.gro",
-            "match": "(?<=^.{44}).{8}|(?<=^.{52}).{8}|(?<=^.{60}).{8}"
-        }
-    ]
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Gromacs mutation file",
+  "scopeName": "source.gro",
+  "fileTypes": [
+    "gro"
+  ],
+  "patterns": [
+    {
+      "name": "keyword.timestep",
+      "match": "t=.*$"
+    },
+    {
+      "//": "the first line? not starting with number or space",
+      "name": "comment.line.gro",
+      "match": "^[^0-9 ].*$"
+    },
+    {
+      "name": "keyword.total_number",
+      "match": "^\\d+\\s*$"
+    },
+    {
+      "name": "keyword.other.box-vector.gro",
+      "match": "^(\\s+-?\\d+\\.\\d+)+\\s*$"
+    },
+    {
+      "name": "support.type.residue-number.gro",
+      "match": "^.{5}"
+    },
+    {
+      "name": "entity.name.type.residue-name.gro",
+      "match": "(?<=^.{5}).{5}"
+    },
+    {
+      "name": "entity.name.tag.atom-name.gro",
+      "match": "(?<=^.{10}).{5}"
+    },
+    {
+      "//": "(?<=^.{15}).{5}. Use black",
+      "name": "constant.numeric.atom-number.gro",
+      "match": ""
+    },
+    {
+      "name": "constant.numeric.coordinate.gro",
+      "match": "(?<=^.{20}).{8}|(?<=^.{28}).{8}|(?<=^.{36}).{8}"
+    },
+    {
+      "name": "string.quoted.velocity.gro",
+      "match": "(?<=^.{44}).{8}|(?<=^.{52}).{8}|(?<=^.{60}).{8}"
+    }
+  ]
 }

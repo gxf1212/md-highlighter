@@ -1,20 +1,20 @@
 {
-    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-    "name": "inpcrd",
-    "scopeName": "source.inpcrd",
-    "fileTypes": [
-        "inpcrd"
-    ],
-    "patterns": [
-        {
-            "//": "The second line",
-            "match": "^\\s\\d+$",
-            "name": "string.quoted.number-of-atom.inpcrd"
-        },
-        {
-            "//": "all float numbers",
-            "match": "\\d+\\.\\d+",
-            "name": "constant.numeric.coordinates.inpcrd"
-        }
-    ]
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "inpcrd",
+  "scopeName": "source.inpcrd",
+  "fileTypes": [
+    "inpcrd"
+  ],
+  "patterns": [
+    {
+      "//": "The second line",
+      "match": "^\\s\\d+$",
+      "name": "string.quoted.number-of-atom.inpcrd"
+    },
+    {
+      "//": "all float numbers",
+      "match": "\\d+\\.\\d+",
+      "name": "constant.numeric.coordinates.inpcrd"
+    }
+  ]
 }

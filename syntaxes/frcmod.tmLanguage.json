@@ -11,15 +11,12 @@
       "name": "keyword.frcmod"
     },
     {
-      "//": "We don't want to include the number in begin, so the last \\s+ might be a space after an atomtype",
-      "//": "I know atomtypes can only be 1/2 characters long",
       "//": "bug: some files like OPLS write values as integers/nothing after point",
       "begin": "^[A-Za-z0-9*]+[ ]*-[A-Za-z0-9*]+[ ]*-[A-Za-z0-9*]+[ ]*-[A-Za-z0-9*]+[ ]*\\s+",
       "end": "$",
       "name": "support.type.atom-type.dihedral.frcmod",
       "patterns": [
         {
-          "//": "sometimes k = .25, cannot be shown as constant...",
           "//": "sometimes phi = 180",
           "match": "\\s*\\d+(?=\\s+-?\\d*\\.\\d*\\s+(-?\\d+\\.\\d*|\\d+))",
           "name": "variable.other.redundancy.frcmod"
@@ -72,7 +69,6 @@
       ]
     },
     {
-      "//": "atom incorrectly matches bond/angle/... section or comment",
       "//": "ions may also contain +- but no bond/angle/...",
       "begin": "^\\s*[A-Za-z0-9*+-]+\\s+",
       "end": "$",

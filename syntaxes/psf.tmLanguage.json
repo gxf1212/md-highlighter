@@ -1,87 +1,85 @@
 {
-    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-    "name": "PSF from GUI, that from vmd is different",
-    "scopeName": "source.psf",
-    "fileTypes": [
-        "psf"
-    ],
-    "patterns": [
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "PSF from GUI, that from vmd is different",
+  "scopeName": "source.psf",
+  "fileTypes": [
+    "psf"
+  ],
+  "patterns": [
+    {
+      "name": "comment.line.psf",
+      "match": "^\\*.*$"
+    },
+    {
+      "begin": "^\\s+REMARKS\\b",
+      "end": "$",
+      "name": "comment.line.remark.pdb"
+    },
+    {
+      "//": "ATOM and BOND is missing...",
+      "name": "keyword.psf",
+      "match": "\\b(PSF|CMAP|NTITLE|NATOM|NBOND|NTHETA|NPHI|NIMPHI|NDON|NACC|NNB|NGRP|NUMLP|NCRTERM)\\b"
+    },
+    {
+      "name": "entity.name.function.total_number",
+      "match": "(?<=^\\s+)\\d+(?= !N)"
+    },
+    {
+      "begin": "(!NATOM\\s*$)",
+      "end": "(!NBOND)",
+      "name": "keyword.atom.psf",
+      "//": "^\\s+\\d+\\s+\\S+\\s+\\d+\\s+\\S+\\s+\\S+\\s+\\b[A-Z0-9]+\\b\\s+(-?\\d+\\.\\d*(E-01)?)\\s+(-?\\d+\\.\\d*)\\s+\\d+$",
+      "patterns": [
         {
-            "name": "comment.line.psf",
-            "match": "^\\*.*$"
+          "//": "NATOM still not solved. see my notes",
+          "name": "keyword.other.psf",
+          "match": "NATOM|NBOND"
         },
         {
-            "begin": "^\\s+REMARKS\\b",
-            "end": "$",
-            "name": "comment.line.remark.pdb"
+          "name": "entity.name.function.total_number",
+          "match": "(?<=^\\s+)\\d+(?= !N)"
         },
         {
-            "//": "ATOM and BOND is missing...",
-            "name": "keyword.psf",
-            "match": "\\b(PSF|CMAP|NTITLE|NATOM|NBOND|NTHETA|NPHI|NIMPHI|NDON|NACC|NNB|NGRP|NUMLP|NCRTERM)\\b"
+          "name": "constant.numeric.atom-number.psf",
+          "match": "(?<=^\\s+)\\d+(?=\\s+\\S+\\s+\\d+\\s+\\S+\\s+\\S+\\s+\\b[A-Z0-9]+\\b\\s+(-?\\d+\\.\\d*(E-01)?)\\s+(-?\\d+\\.\\d*)\\s+\\d+$)"
         },
         {
-            "name": "entity.name.function.total_number",
-            "match": "(?<=^\\s+)\\d+(?= !N)"
+          "name": "variable.other.segment-name.psf",
+          "match": "(?<=^\\s+\\d+\\s+)\\S+(?=\\s+\\d+\\s+\\S+\\s+\\S+\\s+\\b[A-Z0-9]+\\b\\s+(-?\\d+\\.\\d*(E-01)?)\\s+(-?\\d+\\.\\d*)\\s+\\d+$)"
         },
         {
-            "begin": "(!NATOM\\s*$)", 
-            "end": "(!NBOND)",
-            "name": "keyword.atom.psf",
-            "//": "atom names use \\S+ instead of \\b[A-Z0-9]+\\b to include names with '",
-            "//": "format: atomid segname resid resname atomname atomtype charge mass unknown",
-            "//": "^\\s+\\d+\\s+\\S+\\s+\\d+\\s+\\S+\\s+\\S+\\s+\\b[A-Z0-9]+\\b\\s+(-?\\d+\\.\\d*(E-01)?)\\s+(-?\\d+\\.\\d*)\\s+\\d+$",
-            "patterns": [
-                {
-                    "//": "NATOM still not solved. see my notes",
-                    "name": "keyword.other.psf",
-                    "match": "NATOM|NBOND"
-                },
-                {
-                    "name": "entity.name.function.total_number",
-                    "match": "(?<=^\\s+)\\d+(?= !N)"
-                },
-                {
-                    "name": "constant.numeric.atom-number.psf",
-                    "match": "(?<=^\\s+)\\d+(?=\\s+\\S+\\s+\\d+\\s+\\S+\\s+\\S+\\s+\\b[A-Z0-9]+\\b\\s+(-?\\d+\\.\\d*(E-01)?)\\s+(-?\\d+\\.\\d*)\\s+\\d+$)"
-                },
-                {
-                    "name": "variable.other.segment-name.psf",
-                    "match": "(?<=^\\s+\\d+\\s+)\\S+(?=\\s+\\d+\\s+\\S+\\s+\\S+\\s+\\b[A-Z0-9]+\\b\\s+(-?\\d+\\.\\d*(E-01)?)\\s+(-?\\d+\\.\\d*)\\s+\\d+$)"
-                },
-                {
-                    "name": "support.type.residue-number.psf",
-                    "match": "(?<=^\\s+\\d+\\s+\\S+\\s+)\\d+(?=\\s+\\S+\\s+\\S+\\s+\\b[A-Z0-9]+\\b\\s+(-?\\d+\\.\\d*(E-01)?)\\s+(-?\\d+\\.\\d*)\\s+\\d+$)"
-                },
-                {
-                    "name": "entity.name.type.residue-name.psf",
-                    "match": "(?<=^\\s+\\d+\\s+\\S+\\s+\\d+\\s+)\\S+(?=\\s+\\S+\\s+\\b[A-Z0-9]+\\b\\s+(-?\\d+\\.\\d*(E-01)?)\\s+(-?\\d+\\.\\d*)\\s+\\d+$)"
-                },
-                {
-                    "name": "entity.name.tag.atom-name.psf",
-                    "match": "(?<=^\\s+\\d+\\s+\\S+\\s+\\d+\\s+\\S+\\s+)\\S+(?=\\s+\\b[A-Z0-9]+\\b\\s+(-?\\d+\\.\\d*(E-01)?)\\s+(-?\\d+\\.\\d*)\\s+\\d+$)"
-                },
-                {
-                    "name": "support.type.atom-type.psf",
-                    "match": "(?<=^\\s+\\d+\\s+\\S+\\s+\\d+\\s+\\S+\\s+\\S+\\s+)\\b[A-Z0-9]+\\b(?=\\s+(-?\\d+\\.\\d*(E-01)?)\\s+(-?\\d+\\.\\d*)\\s+\\d+$)"
-                },
-                {
-                    "name": "string.quoted.charge.psf",
-                    "match": "(?<=^\\s+\\d+\\s+\\S+\\s+\\d+\\s+\\S+\\s+\\S+\\s+\\b[A-Z0-9]+\\b\\s+)(-?\\d+\\.\\d*(E-01)?)(?=\\s+(-?\\d+\\.\\d*)\\s+\\d+$)"
-                },
-                {
-                    "name": "constant.numeric.atomic-mass.psf",
-                    "match": "(?<=^\\s+\\d+\\s+\\S+\\s+\\d+\\s+\\S+\\s+\\S+\\s+\\b[A-Z0-9]+\\b\\s+(-?\\d+\\.\\d*(E-01)?)\\s+)(-?\\d+\\.\\d*)(?=\\s+\\d+$)"
-                },
-                {
-                    "name": "comment.line.unknown.psf",
-                    "match": "(?<=^\\s+\\d+\\s+\\S+\\s+\\d+\\s+\\S+\\s+\\S+\\s+\\b[A-Z0-9]+\\b\\s+(-?\\d+\\.\\d*(E-01)?)\\s+(-?\\d+\\.\\d*)\\s+)\\d+(?=$)"
-                }                
-            ]
+          "name": "support.type.residue-number.psf",
+          "match": "(?<=^\\s+\\d+\\s+\\S+\\s+)\\d+(?=\\s+\\S+\\s+\\S+\\s+\\b[A-Z0-9]+\\b\\s+(-?\\d+\\.\\d*(E-01)?)\\s+(-?\\d+\\.\\d*)\\s+\\d+$)"
         },
         {
-            "name": "constant.numeric.psf",
-            "match": "\\b\\d+\\b|(?<=^\\s*)\\d+"
+          "name": "entity.name.type.residue-name.psf",
+          "match": "(?<=^\\s+\\d+\\s+\\S+\\s+\\d+\\s+)\\S+(?=\\s+\\S+\\s+\\b[A-Z0-9]+\\b\\s+(-?\\d+\\.\\d*(E-01)?)\\s+(-?\\d+\\.\\d*)\\s+\\d+$)"
+        },
+        {
+          "name": "entity.name.tag.atom-name.psf",
+          "match": "(?<=^\\s+\\d+\\s+\\S+\\s+\\d+\\s+\\S+\\s+)\\S+(?=\\s+\\b[A-Z0-9]+\\b\\s+(-?\\d+\\.\\d*(E-01)?)\\s+(-?\\d+\\.\\d*)\\s+\\d+$)"
+        },
+        {
+          "name": "support.type.atom-type.psf",
+          "match": "(?<=^\\s+\\d+\\s+\\S+\\s+\\d+\\s+\\S+\\s+\\S+\\s+)\\b[A-Z0-9]+\\b(?=\\s+(-?\\d+\\.\\d*(E-01)?)\\s+(-?\\d+\\.\\d*)\\s+\\d+$)"
+        },
+        {
+          "name": "string.quoted.charge.psf",
+          "match": "(?<=^\\s+\\d+\\s+\\S+\\s+\\d+\\s+\\S+\\s+\\S+\\s+\\b[A-Z0-9]+\\b\\s+)(-?\\d+\\.\\d*(E-01)?)(?=\\s+(-?\\d+\\.\\d*)\\s+\\d+$)"
+        },
+        {
+          "name": "constant.numeric.atomic-mass.psf",
+          "match": "(?<=^\\s+\\d+\\s+\\S+\\s+\\d+\\s+\\S+\\s+\\S+\\s+\\b[A-Z0-9]+\\b\\s+(-?\\d+\\.\\d*(E-01)?)\\s+)(-?\\d+\\.\\d*)(?=\\s+\\d+$)"
+        },
+        {
+          "name": "comment.line.unknown.psf",
+          "match": "(?<=^\\s+\\d+\\s+\\S+\\s+\\d+\\s+\\S+\\s+\\S+\\s+\\b[A-Z0-9]+\\b\\s+(-?\\d+\\.\\d*(E-01)?)\\s+(-?\\d+\\.\\d*)\\s+)\\d+(?=$)"
         }
-    ]
+      ]
+    },
+    {
+      "name": "constant.numeric.psf",
+      "match": "\\b\\d+\\b|(?<=^\\s*)\\d+"
+    }
+  ]
 }

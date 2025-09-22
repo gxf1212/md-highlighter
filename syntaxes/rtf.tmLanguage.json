@@ -1,102 +1,100 @@
 {
-    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-    "name": "NAMD force field (atom, residue, parameter) file",
-    "scopeName": "source.rtf",
-    "fileTypes": [
-        "rtf",
-        "inp",
-        "str",
-        "prm"
-    ],
-    "patterns": [
-        {
-            "//": "starting with exclamation",
-            "name": "comment.line.exclamation",
-            "match": "!.*$"
-        },
-        {
-            "name": "comment.line.asterisk",
-            "match": "^\\s*\\*.*"
-        },
-        {
-            "name": "keyword.rtf",
-            "match": "\\b(MASS|RESI|PRES|DELETE|ATOM|BOND|ANGLE(S)?|DIHE(DRAL)?|IMPR|IMPH|(?i)IC|BILD|ACCE(PTOR)?|DONO(R)?|DOUBLE|DOUB|(?i)PATC(H)?|PATCHING|LONEPAIR|COLI|DIST|SCAL|DECL|DEFA|AUTO|FIRS|LAST|first|last|default)\\b"
-        },
-        {
-            "name": "keyword.prm",
-            "match": "(MASS|ATOMS|BONDS|ANGLES|DIHEDRALS|IMPROPER(S)?|CMAP|NONBONDED|NBFIX|HBOND|CUTHB)"
-        },
-        {
-            "name": "entity.name.section.prm",
-            "match": "\\b(BONDS|ANGLES|DIHEDRALS|IMPROPERS|CMAP|NONBONDED|NBFIX)\\b"
-        },
-        {
-            "name": "support.type.end.rtf",
-            "match": "^END|^GROUP"
-        },
-        {
-            "//": "floats in lines starting with those keywords",
-            "name": "constant.numeric.rtf",
-            "match": "(?<=\\b(MASS|ATOM|RESI|PRES|IC|BILD|LONEPAIR)\\b.*?)\\b(-?\\d+\\.\\d*)\\b"
-        },
-        {
-            "//": "the number after MASS, all -1, or 1,2,3...",
-            "name": "string.mass_number.rtf",
-            "match": "(?<=\\bMASS\\b.*?)\\s+-?\\d+\\s+"
-        },
-        {
-            "//": "element symbol in MASS line",
-            "name": "string.quoted.element-symbol.rtf",
-            "match": "(?<=^MASS\\s+-?\\d+\\s+\\S+\\s+\\b(-?\\d+\\.\\d*)\\b\\s+)\\S+"
-        },
-        {
-            "//": "the word after RESI|PRES",
-            "name": "entity.name.type.resname.rtf",
-            "match": "(?<=\\b(RESI|PRES)\\s)\\S+"
-        },
-        {
-            "//": "the number after RESI|PRES resname",
-            "name": "string.quoted.charge.rtf",
-            "match": "(?<=\\b(RESI|PRES)\\s+\\S+\\s+)-?\\d+.\\d+"
-        },
-        {
-            "//": "the several words after a keyword",
-            "note": "bond: variable length of pairs; impr: four strings",
-            "///": "Maybe atom names can be de",
-            "name": "entity.name.tag.atom.rtf",
-            "match": "(?<=\\bATOM\\s*)\\S+|(?<=\\bBOND\\s*)(\\S+\\s+\\S+\\s*)+|(?<=\\bANGLE\\s*)((\\S+\\s*){3})+|(?<=\\bIMPR\\s*)((\\S+\\s*){4})+|(?<=\\bIMPH\\s*)((\\S+\\s*){4})+|(?<=\\bCMAP\\s*)((\\S+\\s*){8})+|(?<=\\b\\s*(?i)IC\\s*)(\\S+\\s+){4}|(?<=\\b\\s*BILD\\s*)(\\S+\\s+){4}"
-        },
-        {
-            "//": "the several words after a keyword.",
-            "name": "entity.name.tag.atom.rtf",
-            "match": "(?<=\\bACCE(PTOR)?\\s*)(\\S+\\s*)+|(?<=\\bDONO(R)?\\s*)(\\S+\\s*)+|(?<=\\bDOUBLE\\s*)(\\S+\\s+\\S+\\s*)+|(?<=\\bPATC\\s*)(\\S+\\s+){4}|(?<=\\bPATCH\\s*)(\\S+\\s+){4}"
-        },
-        {
-            "//": "rarer keywords",
-            "name": "entity.name.tag.atom.rtf",
-            "match": "(?<=\\bDECL\\s*)(?:[+-]\\S+\\s*)|(?<=\\bDEFA\\s*)((\\S+\\s*){4})+|(?<=\\bLONEPAIR\\s+\\S+\\s+)\\S+\\s+\\S+\\s+\\S+"
-        },        
-        {
-            "//": "all floats, charge, mass, etc. put this before atom type. integers like dihedral n is not here",
-            "//": "with \\b( )\\b, cannot match minus sign...",
-            "//": "after charge, before atom-type.prm, otherwise overwritten...",
-            "name": "constant.numberic.rtf",
-            "match": "-?\\d+\\.\\d*"
-        },
-        {
-            "//": "dihedral n",
-            "name": "string.quoted.dihedral-n.prm",
-            "match": "(?<=-?\\d+\\.\\d*\\s+)\\d(?=\\s+-?\\d+\\.\\d*)"
-        },
-        {
-            "//": "all strings made up of capitalized letters (in special files there are lower case letters) and numbers. matching a lot of remaining strings...put them before this!",
-            "name": "support.type.atom-type.prm",
-            "match": "\\b([A-Za-z0-9]+)\\b"
-        },
-        {
-            "//": "a special type",
-            "name": "support.type.atomtype.prm",
-            "match": "\\b(none)\\b|\\b(NONE)\\b"
-        }
-    ]
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "NAMD force field (atom, residue, parameter) file",
+  "scopeName": "source.rtf",
+  "fileTypes": [
+    "rtf",
+    "inp",
+    "str",
+    "prm"
+  ],
+  "patterns": [
+    {
+      "//": "starting with exclamation",
+      "name": "comment.line.exclamation",
+      "match": "!.*$"
+    },
+    {
+      "name": "comment.line.asterisk",
+      "match": "^\\s*\\*.*"
+    },
+    {
+      "name": "keyword.rtf",
+      "match": "\\b(MASS|RESI|PRES|DELETE|ATOM|BOND|ANGLE(S)?|DIHE(DRAL)?|IMPR|IMPH|(?i)IC|BILD|ACCE(PTOR)?|DONO(R)?|DOUBLE|DOUB|(?i)PATC(H)?|PATCHING|LONEPAIR|COLI|DIST|SCAL|DECL|DEFA|AUTO|FIRS|LAST|first|last|default)\\b"
+    },
+    {
+      "name": "keyword.prm",
+      "match": "(MASS|ATOMS|BONDS|ANGLES|DIHEDRALS|IMPROPER(S)?|CMAP|NONBONDED|NBFIX|HBOND|CUTHB)"
+    },
+    {
+      "name": "entity.name.section.prm",
+      "match": "\\b(BONDS|ANGLES|DIHEDRALS|IMPROPERS|CMAP|NONBONDED|NBFIX)\\b"
+    },
+    {
+      "name": "support.type.end.rtf",
+      "match": "^END|^GROUP"
+    },
+    {
+      "//": "floats in lines starting with those keywords",
+      "name": "constant.numeric.rtf",
+      "match": "(?<=\\b(MASS|ATOM|RESI|PRES|IC|BILD|LONEPAIR)\\b.*?)\\b(-?\\d+\\.\\d*)\\b"
+    },
+    {
+      "//": "the number after MASS, all -1, or 1,2,3...",
+      "name": "string.mass_number.rtf",
+      "match": "(?<=\\bMASS\\b.*?)\\s+-?\\d+\\s+"
+    },
+    {
+      "//": "element symbol in MASS line",
+      "name": "string.quoted.element-symbol.rtf",
+      "match": "(?<=^MASS\\s+-?\\d+\\s+\\S+\\s+\\b(-?\\d+\\.\\d*)\\b\\s+)\\S+"
+    },
+    {
+      "//": "the word after RESI|PRES",
+      "name": "entity.name.type.resname.rtf",
+      "match": "(?<=\\b(RESI|PRES)\\s)\\S+"
+    },
+    {
+      "//": "the number after RESI|PRES resname",
+      "name": "string.quoted.charge.rtf",
+      "match": "(?<=\\b(RESI|PRES)\\s+\\S+\\s+)-?\\d+.\\d+"
+    },
+    {
+      "//": "the several words after a keyword",
+      "note": "bond: variable length of pairs; impr: four strings",
+      "///": "Maybe atom names can be de",
+      "name": "entity.name.tag.atom.rtf",
+      "match": "(?<=\\bATOM\\s*)\\S+|(?<=\\bBOND\\s*)(\\S+\\s+\\S+\\s*)+|(?<=\\bANGLE\\s*)((\\S+\\s*){3})+|(?<=\\bIMPR\\s*)((\\S+\\s*){4})+|(?<=\\bIMPH\\s*)((\\S+\\s*){4})+|(?<=\\bCMAP\\s*)((\\S+\\s*){8})+|(?<=\\b\\s*(?i)IC\\s*)(\\S+\\s+){4}|(?<=\\b\\s*BILD\\s*)(\\S+\\s+){4}"
+    },
+    {
+      "//": "the several words after a keyword.",
+      "name": "entity.name.tag.atom.rtf",
+      "match": "(?<=\\bACCE(PTOR)?\\s*)(\\S+\\s*)+|(?<=\\bDONO(R)?\\s*)(\\S+\\s*)+|(?<=\\bDOUBLE\\s*)(\\S+\\s+\\S+\\s*)+|(?<=\\bPATC\\s*)(\\S+\\s+){4}|(?<=\\bPATCH\\s*)(\\S+\\s+){4}"
+    },
+    {
+      "//": "rarer keywords",
+      "name": "entity.name.tag.atom.rtf",
+      "match": "(?<=\\bDECL\\s*)(?:[+-]\\S+\\s*)|(?<=\\bDEFA\\s*)((\\S+\\s*){4})+|(?<=\\bLONEPAIR\\s+\\S+\\s+)\\S+\\s+\\S+\\s+\\S+"
+    },
+    {
+      "//": "after charge, before atom-type.prm, otherwise overwritten...",
+      "name": "constant.numberic.rtf",
+      "match": "-?\\d+\\.\\d*"
+    },
+    {
+      "//": "dihedral n",
+      "name": "string.quoted.dihedral-n.prm",
+      "match": "(?<=-?\\d+\\.\\d*\\s+)\\d(?=\\s+-?\\d+\\.\\d*)"
+    },
+    {
+      "//": "all strings made up of capitalized letters (in special files there are lower case letters) and numbers. matching a lot of remaining strings...put them before this!",
+      "name": "support.type.atom-type.prm",
+      "match": "\\b([A-Za-z0-9]+)\\b"
+    },
+    {
+      "//": "a special type",
+      "name": "support.type.atomtype.prm",
+      "match": "\\b(none)\\b|\\b(NONE)\\b"
+    }
+  ]
 }

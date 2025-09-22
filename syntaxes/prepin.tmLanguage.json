@@ -1,55 +1,55 @@
 {
-    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-    "name": "prepin",
-    "scopeName": "source.prepin",
-    "fileTypes": [
-        "prepin"
-    ],
-    "patterns": [
-        {
-            "name": "comment.line.info.prepin",
-            "match": "^.*(?i)remark.*$"
-        },
-        {
-            "name": "comment.line.dummy.prepin",
-            "match": "DU(MM)?"
-        },
-        {
-            "name": "entity.name.type.prepin",
-            "match": "\\S+(?=\\s*(INT|XYZ))"
-        },
-        {
-            "name": "variable.other.coord-type.prepin",
-            "match": "INT|XYZ"
-        },
-        {
-            "match": "CORRECT|CHANGE|OMIT|NOMIT|BEG|ALL|LOOP|IMPROPER|DONE|STOP",
-            "name": "keyword.prepin"
-        },
-        {
-            "name": "constant.numeric.atom-number.prepin",
-            "match": "(?<=\\s*)\\d+(?=\\s\\s\\S+\\s+\\S+\\s+[EMBS3456])"
-        },
-        {
-            "name": "entity.name.tag.atom-name.prepin",
-            "match": "(?<=\\s+)(\\S+\\s+){2}(?=$)|(?<=\\s+)(\\S+\\s+){4}(?=$)|(?<=\\s*\\d+\\s\\s)(\\S+)(?=\\s+\\S+\\s+[EMBS3456])"
-        },
-        {
-            "name": "support.type.atom-type.prepin",
-            "match": "(?<=\\s*\\d+\\s\\s\\S+\\s+)\\S+(?=\\s+[EMBS3456])"
-        },
-        {
-            "//": "avoid the following three numbers",
-            "name": "keyword.tree-symbol.prepin",
-            "match": "(?<=\\s+\\d+\\s+\\S+\\s+\\S+\\s+)[EMBS3456](?!\\s+-?\\d*\\.\\d*|\\s+-?\\d*\\s+-?\\d*\\.\\d*)"
-        },
-        {
-            "match": "(?<=-?\\d*\\.\\d*)\\s+-?\\d*\\.\\d*(?=$)",
-            "name": "string.quoted.charge.prepin"
-        },
-        {
-            "match": "\\s+-?\\d*\\.\\d*",
-            "name": "constant.numeric.float.prepin"
-        }
-    ]
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "prepin",
+  "scopeName": "source.prepin",
+  "fileTypes": [
+    "prepin"
+  ],
+  "patterns": [
+    {
+      "name": "comment.line.info.prepin",
+      "match": "^.*(?i)remark.*$"
+    },
+    {
+      "name": "comment.line.dummy.prepin",
+      "match": "DU(MM)?"
+    },
+    {
+      "name": "entity.name.type.prepin",
+      "match": "\\S+(?=\\s*(INT|XYZ))"
+    },
+    {
+      "name": "variable.other.coord-type.prepin",
+      "match": "INT|XYZ"
+    },
+    {
+      "match": "CORRECT|CHANGE|OMIT|NOMIT|BEG|ALL|LOOP|IMPROPER|DONE|STOP",
+      "name": "keyword.prepin"
+    },
+    {
+      "name": "constant.numeric.atom-number.prepin",
+      "match": "(?<=\\s*)\\d+(?=\\s\\s\\S+\\s+\\S+\\s+[EMBS3456])"
+    },
+    {
+      "name": "entity.name.tag.atom-name.prepin",
+      "match": "(?<=\\s+)(\\S+\\s+){2}(?=$)|(?<=\\s+)(\\S+\\s+){4}(?=$)|(?<=\\s*\\d+\\s\\s)(\\S+)(?=\\s+\\S+\\s+[EMBS3456])"
+    },
+    {
+      "name": "support.type.atom-type.prepin",
+      "match": "(?<=\\s*\\d+\\s\\s\\S+\\s+)\\S+(?=\\s+[EMBS3456])"
+    },
+    {
+      "//": "avoid the following three numbers",
+      "name": "keyword.tree-symbol.prepin",
+      "match": "(?<=\\s+\\d+\\s+\\S+\\s+\\S+\\s+)[EMBS3456](?!\\s+-?\\d*\\.\\d*|\\s+-?\\d*\\s+-?\\d*\\.\\d*)"
+    },
+    {
+      "match": "(?<=-?\\d*\\.\\d*)\\s+-?\\d*\\.\\d*(?=$)",
+      "name": "string.quoted.charge.prepin"
+    },
+    {
+      "match": "\\s+-?\\d*\\.\\d*",
+      "name": "constant.numeric.float.prepin"
+    }
+  ]
 }

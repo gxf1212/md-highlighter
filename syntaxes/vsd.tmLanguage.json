@@ -1,38 +1,38 @@
 {
-    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-    "name": "Gromacs virtual site definition file",
-    "scopeName": "source.vsd",
-    "fileTypes": [
-        "vsd"
-    ],
-    "patterns": [
-        {
-            "name": "comment.line.semicolon",
-            "match": ";.*$"
-        },
-        {
-            "name": "keyword.vsd",
-            "match": "planar"
-        },
-		{
-			"//": "section",
-			"match": "\\[.*\\]",
-			"name": "entity.name.class"
-		},
-        {
-            "//": "aromatic section",
-            "name": "entity.name.tag.atom-name.vsd",
-            "match": "[0-9]*[A-Z]+[A-Z0-9_']*(?=.*\\s+\\d+\\.?\\d*)"
-        },
-        {
-            "//": "after atom name, match any of these strings",
-            "name": "support.type.atom-type.vsd",
-            "match": "[0-9]*[a-zA-Z]+[A-Z0-9_'*]*"
-        },
-		{
-			"//": "number",
-			"match": "(\\b|\\-)\\d+\\.?\\d*([eE][\\+\\-]?\\d+)?",
-			"name": "constant.language.vsd"
-		}
-    ]
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Gromacs virtual site definition file",
+  "scopeName": "source.vsd",
+  "fileTypes": [
+    "vsd"
+  ],
+  "patterns": [
+    {
+      "name": "comment.line.semicolon",
+      "match": ";.*$"
+    },
+    {
+      "name": "keyword.vsd",
+      "match": "planar"
+    },
+    {
+      "//": "section",
+      "match": "\\[.*\\]",
+      "name": "entity.name.class"
+    },
+    {
+      "//": "aromatic section",
+      "name": "entity.name.tag.atom-name.vsd",
+      "match": "[0-9]*[A-Z]+[A-Z0-9_']*(?=.*\\s+\\d+\\.?\\d*)"
+    },
+    {
+      "//": "after atom name, match any of these strings",
+      "name": "support.type.atom-type.vsd",
+      "match": "[0-9]*[a-zA-Z]+[A-Z0-9_'*]*"
+    },
+    {
+      "//": "number",
+      "match": "(\\b|\\-)\\d+\\.?\\d*([eE][\\+\\-]?\\d+)?",
+      "name": "constant.language.vsd"
+    }
+  ]
 }

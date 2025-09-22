@@ -53,7 +53,7 @@ PSF（Protein Structure File）是 NAMD 和 CHARMM 中使用的二进制拓扑�
 
 \subsubsection{CHARMM 参数文件（PRM）}
 
-PRM 文件是 CHARMM 力场中的参数文件，包含键长、键角、二面角和非键相互作用参数。该文件定义了分子间和分子内相互作用的力学性质，是力场计算的核心组件。md-highlighter 为 PRM 文件提供了清晰的章节区分和参数高亮。
+PRM 文件是 NAMD 和 CHARMM 中的参数文件，包含键长、键角、二面角和非键相互作用参数。该文件定义了分子间和分子内相互作用的力学性质，是力场计算的核心组件。md-highlighter 为 PRM 文件提供了清晰的章节区分和参数高亮。
 
 \begin{figure}[!h]
     \centering
@@ -149,7 +149,7 @@ tleap.in 文件是 AmberTools 中 tleap 程序的输入脚本，用于构建分�
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=0.85\textwidth]{../images/tleap.in.png}
+    \includegraphics[width=0.8\textwidth]{../images/tleap.in.png}
     \caption{tleap 输入脚本语法高亮演示（.in 格式）}
     \label{fig:tleap-highlighting}
 \end{figure}
@@ -164,7 +164,7 @@ MC 文件是 Antechamber 工具中用于定义分子主链结构的文件格式�
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=0.65\textwidth]{../images/mc.png}
+    \includegraphics[width=0.7\textwidth]{../images/mc.png}
     \caption{MC 主链文件语法高亮演示（.mc 格式）}
     \label{fig:mc-highlighting}
 \end{figure}
@@ -194,7 +194,7 @@ GRO 文件是 Gromacs 分子动力学软件包中的标准坐标文件格式。�
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=0.85\textwidth]{../images/gro.png}
+    \includegraphics[width=0.8\textwidth]{../images/gro.png}
     \caption{Gromacs GRO 文件语法高亮演示（.gro 格式）}
     \label{fig:gro-highlighting}
 \end{figure}
@@ -209,7 +209,7 @@ ATP 文件定义了 Gromacs 中的原子类型参数，包括原子质量、电�
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=0.85\textwidth]{../images/atp.png}
+    \includegraphics[width=0.8\textwidth]{../images/atp.png}
     \caption{Gromacs ATP 原子类型文件语法高亮演示（.atp 格式）}
     \label{fig:atp-highlighting}
 \end{figure}
@@ -222,31 +222,36 @@ ATP 文件定义了 Gromacs 中的原子类型参数，包括原子质量、电�
 
 MTP 文件用于 Gromacs 中的自由能计算，定义了在突变过程中如何修改分子的拓扑结构。该文件包含了初始状态、最终状态和中间状态的定义，支持复杂的化学变化模拟。
 
-\begin{figure}[!h]
-    \centering
-    \includegraphics[width=0.85\textwidth]{../images/mtp.png}
-    \caption{Gromacs MTP 突变拓扑文件语法高亮演示（.mtp 格式）}
-    \label{fig:mtp-highlighting}
-\end{figure}
-
-\textbf{高亮特性：}状态定义、拓扑变化、参数转换、突变路径清晰标识
-
-\textbf{应用场景：}自由能计算、突变模拟、化学反应研究
-
 \subsubsection{Gromacs 终端数据库文件（TDB）}
 
 TDB 文件定义了 Gromacs 中蛋白质终端的处理方式，包括 N-终端和 C-终端的质子化状态和特殊修饰。该文件在构建蛋白质系统拓扑时提供终端处理的标准化规则。
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=0.85\textwidth]{../images/tdb.png}
-    \caption{Gromacs TDB 终端数据库文件语法高亮演示（.tdb 格式）}
-    \label{fig:tdb-highlighting}
+    \begin{subfigure}[c]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../images/mtp.png}
+        \caption{MTP 格式}
+        \label{fig:mtp-highlighting}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[c]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../images/tdb.png}
+        \caption{TDB 格式}
+        \label{fig:tdb-highlighting}
+    \end{subfigure}
+    \caption{Gromacs MTP 突变拓扑文件和 TDB 终端数据库文件语法高亮演示}
+    \label{fig:mtp-tdb-highlighting}
 \end{figure}
 
-\textbf{高亮特性：}终端类型、修饰定义、质子化状态、原子添加规则清晰分类
+\textbf{MTP高亮特性：}状态定义、拓扑变化、参数转换、突变路径清晰标识
 
-\textbf{应用场景：}蛋白质建模、pH 效应模拟、终端修饰研究
+\textbf{MTP应用场景：}自由能计算、突变模拟、化学反应研究
+
+\textbf{TDB高亮特性：}终端类型、修饰定义、质子化状态、原子添加规则清晰分类
+
+\textbf{TDB应用场景：}蛋白质建模、pH 效应模拟、终端修饰研究
 
 \subsection{小分子文件格式}
 
@@ -254,31 +259,36 @@ TDB 文件定义了 Gromacs 中蛋白质终端的处理方式，包括 N-终端�
 
 MOL2 是 Tripos 公司开发的小分子结构文件格式，在药物设计和分子建模领域广泛使用。该格式能够存储分子的完整信息，包括原子坐标、电荷分布、原子类型和键连接关系。md-highlighter 为 MOL2 文件提供了细致的语法高亮，能够突出显示不同的数据块和关键信息。
 
-\begin{figure}[!h]
-    \centering
-    \includegraphics[width=0.85\textwidth]{../images/mol2.png}
-    \caption{MOL2 文件语法高亮演示（.mol2 格式）}
-    \label{fig:mol2-highlighting}
-\end{figure}
-
-\textbf{高亮特性：}分子信息、原子类型、键连接、电荷数据突出显示
-
-\textbf{应用场景：}小分子建模、药物设计、化学结构分析
-
 \subsubsection{结构数据文件（SDF）}
 
 SDF（Structure Data File）是化学信息学中广泛使用的分子结构数据格式。该格式能够存储多个分子的结构信息，包括原子坐标、键连接、立体化学信息和分子属性数据。SDF 文件在药物发现和化学数据库管理中应用广泛。
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=0.85\textwidth]{../images/sdf.png}
-    \caption{SDF 结构数据文件语法高亮演示（.sdf 格式）}
-    \label{fig:sdf-highlighting}
+    \begin{subfigure}[c]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../images/mol2.png}
+        \caption{MOL2 格式}
+        \label{fig:mol2-highlighting}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[c]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../images/sdf.png}
+        \caption{SDF 格式}
+        \label{fig:sdf-highlighting}
+    \end{subfigure}
+    \caption{MOL2 分子结构文件和 SDF 结构数据文件语法高亮演示}
+    \label{fig:mol2-sdf-highlighting}
 \end{figure}
 
-\textbf{高亮特性：}分子数据块、原子坐标、键连接表、属性信息清晰组织
+\textbf{MOL2高亮特性：}分子信息、原子类型、键连接、电荷数据突出显示
 
-\textbf{应用场景：}化学数据库、药物筛选、分子属性分析
+\textbf{MOL2应用场景：}小分子建模、药物设计、化学结构分析
+
+\textbf{SDF高亮特性：}分子数据块、原子坐标、键连接表、属性信息清晰组织
+
+\textbf{SDF应用场景：}化学数据库、药物筛选、分子属性分析
 
 \subsection{增强采样文件格式}
 
@@ -299,7 +309,7 @@ PLUMED 是一个功能强大的增强采样库，广泛用于分子动力学模�
 
 \subsection{实际应用指南}
 
-\subsubsection{文件验证与调试}
+\subsubsection{文件格式验证与调试}
 通过语法高亮快速定位文件格式问题：
 \begin{itemize}
     \item 识别格式不正确的坐标数据
@@ -317,14 +327,6 @@ md-highlighter 支持完整的分子模拟工作流：
     \item PLUMED 集成的增强采样流程
 \end{itemize}
 
-\subsubsection{最佳实践建议}
-\begin{itemize}
-    \item 使用 Atom One Light 主题获得最佳显示效果
-    \item 自定义颜色方案以适应个人偏好
-    \item 结合 VS Code 的搜索功能快速定位特定原子或残基
-    \item 利用折叠功能管理大型文件的复杂结构
-\end{itemize}
-
 \section{未来发展}
 
 \subsection{计划增强}
@@ -337,6 +339,7 @@ md-highlighter 扩展持续发展，计划改进包括：
     \item 增强的错误检测和验证特性
     \item 与分子可视化工具的集成
     \item 超大文件的性能优化
+    \item 利用折叠功能管理大型文件的复杂结构
 \end{itemize}
 
 \subsection{社区贡献}
