@@ -19,6 +19,7 @@
 开发语言 & JSON 配置文件 \\
 运行环境 & Visual Studio Code 1.70.0 及以上版本 \\
 开发者 & 高旭帆（gxf1212） \\
+联系方式 & gxf1212@zju.edu.cn \\
 开发单位 & 个人开发者 \\
 仓库地址 & \href{https://github.com/gxf1212/md-highlighter}{https://github.com/gxf1212/md-highlighter} \\
 程序规模 & package.json、language-configuration.json 以及 23 个语法定义文件，共 1761 行 \\
@@ -45,17 +46,18 @@ md-highlighter 用于在 Visual Studio Code 中为分子动力学相关文本文
 
 按照 \lstinline|package.json| 当前注册结果，本软件共提供 23 个语法定义，覆盖以下文件类型：
 
-\begin{table}[h]
+\begin{table}[!h]
 \centering
 \caption{已注册的语言和文件类型}
-\begin{tabular}{p{3cm}p{10cm}}
+\begin{tabular}{p{2cm}p{11cm}}
 \toprule
 \textbf{类别} & \textbf{语言 ID 或扩展名} \\
 \midrule
-NAMD / CHARMM & rtf（\lstinline|.rtf|、\lstinline|.str|、\lstinline|.inp|、\lstinline|.prm|、\lstinline|.par|）、pdb（\lstinline|.pdb|）、psf（\lstinline|.psf|） \\
-Amber / AmberTools & in（\lstinline|.in|，并匹配 \lstinline|leaprc.*|）、prmtop（\lstinline|.prmtop|、\lstinline|.parm7|）、inpcrd（\lstinline|.inpcrd|、\lstinline|.rst7|）、prepin（\lstinline|.prepin|、\lstinline|.prepi|）、frcmod（\lstinline|.frcmod| 及若干参数文件名模式）、lib（\lstinline|.lib|、\lstinline|.off|）、ac（\lstinline|.ac|）、mc（\lstinline|.mc|） \\
+NAMD或CHARMM & rtf（\lstinline|.rtf|、\lstinline|.str|、\lstinline|.inp|、\lstinline|.prm|、\lstinline|.par|）、pdb（\lstinline|.pdb|）、psf（\lstinline|.psf|） \\
+Amber或AmberTools & in（\lstinline|.in|，并匹配 \lstinline|leaprc.*|）、prmtop（\lstinline|.prmtop|、\lstinline|.parm7|）、inpcrd（\lstinline|.inpcrd|、\lstinline|.rst7|）、prepin（\lstinline|.prepin|、\lstinline|.prepi|）、frcmod（\lstinline|.frcmod| 及若干参数文件名模式）、lib（\lstinline|.lib|、\lstinline|.off|）、ac（\lstinline|.ac|）、mc（\lstinline|.mc|） \\
 Gromacs & gro、atp、arn、rtp、hdb、r2b、tdb、mtp、vsd \\
-小分子与辅助格式 & mol2、sdf（\lstinline|.sdf|、\lstinline|.mol|）、plumed（\lstinline|.plumed.dat|） \\
+小分子 & mol2、sdf（\lstinline|.sdf|、\lstinline|.mol|） \\
+其他 & plumed（\lstinline|.plumed.dat|） \\
 \bottomrule
 \end{tabular}
 \end{table}

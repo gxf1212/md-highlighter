@@ -9,7 +9,7 @@ md-highlighter 是一个 Visual Studio Code 扩展。这个项目本身没有单
 \begin{table}[h]
 \centering
 \caption{md-highlighter 系统要求}
-\begin{tabular}{p{3cm}p{8cm}}
+\begin{tabular}{p{3cm}p{10cm}}
 \toprule
 \textbf{要求项目} & \textbf{规格} \\
 \midrule
@@ -25,23 +25,6 @@ VS Code 版本 & 1.70.0 及以上版本，对应 \lstinline|package.json| 中的
 \subsection{软件特性}
 
 这一章只写当前仓库里已经实现的内容，不额外扩展。md-highlighter 的主要功能是给分子模拟相关文本文件提供语法高亮。当前版本在 \lstinline|package.json| 中注册了 23 个语言 ID，对应 23 个语法定义文件，范围包括 NAMD/CHARMM、Amber/AmberTools、Gromacs、小分子结构文件以及 PLUMED 输入文件。
-
-\subsubsection{支持的文件格式概览}
-\begin{table}[h]
-\centering
-\caption{支持的文件格式概览}
-\label{tab:file_format}
-\begin{longtable}{p{3cm}p{11cm}}
-\toprule
-\textbf{软件平台} & \textbf{主要格式} \\
-\midrule
-NAMD / CHARMM & \lstinline|.rtf|、\lstinline|.str|、\lstinline|.inp|、\lstinline|.prm|、\lstinline|.par|、\lstinline|.pdb|、\lstinline|.psf| \\
-Amber / AmberTools & \lstinline|.in|、\lstinline|leaprc.*|、\lstinline|.prmtop|、\lstinline|.parm7|、\lstinline|.inpcrd|、\lstinline|.rst7|、\lstinline|.prepin|、\lstinline|.prepi|、\lstinline|.frcmod|、\lstinline|.lib|、\lstinline|.off|、\lstinline|.ac|、\lstinline|.mc| \\
-Gromacs & \lstinline|.gro|、\lstinline|.atp|、\lstinline|.arn|、\lstinline|.rtp|、\lstinline|.hdb|、\lstinline|.r2b|、\lstinline|.tdb|、\lstinline|.mtp|、\lstinline|.vsd| \\
-小分子和辅助格式 & \lstinline|.mol2|、\lstinline|.sdf|、\lstinline|.mol|、\lstinline|.plumed.dat| \\
-\bottomrule
-\end{longtable}
-\end{table}
 
 \subsubsection{颜色编码方式}
 

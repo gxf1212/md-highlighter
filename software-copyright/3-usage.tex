@@ -301,7 +301,7 @@ PLUMED 文件使用 \lstinline|syntaxes/plumed.tmLanguage.json|。当前规则�
 
 PLUMED 的显示层次比较清楚，动作关键字、偏置关键字、参数名、变量名和数值项是分开的。编写或阅读输入脚本时，动作段和参数段不会搅在一起。
 
-\subsection{实际应用说明}
+\subsection{实际用途}
 
 \subsubsection{文本阅读和人工检查}
 
@@ -328,24 +328,12 @@ PLUMED 的显示层次比较清楚，动作关键字、偏置关键字、参数�
 
 \subsection{计划改进}
 
-从 README 和现有语法文件里的注释看，后续仍有一些可以继续完善的方向：
+从 README 和现有语法文件看，后续仍有一些可以继续完善的方向：
 \begin{itemize}
-    \item 继续补充更多分子模拟相关文本格式
+    \item 继续补充更多分子模拟相关文本格式，如LAMMPS软件等
     \item 调整部分规则对特殊原子命名方式的兼容性
     \item 针对已有语法文件中的已知注释和 TODO 继续细化匹配范围
-    \item 视需要补充更多截图和示例文件，方便用户比对显示效果
-    \item 在不引入复杂运行时代码的前提下，保持语法文件结构的可维护性
     \item 结合实际使用情况修正少数过宽或过窄的正则规则
-\end{itemize}
-
-\subsection{社区贡献}
-
-本项目适合以下几类增量维护工作：
-\begin{itemize}
-    \item 为新的文件格式补充 \lstinline|tmLanguage| 规则
-    \item 根据实际样例文件修改已有正则表达式
-    \item 提交显示问题、误匹配问题和边界样例
-    \item 完善 README、截图和软著申请材料中的说明文本
 \end{itemize}
 
 \subsection{总结}
