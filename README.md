@@ -76,8 +76,6 @@ TODO:
 - add self-defined colors like pink, etc.
 - sdf file?
 
-This extension is created with the help of ChatGPT and New Bing in the beginning.
-
 ## Release Notes
 
 see CHANGELOG

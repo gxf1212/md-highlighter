@@ -4,6 +4,11 @@
 import os
 import sys
 
+SOURCE_EXTENSIONS = {
+    '.py', '.js', '.java', '.c', '.cpp', '.h', '.sh', '.bash',
+    '.yml', '.yaml', '.tex', '.json'
+}
+
 
 def count_file_lines(file_path):
     """Count lines in a single file."""
@@ -39,7 +44,6 @@ def should_ignore(path):
 
 def count_directory_lines(directory):
     """Count lines in all source files in directory."""
-    source_extensions = {'.py', '.js', '.java', '.c', '.cpp', '.h', '.sh', '.bash', '.yml', '.yaml', '.tex', '.json'}
     total_lines = 0
     file_count = 0
 
@@ -52,7 +56,7 @@ def count_directory_lines(directory):
             if should_ignore(file_path):
                 continue
 
-            if any(file.endswith(ext) for ext in source_extensions):
+            if any(file.endswith(ext) for ext in SOURCE_EXTENSIONS):
                 lines = count_file_lines(file_path)
                 rel_path = os.path.relpath(file_path, directory)
                 print(f"{rel_path}: {lines} lines")
@@ -63,14 +67,54 @@ def count_directory_lines(directory):
     return total_lines, file_count
 
 
-if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python count_lines.py <directory>")
-        sys.exit(1)
+def remove_empty_lines(file_path):
+    """Remove empty lines from a file."""
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            lines = f.readlines()
+        non_empty_lines = [line for line in lines if line.strip()]
+        with open(file_path, 'w', encoding='utf-8') as f:
+            if non_empty_lines:
+                if not non_empty_lines[-1].endswith('\n'):
+                    non_empty_lines[-1] += '\n'
+                f.writelines(non_empty_lines)
+        return len(non_empty_lines)
+    except Exception as e:
+        print(f"Error processing {file_path}: {e}")
+        return 0
 
+
+def remove_empty_lines_from_directory(directory, extensions=None):
+    """Remove empty lines from all source files in directory."""
+    if extensions is None:
+        extensions = SOURCE_EXTENSIONS
+    total_lines = 0
+    file_count = 0
+    for root, dirs, files in os.walk(directory):
+        dirs[:] = [d for d in dirs if not should_ignore(os.path.join(root, d))]
+        for file in files:
+            file_path = os.path.join(root, file)
+            if should_ignore(file_path):
+                continue
+            if any(file.endswith(ext) for ext in extensions):
+                lines = remove_empty_lines(file_path)
+                rel_path = os.path.relpath(file_path, directory)
+                print(f"{rel_path}: {lines} lines (after removing empty lines)")
+                total_lines += lines
+                file_count += 1
+    print(f"\nTotal: {file_count} files, {total_lines} lines")
+    return total_lines, file_count
+
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Usage: python count_lines.py <directory> [--remove-empty]")
+        sys.exit(1)
     directory = sys.argv[1]
     if not os.path.isdir(directory):
         print(f"Directory not found: {directory}")
         sys.exit(1)
-
-    count_directory_lines(directory)
+    if len(sys.argv) > 2 and sys.argv[2] == '--remove-empty':
+        remove_empty_lines_from_directory(directory)
+    else:
+        count_directory_lines(directory)

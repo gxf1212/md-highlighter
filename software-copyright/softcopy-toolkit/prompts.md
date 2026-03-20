@@ -1,9 +1,11 @@
 基本要求  
 你是一名专业的软件著作权撰写顾问，熟悉知识产权法律法规与软件开发流程。请根据以下要求，撰写一份正式、合规且具备法律与技术严谨度的软件著作权说明文档，并确保输出内容可以直接用于申请或备案参考。
+document.texl里面包含子文档software-copyright\1-introduction.tex，2-installation.tex之类的，是要写子文档的内容，可以删掉多余的子文件、改文件名什么的，要写中文！源程序文档主文档是source-code.tex，主要是编辑code_simplified.tex，只写`\section,\subsection`等和`\lstinputlisting`语句
 
-- document.tex里面包含子文档software-copyright\1-introduction.tex，2-installation.tex之类的，是要写子文档的内容，可以删掉多余的子文件、改文件名什么的，要写中文！
-- 源程序文档主文档是source-code.tex，主要是编辑code_simplified.tex，只写`\section,\subsection`等和`\lstinputlisting`语句
-- 不要删掉%!TEX root = document.tex这种
+工具脚本约定
+- 使用说明文档可通过 `\lstinline|compile.sh|` 编译。
+- 源程序文档在更新 `\lstinline|code_simplified.tex|` 后，应先运行 `\lstinline|software-copyright/self_assembly/sync_code_listings.py|` 同步代码副本，再运行 `\lstinline|count_lines.py software-copyright/self_assembly/src --remove-empty|` 清理空行并统计行数，最后编译 `\lstinline|source-code.tex|`。
+- 如需提交软著要求的节选 PDF，可使用 `\lstinline|extract_front_back_pages.py|` 从完整 PDF 中提取前若干页与后若干页，默认保留前30页和后30页并自动去重重叠页。
 
 文档结构  
 
@@ -70,14 +72,14 @@ API接口或使用方法
 - 代码块格式：软著正文使用 `lstlisting` 环境展示代码块，要求使用`style=blockstyle`，如：  
   ```latex
   \begin{lstlisting}[language=bash,style=blockstyle]
-  conda create -n download python==3.9 -c https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+  conda create -n download python==3.9
   \end{lstlisting}
   ```  
 - 行内代码也要用，如 `\lstinline|PATH|`。  
 - 有些代码直接编译不了，如 `_`，还有 `\`，这些都要加上 `\lstinline`。  
 - 已经在 `\begin{lstlisting}` 里面的就不用 `\lstinline|` 了。  
 - `\lstinline` 内部也不需要给 `_` 加 `\` 了，例如 `get_data`、`max_results` 这种也要用 `\lstinline`，比如：  
-  > 为了能够自动生成包含中文的图表，您可能需要为 Matplotlib 包添加合适的中文字体。默认情况下，使用的中文字体是 Microsoft YaHei，但如果您没有安装该字体，或者希望使用其他字体（需更改 `\lstinline|analysis/analysis_tools.py|`），可以按照以下步骤操作。  
+  > 为了能够自动生成包含中文的图表，您可能需要为 Matplotlib 包添加合适的中文字体。默认情况下，使用的中文字体是 Microsoft YaHei，但如果您没有安装该字体，或者希望使用其他字体（需更改 `\lstinline|self_assembly/styles.py|`），可以按照以下步骤操作。  
 - 希望保持代码块的顶格和缩进规范，使用四个空格代替制表符。  
 - 需要确保所有代码块都符合这一格式要求。  
 - 确保 `language=` 参数正确，避免误用语言类型。
@@ -87,9 +89,8 @@ API接口或使用方法
 - 代码也是不要用各种奇怪的手动换行，`\\` 什么的，就正常地用空格控制就行。  
 - 一般不要用 `\newline`。  
 
-- 所有表格都用三线表居中，caption在表的上方，Figure的caption在图片下方，总之得符合论文的标准。
-- 如\ref{fig:theme_pie_chart}就行了，杜绝“如图图 2所示”这种编译结果
-- 调整图大小，使用!h之类的，甚至可多写点文字，使得图片显示位置尽量在原位，相关文字的附近
+重新管理换行  
+- 所有表格都用三线表居中。  
 
 自动检查  
 在生成文档时，确保以下内容符合规范：  
@@ -99,12 +100,3 @@ API接口或使用方法
 
 最终输出  
 请按照上述要求，以规范化、条理化的形式输出整篇软件著作权说明文档，并确保内容符合 LaTeX 格式规范。
-
-software-copyright\code_simplified.tex只需要大概这样就行了
-\section{扩展配置模块}
-\subsection{package.json - 扩展主配置文件}
-\lstinputlisting{../package.json}
-\subsection{language-configuration.json - 语言通用配置}
-\lstinputlisting{../language-configuration.json}
-……
-然后总代码量不用超过三千行，多了就注释掉部分文件，或显示源码略
