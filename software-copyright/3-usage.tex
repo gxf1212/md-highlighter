@@ -2,13 +2,13 @@
 
 \section{使用示例}
 
-md-highlighter 扩展安装后自动生效，无需操作。以下演示展示了 md-highlighter 扩展在不同分子仿真文件中的语法高亮效果。通过个性化的颜色编码和语义标识，用户可以更高效地编辑和管理各种复杂的分子模拟文件。
+md-highlighter 安装后会在 VS Code 中按文件类型自动加载相应语法文件。下面各节按仓库中已经存在的语法定义说明高亮范围，不另外引入未实现的功能。当前版本做的是文本匹配和作用域标注，不做分子结构计算，也不做力场参数求解。
 
 \subsection{NAMD/CHARMM 文件格式}
 
 \subsubsection{蛋白质数据库文件（PDB）}
 
-PDB（Protein Data Bank）格式是生物大分子结构数据的国际标准格式。该格式包含了蛋白质、核酸和其他生物大分子的三维原子坐标信息。md-highlighter 为 PDB 文件提供了精细的语法高亮，能够清晰地区分 ATOM、HETATM、REMARK 等不同记录类型，并且对原子坐标、残基信息和链标识符进行颜色编码，大大提高了文件的可读性。
+PDB 文件的高亮规则定义在 \lstinline|syntaxes/pdb.tmLanguage.json|。这一部分写得比较直接：先把 \lstinline|CRYST|、\lstinline|REMARK|、\lstinline|HEADER|、\lstinline|TITLE|、\lstinline|COMPND|、\lstinline|SOURCE|、\lstinline|JRNL|、\lstinline|CONECT| 这类记录当作说明性记录处理；再单独匹配 \lstinline|CRYST1|、\lstinline|TER|、\lstinline|END|、\lstinline|HELIX|、\lstinline|SHEET|、\lstinline|SSBOND|；对 \lstinline|ATOM| 和 \lstinline|HETATM| 行，则按固定列宽继续拆出原子序号、原子名、残基名、链标识、残基编号、坐标、占有率、温度因子、段名、电荷等字段。
 
 \begin{figure}[!h]
     \centering
@@ -17,13 +17,11 @@ PDB（Protein Data Bank）格式是生物大分子结构数据的国际标准格
     \label{fig:pdb-highlighting}
 \end{figure}
 
-\textbf{高亮特性：}记录类型、原子坐标、残基信息、链标识符清晰区分
-
-\textbf{应用场景：}结构分析、坐标编辑、格式验证
+从实际显示看，记录名和数据行是分开处理的；原子记录内部又会按固定列位置区分原子序号、原子名、残基名、链 ID、三列坐标和元素符号等字段。这个格式最适合在编辑器里直接看文本布局，手动核对坐标列、残基编号和记录类型时会更顺手。
 
 \subsubsection{残基拓扑文件（RTF）}
 
-RTF（Residue Topology File）文件是 CHARMM 力场中用于定义残基拓扑结构的核心文件。它包含了残基的原子类型、连接关系、电荷分布等关键信息。通过 md-highlighter 的语法高亮，用户可以快速识别 RESI、ATOM、BOND 等关键字，以及各种参数值和注释内容。
+RTF 和部分 CHARMM 参数文件共用 \lstinline|syntaxes/rtf.tmLanguage.json|。这份语法文件里既有拓扑项，也兼顾了参数项。实际匹配内容包括以 \lstinline|!| 和 \lstinline|*| 开头的注释行，\lstinline|MASS|、\lstinline|RESI|、\lstinline|PRES|、\lstinline|ATOM|、\lstinline|BOND|、\lstinline|ANGLE|、\lstinline|DIHEDRAL|、\lstinline|IMPR|、\lstinline|PATCH|、\lstinline|LONEPAIR| 等关键字，以及这些关键字后面的质量编号、元素符号、残基名、电荷数值、原子名称和原子类型。
 
 \begin{figure}[!h]
     \centering
@@ -32,13 +30,11 @@ RTF（Residue Topology File）文件是 CHARMM 力场中用于定义残基拓扑
     \label{fig:rtf-highlighting}
 \end{figure}
 
-\textbf{高亮特性：}章节标题、原子定义、连接信息、参数值突出显示
-
-\textbf{应用场景：}力场开发、残基定义、拓扑验证
+在该文件里，注释、拓扑关键字、残基名、电荷、原子名和参数区数据是分开显示的；\lstinline|MASS| 行以及 \lstinline|RESI/PRES| 行还有单独规则。实际使用时，这一类高亮更适合查看残基定义、键接关系以及力场项的文本组织方式，人工定位拓扑段落会方便一些。
 
 \subsubsection{蛋白质结构文件（PSF）}
 
-PSF（Protein Structure File）是 NAMD 和 CHARMM 中使用的二进制拓扑文件，存储了分子系统的完整拓扑信息。文件包含原子列表、键连接、角度和二面角定义，是分子动力学模拟的基础文件。md-highlighter 通过对不同章节进行颜色编码，使用户能够快速定位和编辑相关内容。
+PSF 文件的高亮规则定义在 \lstinline|syntaxes/psf.tmLanguage.json|。这一部分没有写得很花，重点就是把 \lstinline|PSF| 文件头、说明性记录、各个 section 标题、总数值以及原子数据行中的字段区分开。实际用下来，比较有用的是长文件里 section 标题和数据主体不会混在一起。
 
 \begin{figure}[!h]
     \centering
@@ -47,13 +43,11 @@ PSF（Protein Structure File）是 NAMD 和 CHARMM 中使用的二进制拓扑�
     \label{fig:psf-highlighting}
 \end{figure}
 
-\textbf{高亮特性：}原子列表、键连接、分子段信息有序组织
-
-\textbf{应用场景：}拓扑验证、连接调试、分子分析
+这里的效果比较朴素，文件头、分段标识、计数字段和原子相关数据采用不同作用域。对较长的 PSF 文本来说，这样至少能先把 section 标题和数据区分开。
 
 \subsubsection{CHARMM 参数文件（PRM）}
 
-PRM 文件是 NAMD 和 CHARMM 中的参数文件，包含键长、键角、二面角和非键相互作用参数。该文件定义了分子间和分子内相互作用的力学性质，是力场计算的核心组件。md-highlighter 为 PRM 文件提供了清晰的章节区分和参数高亮。
+扩展把 \lstinline|.prm| 文件也归入 \lstinline|rtf| 语言配置，因此它的语法高亮仍然来自 \lstinline|syntaxes/rtf.tmLanguage.json|。在该分析项中，主要是对 \lstinline|BONDS|、\lstinline|ANGLES|、\lstinline|DIHEDRALS|、\lstinline|IMPROPERS|、\lstinline|CMAP|、\lstinline|NONBONDED|、\lstinline|NBFIX| 等参数区名称做匹配，再把原子类型、浮点数参数和部分节标题分开显示。
 
 \begin{figure}[!h]
     \centering
@@ -62,15 +56,13 @@ PRM 文件是 NAMD 和 CHARMM 中的参数文件，包含键长、键角、二�
     \label{fig:prm-highlighting}
 \end{figure}
 
-\textbf{高亮特性：}参数章节、原子类型、力常数、相互作用定义清晰划分
-
-\textbf{应用场景：}力场开发、参数优化、分子动力学模拟
+PRM 这部分主要是把参数区标题、原子类型字符串和数值参数拉开层次。当前版本里，它的作用还是偏基础，主要用于阅读和修改参数文本时区分节标题、类型名和数值列。
 
 \subsection{Amber/AmberTools 文件格式}
 
 \subsubsection{Amber 拓扑文件（PRMTOP）}
 
-PRMTOP（Parameter and Topology File）是 Amber 分子动力学软件包中的核心拓扑文件格式。该文件采用特殊的格式化结构，包含了分子系统的全部力场参数和拓扑信息。md-highlighter 能够识别其中的数据块标签、原子信息区域和参数定义，为用户提供清晰的视觉分割。
+PRMTOP 文件使用 \lstinline|syntaxes/prmtop.tmLanguage.json|。这份规则是按块写的。先识别 \lstinline|%VERSION|、\lstinline|%FLAG|、\lstinline|%FORMAT| 三类标记，再对 \lstinline|ATOM_NAME|、\lstinline|ATOMIC_NUMBER|、\lstinline|MASS|、\lstinline|RESIDUE_LABEL|、\lstinline|AMBER_ATOM_TYPE| 等数据块分别处理。实际输出为：格式字符串、原子名、原子序数、残基名、原子类型和数值项会落在不同作用域里。
 
 \begin{figure}[!h]
     \centering
@@ -79,13 +71,11 @@ PRMTOP（Parameter and Topology File）是 Amber 分子动力学软件包中的�
     \label{fig:prmtop-highlighting}
 \end{figure}
 
-\textbf{高亮特性：}格式标签、数据块、原子信息、参数区域标识清晰
+实际显示时，\lstinline|%FLAG|/\lstinline|%FORMAT| 标记、格式说明、原子名块、残基标签块和数值块会被分层处理。对 PRMTOP 这类按块组织的数据文件来说，这样更容易人工定位常见 section。
 
-\textbf{应用场景：}Amber 仿真、拓扑分析、参数验证
+\subsubsection{Amber 参数版本 7 格式（PARM7）}
 
-\subsubsection{Amber 参数版本7格式 (PARM7)}
-
-PARM7 是 Amber 新版本中使用的拓扑文件格式，与 PRMTOP 功能相似但采用了更加细致的数据组织结构。该格式提供了更好的可读性和更高的数据精度，支持更复杂的分子系统描述。
+\lstinline|.parm7| 扩展名在 \lstinline|package.json| 中与 \lstinline|prmtop| 语言 ID 共用同一套语法定义，因此它的高亮方式和 PRMTOP 相同。当前版本没有为 \lstinline|.parm7| 另外再写一套规则，而是直接复用 \lstinline|syntaxes/prmtop.tmLanguage.json| 中的分块匹配逻辑。
 
 \begin{figure}[!h]
     \centering
@@ -94,13 +84,11 @@ PARM7 是 Amber 新版本中使用的拓扑文件格式，与 PRMTOP 功能相�
     \label{fig:parm7-highlighting}
 \end{figure}
 
-\textbf{高亮特性：}数据标签、参数分组、精度指示符、版本信息清晰显示
-
-\textbf{应用场景：}现代 Amber 仿真、高精度计算、跨平台兼容
+因为直接复用了 PRMTOP 的规则，所以这里看到的也是同一套标记、字段块和数值高亮方式。适用范围也很直接，就是用 \lstinline|.parm7| 扩展名存放的 Amber 拓扑文件。
 
 \subsubsection{Amber 库文件（LIB）}
 
-LIB 文件是 Amber 中用于存储残基库信息的文件格式，包含了原子类型、电荷分布、键连接等详细信息。这种文件在建立复杂分子系统拓扑时起关键作用。md-highlighter 为 LIB 文件提供了精确的语法识别，能够突出显示单元定义、原子列表和库命令。
+LIB/OFF 文件的语法定义位于 \lstinline|syntaxes/lib.tmLanguage.json|。这里的规则比较贴近文件本身的组织方式，主要识别 \lstinline|!entry| 记录、残基名、unit 类型、原子名、残基编号、原子编号、元素编号、电荷以及纯数字索引行。以 \lstinline|!entry| 开头的结构段单独处理，所以头部标识和后续数据行不会混在一层。
 
 \begin{figure}[!h]
     \centering
@@ -109,13 +97,11 @@ LIB 文件是 Amber 中用于存储残基库信息的文件格式，包含了原
     \label{fig:lib-highlighting}
 \end{figure}
 
-\textbf{高亮特性：}单元定义、原子列表、连接信息、库命令突出显示
-
-\textbf{应用场景：}库文件开发、残基定义、参数优化
+\lstinline|!entry| 关键字、残基名、原子名、编号和电荷字段会分别显示出来。看 tLeap 库文件时，这样比较容易顺着条目结构往下读，也方便找原子列表。
 
 \subsubsection{Amber 预处理输入文件（PREPIN）}
 
-PREPIN 文件是 Amber 中用于定义非标准残基的预处理输入文件。该格式包含残基的几何结构、原子类型、电荷分布和连接信息，用于生成新的残基库条目。md-highlighter 能够识别其中的各种定义区块和参数设置。
+PREPIN 文件的规则定义在 \lstinline|syntaxes/prepin.tmLanguage.json|。这一部分除了原子表，还把一些控制项一起写进去了。当前可识别 \lstinline|remark| 信息行、\lstinline|DU/ DUM| 占位原子、坐标类型 \lstinline|INT|/\lstinline|XYZ|、\lstinline|CORRECT|、\lstinline|CHANGE|、\lstinline|OMIT|、\lstinline|LOOP|、\lstinline|IMPROPER|、\lstinline|DONE|、\lstinline|STOP| 等控制关键字，以及原子编号、原子名、原子类型、树符号、电荷和浮点数。
 
 \begin{figure}[!h]
     \centering
@@ -124,13 +110,11 @@ PREPIN 文件是 Amber 中用于定义非标准残基的预处理输入文件。
     \label{fig:prepin-highlighting}
 \end{figure}
 
-\textbf{高亮特性：}残基定义、原子坐标、电荷分配、连接关系突出显示
-
-\textbf{应用场景：}非标准残基建模、残基库扩展、参数化工作
+说明行、控制关键字、原子信息列和电荷数值在当前版本里都有对应匹配。对于非标准残基预处理文件，这样的分段足够支持人工核对原子表和控制段。
 
 \subsubsection{Amber 力场修改文件（FRCMOD）}
 
-FRCMOD 文件用于修改或扩展现有的 Amber 力场参数。该文件格式允许用户添加新的原子类型、修改现有参数或定义新的相互作用项。md-highlighter 提供了清晰的参数分类和数值高亮。
+FRCMOD 文件的语法定义位于 \lstinline|syntaxes/frcmod.tmLanguage.json|。当前版本里，这个文件主要匹配 \lstinline|MASS|、\lstinline|BOND|、\lstinline|ANGLE|、\lstinline|DIHE|、\lstinline|IMPROPER|、\lstinline|NONBON|、\lstinline|CMAP| 等段标识，并对不同段中的原子类型组合、浮点参数和整数参数分别着色。
 
 \begin{figure}[!h]
     \centering
@@ -139,13 +123,11 @@ FRCMOD 文件用于修改或扩展现有的 Amber 力场参数。该文件格式
     \label{fig:frcmod-highlighting}
 \end{figure}
 
-\textbf{高亮特性：}参数修改、原子类型定义、力场扩展信息清晰组织
+这个格式里，参数段标题和各类参数行的原子类型组合、数值项区分得比较清楚。实际用途主要还是人工查看新增或修改后的力场参数条目。
 
-\textbf{应用场景：}力场定制、参数微调、新分子类型支持
+\subsubsection{AmberTools 输入脚本（TLEAP/相关 .in 文件）}
 
-\subsubsection{AmberTools 输入脚本（TLEAP.IN）}
-
-tleap.in 文件是 AmberTools 中 tleap 程序的输入脚本，用于构建分子系统的拓扑结构。该脚本包含加载力场、添加分子、定义系统等命令序列。md-highlighter 能够识别命令关键字、文件路径和参数设置。
+\lstinline|syntaxes/in.tmLanguage.json| 用于 \lstinline|.in| 文件以及 \lstinline|leaprc.*| 模式文件。它同时照顾了 Amber MD 输入脚本、tleap 常用命令和部分 parmed 命令。代码里已经写进去的关键词包括 \lstinline|imin|、\lstinline|iwrap|、\lstinline|ntx|、\lstinline|cut|、\lstinline|nstlim|、\lstinline|temp0| 等 MD 参数名，也包括 \lstinline|source|、\lstinline|loadmol2|、\lstinline|loadpdb|、\lstinline|loadamberparams|、\lstinline|loadAmberPrep|、\lstinline|loadOFF|、\lstinline|addIons|、\lstinline|savepdb|、\lstinline|saveamberparm|、\lstinline|quit| 等 tleap 命令。
 
 \begin{figure}[!h]
     \centering
@@ -154,13 +136,11 @@ tleap.in 文件是 AmberTools 中 tleap 程序的输入脚本，用于构建分�
     \label{fig:tleap-highlighting}
 \end{figure}
 
-\textbf{高亮特性：}命令关键字、文件路径、参数值、注释信息清晰区分
-
-\textbf{应用场景：}系统构建、拓扑生成、批处理脚本
+在这类脚本里，注释、参数名、命令名、常见文件格式名、离子名和变量赋值行都会分开显示。写 Amber 输入文件和 tleap 脚本时，至少不会把命令和参数混成一片。
 
 \subsubsection{Antechamber 主链文件（MC）}
 
-MC 文件是 Antechamber 工具中用于定义分子主链结构的文件格式。该文件包含主链原子的标识、连接关系和几何信息，用于分子的自动参数化过程。
+MC 文件使用 \lstinline|syntaxes/mc.tmLanguage.json|。当前规则识别 \lstinline|HEAD_NAME|、\lstinline|TAIL_NAME|、\lstinline|PRE_HEAD_TYPE|、\lstinline|POST_TAIL_TYPE|、\lstinline|CHARGE|、\lstinline|OMIT_NAME| 等字段名，并对 \lstinline|NAME| 行后的原子名、\lstinline|TYPE| 行后的原子类型以及数值项进行着色。
 
 \begin{figure}[!h]
     \centering
@@ -169,13 +149,11 @@ MC 文件是 Antechamber 工具中用于定义分子主链结构的文件格式�
     \label{fig:mc-highlighting}
 \end{figure}
 
-\textbf{高亮特性：}主链定义、原子标识、连接信息有序显示
-
-\textbf{应用场景：}小分子参数化、主链识别、结构分析
+MC 文件里，字段关键字、原子名、原子类型和数值项用了不同作用域。它的用途也比较朴素，就是在查看主链定义文本时，能把名称字段和参数字段先分开。
 
 \subsubsection{Antechamber 文件（AC）}
 
-AC 文件是 Antechamber 工具生成的中间格式文件，主要用于小分子的电荷计算和原子类型分配。该格式包含了分子的原子连接信息、电荷分布和分子描述符。md-highlighter 可以清晰地显示这些不同类型的信息，帮助用户进行小分子参数化工作。
+AC 文件的语法定义位于 \lstinline|syntaxes/ac.tmLanguage.json|。当前实现识别 \lstinline|CHARGE|、\lstinline|Formula| 两类头部关键字；对 \lstinline|ATOM|/\lstinline|HETATM| 行按固定宽度拆分原子编号、原子名、残基名、残基编号、三维坐标、电荷和原子类型；对 \lstinline|BOND| 行则区分键序号、两端原子编号、键类型和两端原子名。
 
 \begin{figure}[!h]
     \centering
@@ -184,13 +162,13 @@ AC 文件是 Antechamber 工具生成的中间格式文件，主要用于小分�
     \label{fig:ac-highlighting}
 \end{figure}
 
-\textbf{高亮特性：}原子连接、电荷信息、分子描述符清晰组织
+头部说明、原子记录和键记录在这里分别用了独立的匹配范围。对 Antechamber 中间文件来说，这样看原子信息和键信息会更直接。
 
 \subsection{Gromacs 文件格式}
 
 \subsubsection{Gromacs 坐标文件（GRO）}
 
-GRO 文件是 Gromacs 分子动力学软件包中的标准坐标文件格式。与传统的 PDB 格式相比，GRO 格式提供了更高的精度和更紧凑的数据结构。该格式包含原子编号、残基信息、坐标数据和可选的速度信息。md-highlighter 为 GRO 文件提供了精确的语法分析，能够清晰地区分各个数据列。
+GRO 文件的高亮规则定义在 \lstinline|syntaxes/gro.tmLanguage.json|。这份文件按列宽处理得比较明显：时间步字符串、标题行、总原子数行、盒子向量行先分出来，正文再按固定列宽区分残基编号、残基名、原子名、坐标列和速度列。代码里其实预留了原子编号字段的位置，但这一项当前的 \lstinline|match| 为空，所以现在的重点还是名称列和数值列。
 
 \begin{figure}[!h]
     \centering
@@ -199,13 +177,11 @@ GRO 文件是 Gromacs 分子动力学软件包中的标准坐标文件格式。�
     \label{fig:gro-highlighting}
 \end{figure}
 
-\textbf{高亮特性：}原子编号、残基信息、坐标数据、速度信息清晰划分
-
-\textbf{应用场景：}Gromacs 仿真、坐标分析、轨迹处理
+标题、总数、盒向量、残基名、原子名、坐标和速度列在显示上是分开的。GRO 文件本来就依赖列结构，这种高亮最有用的地方也正是在这里。
 
 \subsubsection{Gromacs 原子类型文件（ATP）}
 
-ATP 文件定义了 Gromacs 中的原子类型参数，包括原子质量、电荷、原子半径等物理属性。该文件是 Gromacs 力场定义的基础组件，在构建拓扑文件时起关键作用。
+ATP 文件使用 \lstinline|syntaxes/atp.tmLanguage.json|。这部分规则比较短，主要处理分号注释、浮点数、一般原子类型字符串以及带 \lstinline|amber| 前缀的类型名。
 
 \begin{figure}[!h]
     \centering
@@ -214,17 +190,35 @@ ATP 文件定义了 Gromacs 中的原子类型参数，包括原子质量、电�
     \label{fig:atp-highlighting}
 \end{figure}
 
-\textbf{高亮特性：}原子类型名称、质量数据、电荷信息、物理参数清晰分类
+ATP 这部分没有很复杂的层级，主要就是把注释、类型名和参数数值分开。拿它来看原子类型表和对应参数，已经够用。
 
-\textbf{应用场景：}力场开发、原子类型定义、参数优化
+\subsubsection{Gromacs 原子重命名文件（ARN）}
 
-\subsubsection{Gromacs 突变拓扑文件（MTP）}
+ARN 文件的语法定义位于 \lstinline|syntaxes/arn.tmLanguage.json|。当前版本里，它识别分号注释、浮点数、行首的残基名、其后的原子名以及后续原子类型字符串。这个文件属于映射类文本，实现重点就是把名称列和数值列分开。
 
-MTP 文件用于 Gromacs 中的自由能计算，定义了在突变过程中如何修改分子的拓扑结构。该文件包含了初始状态、最终状态和中间状态的定义，支持复杂的化学变化模拟。
+ARN 文件中，注释、残基名、原子名和原子类型字符串是分别匹配的。这样写的好处不大不小，正好够用来人工检查重命名规则文本里的字段顺序。
+
+\subsubsection{Gromacs 残基类型文件（RTP）}
+
+RTP 文件使用 \lstinline|syntaxes/rtp.tmLanguage.json|。规则里识别分号注释、\lstinline|torsion| 和 \lstinline|un| 等特殊说明行、方括号 section 名、原子名、四元原子组、原子类型、电荷以及一般数值项。像 \lstinline|[ atoms ]|、\lstinline|[ bonds ]|、\lstinline|[ impropers ]| 这些 section 内常见字段，在当前版本里都做了区分。
+
+RTP 里能看到比较清楚的层次：section 名称、原子组、原子类型、电荷和数值参数是分开的。编辑或阅读 RTP 文本时，先找到 section，再看字段列，会比较顺。
+
+\subsubsection{Gromacs 氢数据库文件（HDB）}
+
+HDB 文件的语法定义位于 \lstinline|syntaxes/hdb.tmLanguage.json|。当前规则识别分号注释、行首残基名、数量字段、原子名组以及数值项。HDB 的文本组织比较规整，所以这里主要还是靠列位置和行结构做匹配。
+
+HDB 里，残基名、计数字段、原子名组合和数值列是分别显示的。对这类加氢规则文件来说，能把条目结构看清楚就已经很实用。
+
+\subsubsection{Gromacs 残基到珠映射文件（R2B）}
+
+R2B 文件使用 \lstinline|syntaxes/r2b.tmLanguage.json|。当前实现较简单，主要对分号注释、字符串形式的残基名以及数值项进行区分。
+
+R2B 的高亮比较简单，注释、名称字段和数值字段是分开的。它更像一个轻量的映射表显示，不需要写得太复杂。
 
 \subsubsection{Gromacs 终端数据库文件（TDB）}
 
-TDB 文件定义了 Gromacs 中蛋白质终端的处理方式，包括 N-终端和 C-终端的质子化状态和特殊修饰。该文件在构建蛋白质系统拓扑时提供终端处理的标准化规则。
+TDB 文件的语法定义位于 \lstinline|syntaxes/tdb.tmLanguage.json|。这一项支持分号注释、方括号 section 名、原子名、一组四到五个原子名的规则行、原子类型、原子质量、电荷以及一般数值项。当前版本在这类文件中的重点，还是把终端修饰规则里的名称字段和参数字段拆开。
 
 \begin{figure}[!h]
     \centering
@@ -245,23 +239,31 @@ TDB 文件定义了 Gromacs 中蛋白质终端的处理方式，包括 N-终端�
     \label{fig:mtp-tdb-highlighting}
 \end{figure}
 
-\textbf{MTP高亮特性：}状态定义、拓扑变化、参数转换、突变路径清晰标识
+在 TDB 里，section、原子名组、类型、质量和电荷用了不同作用域。浏览终端数据库文件时，规则段落的边界会更清楚一些。
 
-\textbf{MTP应用场景：}自由能计算、突变模拟、化学反应研究
+\subsubsection{Gromacs 突变拓扑文件（MTP）}
 
-\textbf{TDB高亮特性：}终端类型、修饰定义、质子化状态、原子添加规则清晰分类
+MTP 文件使用 \lstinline|syntaxes/mtp.tmLanguage.json|。当前规则识别分号注释、以 \lstinline|default| 开头的关键字、方括号 section 名、原子名、原子类型、电荷和一般数值项。代码里对部分旋转相关行和四元原子组还写了专门模式。
 
-\textbf{TDB应用场景：}蛋白质建模、pH 效应模拟、终端修饰研究
+MTP 当前能把默认关键字、section、原子名、电荷和数值列分出层次。阅读突变拓扑文本时，先抓状态块，再看原子字段，会比较方便。
+
+\subsubsection{Gromacs 虚拟位点定义文件（VSD）}
+
+VSD 文件的语法定义位于 \lstinline|syntaxes/vsd.tmLanguage.json|。这是 0.0.7 版本新增支持的文件类型。当前规则识别分号注释、关键字 \lstinline|planar|、方括号 section、原子名、原子类型和数值项，范围不大，但和当前代码是一致的。
+
+VSD 这部分的范围不大，关键字、section、原子名和参数值是分别显示的。对于当前版本来说，这样已经足够支撑查看虚拟位点定义文本中的名称列和参数列。
 
 \subsection{小分子文件格式}
 
 \subsubsection{MOL2 分子结构文件（MOL2）}
 
-MOL2 是 Tripos 公司开发的小分子结构文件格式，在药物设计和分子建模领域广泛使用。该格式能够存储分子的完整信息，包括原子坐标、电荷分布、原子类型和键连接关系。md-highlighter 为 MOL2 文件提供了细致的语法高亮，能够突出显示不同的数据块和关键信息。
+MOL2 文件使用 \lstinline|syntaxes/mol2.tmLanguage.json|。这份语法和前面几类文件不太一样，实际是通过 \lstinline|repository.structure| 中的规则来工作。当前可识别注释行、以 \lstinline|@<TRIPOS>| 形式出现的结构段标识、原子编号、原子名、原子类型、残基编号、残基名、电荷和键类型。因为它用了 \lstinline|include| 引用内部仓库规则，所以文件结构看起来也和其他语法文件不完全一样。
+
+MOL2 里，结构段标识、原子名、原子类型、残基信息、电荷和键类型是分开显示的。这个格式最直接的用处，就是阅读小分子结构文本里的原子表和键表。
 
 \subsubsection{结构数据文件（SDF）}
 
-SDF（Structure Data File）是化学信息学中广泛使用的分子结构数据格式。该格式能够存储多个分子的结构信息，包括原子坐标、键连接、立体化学信息和分子属性数据。SDF 文件在药物发现和化学数据库管理中应用广泛。
+SDF 文件的语法定义位于 \lstinline|syntaxes/sdf.tmLanguage.json|。当前版本里，它会识别单独的字符串行、\lstinline|V2000| 标志、\lstinline|M  END| 和 \lstinline|$$$$| 结束标记、属性头 \lstinline|> <...>|、三维坐标列、元素符号、键连接行和键级。
 
 \begin{figure}[!h]
     \centering
@@ -282,19 +284,13 @@ SDF（Structure Data File）是化学信息学中广泛使用的分子结构数�
     \label{fig:mol2-sdf-highlighting}
 \end{figure}
 
-\textbf{MOL2高亮特性：}分子信息、原子类型、键连接、电荷数据突出显示
-
-\textbf{MOL2应用场景：}小分子建模、药物设计、化学结构分析
-
-\textbf{SDF高亮特性：}分子数据块、原子坐标、键连接表、属性信息清晰组织
-
-\textbf{SDF应用场景：}化学数据库、药物筛选、分子属性分析
+SDF 里，文件头标记、坐标列、元素符号、键连信息、属性头和结束标识是分开显示的。实际看这种文件时，最有帮助的还是文本块边界和原子坐标区更容易看清。
 
 \subsection{增强采样文件格式}
 
 \subsubsection{PLUMED 输入文件}
 
-PLUMED 是一个功能强大的增强采样库，广泛用于分子动力学模拟中的自由能计算和集体变量分析。PLUMED 输入文件使用特殊的语法结构，包含关键字、变量定义、函数参数和注释信息。md-highlighter 能够准确识别这些不同的语法元素，帮助用户更高效地编写和调试 PLUMED 脚本。
+PLUMED 文件使用 \lstinline|syntaxes/plumed.tmLanguage.json|。当前规则识别注释行、动作关键字 \lstinline|GROUP|、\lstinline|MOLINFO|、\lstinline|PRINT|、\lstinline|ANGLE|、\lstinline|TORSION|、\lstinline|DISTANCE|、\lstinline|COM|、\lstinline|GYRATION|、\lstinline|VOLUME|，偏置关键字 \lstinline|LOWER_WALLS| 和 \lstinline|UPPER_WALLS|，通用参数名 \lstinline|ATOMS|、\lstinline|ARG|、\lstinline|FILE|、\lstinline|STRIDE|、\lstinline|NDX_FILE|、\lstinline|NDX_GROUP|、\lstinline|RESTRAINT|、\lstinline|METAD|，以及参数值和数值项。
 
 \begin{figure}[!h]
     \centering
@@ -303,57 +299,55 @@ PLUMED 是一个功能强大的增强采样库，广泛用于分子动力学模�
     \label{fig:plumed-highlighting}
 \end{figure}
 
-\textbf{高亮特性：}关键字、变量定义、函数参数、注释清晰区分
+PLUMED 的显示层次比较清楚，动作关键字、偏置关键字、参数名、变量名和数值项是分开的。编写或阅读输入脚本时，动作段和参数段不会搅在一起。
 
-\textbf{应用场景：}增强采样、集体变量定义、自由能计算
+\subsection{实际应用说明}
 
-\subsection{实际应用指南}
+\subsubsection{文本阅读和人工检查}
 
-\subsubsection{文件格式验证与调试}
-通过语法高亮快速定位文件格式问题：
+本软件的直接用途是提升文本可读性。对于列宽固定或字段密集的文件，语法高亮能帮助用户更快看出不同字段所在位置。例如：
 \begin{itemize}
-    \item 识别格式不正确的坐标数据
-    \item 发现缺失的原子类型定义
-    \item 验证残基编号的连续性
-    \item 检查键连接的完整性
+    \item PDB、GRO、AC 这类固定列宽文件中，坐标列和名称列可较快分离
+    \item PRMTOP、LIB、TDB、RTP 这类分块或分段文件中，section 标识更容易定位
+    \item tleap、PLUMED 等脚本文件中，命令和参数名不容易混在一起
 \end{itemize}
 
-\subsubsection{跨格式工作流}
-md-highlighter 支持完整的分子模拟工作流：
+这里的“检查”指人工阅读时的辅助，不等同于程序自动校验，也不表示软件能够给出结构正确性结论。
+
+\subsubsection{跨格式编辑场景}
+
+分子模拟工作流通常会同时涉及多种文本格式。md-highlighter 的作用不是串联这些格式之间的数据转换，而是在同一个编辑器中给不同文件提供尽量统一的可读性。当前版本适合以下编辑场景：
 \begin{itemize}
-    \item PDB $\to$ PSF $\to$ 参数文件的 NAMD 流程
-    \item PDB $\to$ GRO $\to$ TOP 的 Gromacs 流程  
-    \item MOL2 $\to$ AC $\to$ PRMTOP 的 Amber 流程
-    \item PLUMED 集成的增强采样流程
+    \item 在同一 VS Code 会话中切换查看 PDB、PSF、PRM 等 NAMD/CHARMM 相关文件
+    \item 并列编辑 MOL2、PREPIN、FRCMOD、PRMTOP 等 Amber/AmberTools 文件
+    \item 查看 GRO、RTP、TDB、MTP、VSD 等 Gromacs 配置文本
+    \item 编写 \lstinline|.plumed.dat| 文件时区分动作块和参数块
 \end{itemize}
 
 \section{未来发展}
 
-\subsection{计划增强}
+\subsection{计划改进}
 
-md-highlighter 扩展持续发展，计划改进包括：
-
+从 README 和现有语法文件里的注释看，后续仍有一些可以继续完善的方向：
 \begin{itemize}
-    \item 为新兴仿真工具提供额外文件格式支持
-    \item 专为氨基酸类型设计的自定义颜色方案
-    \item 增强的错误检测和验证特性
-    \item 与分子可视化工具的集成
-    \item 超大文件的性能优化
-    \item 利用折叠功能管理大型文件的复杂结构
+    \item 继续补充更多分子模拟相关文本格式
+    \item 调整部分规则对特殊原子命名方式的兼容性
+    \item 针对已有语法文件中的已知注释和 TODO 继续细化匹配范围
+    \item 视需要补充更多截图和示例文件，方便用户比对显示效果
+    \item 在不引入复杂运行时代码的前提下，保持语法文件结构的可维护性
+    \item 结合实际使用情况修正少数过宽或过窄的正则规则
 \end{itemize}
 
 \subsection{社区贡献}
 
-扩展欢迎社区贡献：
+本项目适合以下几类增量维护工作：
 \begin{itemize}
-    \item 新文件格式定义
-    \item 改进的语法规则
-    \item 错误报告和特性请求
-    \item 文档改进
+    \item 为新的文件格式补充 \lstinline|tmLanguage| 规则
+    \item 根据实际样例文件修改已有正则表达式
+    \item 提交显示问题、误匹配问题和边界样例
+    \item 完善 README、截图和软著申请材料中的说明文本
 \end{itemize}
 
 \subsection{总结}
 
-md-highlighter 扩展通过为计算化学和结构生物学中使用的多样化文件格式提供全面、智能的语法高亮，显著改善了分子仿真工作流程。通过其语义颜色编码系统、一致的跨格式方法和广泛的格式覆盖，该扩展提高了生产力、减少了错误，并改善了从事分子动力学仿真的研究人员和开发人员的整体用户体验。
-
-无论处理简单的坐标文件还是复杂的力场参数，md-highlighter 扩展都提供了高效准确文件编辑所需的视觉清晰度。
+md-highlighter 当前版本的实现重心，是为分子动力学相关文本文件提供编辑器级语法高亮。源码中已注册 23 个语言 ID，并配套 23 个 \lstinline|tmLanguage| 语法文件。当前版本完成的是文件识别、文本匹配和作用域分配，不包含独立计算引擎、网络服务或数据库模块。

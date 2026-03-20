@@ -4,3 +4,19 @@
 vsc-extension-quickstart.md
 .qoder
 deprecated/**
+.history/
+
+
+# LaTeX build artifacts (keep document.pdf tracked)
+software-copyright/*.aux
+software-copyright/*.log
+software-copyright/*.out
+software-copyright/*.synctex.gz
+software-copyright/*.toc
+software-copyright/*.fls
+software-copyright/*.xdv
+software-copyright/*.synctex(busy)
+software-copyright/*.fdb_latexmk
+software-copyright/*/src
+software-copyright/*_excerpt.pdf
+software-copyright/latexmkrc
