@@ -4,7 +4,7 @@
 
 \subsection{系统要求}
 
-md-highlighter 是一个VSCode扩展。这个项目本身没有单独的后端程序，也不需要数据库。实际使用时，主要要求还是VSCode能正常加载扩展配置和TextMate语法文件。
+md-highlighter 是一个VSCode扩展。本项目没有单独的后端程序，也不需要数据库。实际使用时，主要要求是VSCode正常加载扩展配置和TextMate语法文件。
 
 \begin{table}[h]
 \centering
@@ -24,11 +24,11 @@ VSCode版本 & 1.70.0及以上版本，对应\lstinline|package.json|中的\lsti
 
 \subsection{软件特性}
 
-本章仅说明当前仓库中已经实现的内容，不额外扩展。md-highlighter 的主要功能是为分子模拟相关文本文件提供语法高亮。当前版本在\lstinline|package.json|中注册了23个语言ID，对应23个语法定义文件，范围包括NAMD/CHARMM、Amber/AmberTools、Gromacs、小分子结构文件以及PLUMED输入文件。
+当前版本在\lstinline|package.json|中注册了23个语言ID，对应23个语法定义文件，范围包括NAMD/CHARMM、Amber/AmberTools、Gromacs、小分子结构文件以及PLUMED输入文件。
 
 \subsubsection{颜色编码方式}
 
-这个扩展本身并不直接写死每一种颜色，而是给文本打上TextMate作用域，最后由当前主题决定显示效果。结合现有语法文件，当前版本里常见的作用域用法大致如下：
+该扩展本身并不直接定义每一种颜色，而是为文本赋予TextMate作用域，最终由当前主题决定显示效果。常见的作用域用法如下：
 
 \begin{itemize}
     \item \textbf{名称类字段}：原子名、残基名、分段名称等，一般使用\lstinline|entity.name.*|或相近作用域
@@ -41,10 +41,9 @@ VSCode版本 & 1.70.0及以上版本，对应\lstinline|package.json|中的\lsti
 
 \subsubsection{主题兼容性}
 
-README中写到当前项目在\lstinline|Atom One Light|主题下做过显示检查。至于其他主题，本扩展仍按VSCode的作用域取色机制显示；但不同主题之间的颜色差异较大，实际显示效果应以用户本地主题为准，因此本文档不将其表述为统一结论。
+在\lstinline|Atom One Light|主题下已经测试显示效果。对于其他主题，本扩展仍按VSCode的作用域取色机制显示；但不同主题之间的颜色差异较大，实际显示效果以用户本地主题为准。
 
-如果需要手动调某一类字段的颜色，可以在\lstinline|settings.json|中覆盖指定作用域。例如：
-\newpage
+如需手动调整某一类字段的颜色，可在\lstinline|settings.json|中覆盖指定作用域。例如：
 
 \begin{lstlisting}[style=blockstyle,language=json]
 {
@@ -66,7 +65,7 @@ README中写到当前项目在\lstinline|Atom One Light|主题下做过显示检
 
 \subsubsection{从Visual Studio Marketplace安装}
 
-如果该版本已经发布到扩展市场，可以直接在VSCode里搜索安装。操作步骤如下：
+若该版本已经发布到扩展市场，可直接在VSCode中搜索安装。操作步骤如下：
 \begin{itemize}
     \item 打开VSCode
     \item 进入扩展视图，或者按 \texttt{Ctrl+Shift+X}
@@ -76,7 +75,7 @@ README中写到当前项目在\lstinline|Atom One Light|主题下做过显示检
 
 \subsubsection{从VSIX文件安装}
 
-如果是从仓库发布页拿到VSIX包，也可以手动安装：
+若从仓库发布页获取VSIX包，也可手动安装：
 \begin{itemize}
     \item 打开VSCode
     \item 按 \texttt{Ctrl+Shift+P} 打开命令面板
@@ -87,29 +86,29 @@ README中写到当前项目在\lstinline|Atom One Light|主题下做过显示检
 
 \subsubsection{从命令行安装}
 
-如果本机已经能使用\lstinline|code|命令，也可以直接执行：
+若本机已经能使用\lstinline|code|命令，也可直接执行：
 \begin{lstlisting}[style=blockstyle,language=bash]
 code --install-extension gxf1212.md-highlighter
 \end{lstlisting}
 
 \subsection{验证安装}
 
-安装完成后，可以打开一个已经注册的文件类型，查看语言模式和高亮是否生效。当前版本可按下面的方法确认：
+安装完成后，可打开一个已经注册的文件类型，查看语言模式和高亮是否生效。可按以下方法确认：
 
 \begin{itemize}
     \item 打开一个 \lstinline|.pdb|、\lstinline|.rtf|、\lstinline|.gro| 或 \lstinline|.plumed.dat| 文件
     \item 查看VSCode右下角的语言模式是否切换到本扩展注册的语言ID
-    \item 查看文件内容是否已经按字段出现分段高亮，而不是整段普通文本
+    \item 查看文件内容是否已按字段出现分段高亮，而不是整段普通文本
     \item 在扩展列表中确认 \lstinline|md-highlighter| 处于已启用状态
 \end{itemize}
 
 \subsection{配置选项}
 
-当前版本没有自定义设置项，安装后即可使用。和显示有关的调整主要还是走VSCode自身的主题和文件关联能力，而不是本扩展单独提供一套配置面板。
+当前版本没有自定义设置项，安装后即可使用。与显示有关的调整主要通过VSCode自身的主题和文件关联能力完成，而不是由本扩展单独提供配置面板。
 
 \subsubsection{主题适配}
 
-主题适配主要取决于当前主题对TextMate作用域的解释方式。当前材料中只保留能够确认的信息：项目作者在\lstinline|Atom One Light|主题下查看过显示效果。若用户本地使用其他主题，通常也能看到高亮，但具体颜色深浅和对比度仍取决于对应主题本身的配色方案。
+主题适配主要取决于当前主题对TextMate作用域的解释方式。\lstinline|Atom One Light|主题下已验证显示效果。若用户本地使用其他主题，仍可显示高亮，但具体颜色深浅和对比度取决于对应主题本身的配色方案。
 
 \subsubsection{文件关联}
 
@@ -121,7 +120,7 @@ code --install-extension gxf1212.md-highlighter
     \item \lstinline|.plumed.dat| 会进入 \lstinline|plumed| 模式
 \end{itemize}
 
-如果文件后缀不标准，或者VSCode没自动识别，也可以手动切换语言模式，再选择本扩展注册的条目。
+如果文件后缀不标准，或者VSCode未自动识别，也可手动切换语言模式，再选择本扩展注册的条目。
 
 \subsection{更新和维护}
 
@@ -135,10 +134,10 @@ code --install-extension gxf1212.md-highlighter
 
 \subsubsection{问题反馈}
 
-当前仓库里保留了两个反馈渠道：
+保留了两个反馈渠道：
 \begin{itemize}
     \item GitHub Issues：\url{https://github.com/gxf1212/md-highlighter/issues}
-    \item 邮件：\url{mailto:gxf1212@zju.edu.cn}
+    \item 邮件：\href{mailto:gxf1212@zju.edu.cn}{gxf1212@zju.edu.cn}
 \end{itemize}
 
 \subsection{卸载}
