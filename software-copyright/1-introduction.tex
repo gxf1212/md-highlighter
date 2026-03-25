@@ -11,18 +11,18 @@
 \toprule
 \textbf{项目} & \textbf{描述} \\
 \midrule
-软件全称 & 分子动力学文件语法高亮 VScode 插件 \\
+软件全称 & 分子动力学文件语法高亮VSCode插件 \\
 软件简称 & md-highlighter \\
 版本号 & 0.0.7 \\
 软件分类 & 应用软件 \\
-软件类型 & Visual Studio Code 扩展插件 \\
-开发语言 & JSON 配置文件 \\
-运行环境 & Visual Studio Code 1.70.0 及以上版本 \\
-开发者 & 高旭帆（gxf1212） \\
+软件类型 & VSCode扩展插件 \\
+开发语言 & JSON配置文件 \\
+运行环境 & VSCode1.70.0及以上版本 \\
+% 开发者 & 高旭帆（gxf1212） \\
 联系方式 & gxf1212@zju.edu.cn \\
-开发单位 & 个人开发者 \\
+% 开发单位 & 个人开发者 \\
 仓库地址 & \href{https://github.com/gxf1212/md-highlighter}{https://github.com/gxf1212/md-highlighter} \\
-程序规模 & package.json、language-configuration.json 以及 23 个语法定义文件，共 1761 行 \\
+程序规模 & 配置文件以及23个语法定义文件，共1761行 \\
 当前公开版本 & 0.0.7 \\
 \bottomrule
 \end{tabular}
@@ -30,28 +30,28 @@
 
 \subsection{软件用途}
 
-md-highlighter 用于在 Visual Studio Code 中为分子动力学相关文本文件提供语法高亮。这个项目当前做的事情比较明确，不涉及计算、建模或结果分析，主要是在编辑器里完成文件类型识别、语法元素匹配和颜色作用域分配，方便直接阅读和修改专业输入文件。
+md-highlighter 用于在VSCode中为分子动力学相关文本文件提供语法高亮。本项目不涉及计算、建模或结果分析，主要在编辑器中完成文件类型识别、语法元素匹配和颜色作用域分配，用于支持专业输入文件的阅读和修改。
 
-从仓库实现看，它的工作流程也比较直白：先在 \lstinline|package.json| 里注册语言标识、文件扩展名和语法文件路径，再由 \lstinline|language-configuration.json| 提供通用的括号、注释和自动补全配置；各类具体格式的匹配规则写在 \lstinline|syntaxes/*.tmLanguage.json| 中，最后由 VS Code 根据匹配结果给文本片段赋予作用域，再交给当前主题显示颜色。
+从仓库实现看，其工作流程较为明确：先在\lstinline|package.json|中注册语言标识、文件扩展名和语法文件路径，再由\lstinline|language-configuration.json|提供通用的括号、注释和自动补全配置；各类具体格式的匹配规则写在\lstinline|syntaxes/*.tmLanguage.json|中，最后由VSCode根据匹配结果为文本片段赋予作用域，再由当前主题显示颜色。
 
 \subsection{适用对象}
 
-本工具面向需要直接编辑分子模拟输入文件的用户。比较常见的使用者，一类是使用 NAMD、CHARMM、Amber、AmberTools、Gromacs、PLUMED 的研究人员；一类是在 VS Code 中查看力场、拓扑、坐标和参数文件的实验人员；另外也包括需要补充或维护这类文本语法高亮规则的开发者。
+本工具面向需要直接编辑分子模拟输入文件的用户。比较常见的使用者，一类是使用NAMD、CHARMM、Amber、AmberTools、Gromacs、PLUMED的研究人员；一类是在VSCode中查看力场、拓扑、坐标和参数文件的实验人员；另外也包括需要补充或维护这类文本语法高亮规则的开发者。
 
 \subsection{主要功能}
 
-当前版本和源码能直接对应上的功能，主要是这几块。第一是文件识别，项目里注册了 23 个语言 ID，并把常见扩展名或文件名模式映射到对应语言。第二是语法高亮，不同文件格式各自定义匹配规则，对关键字、原子名、残基名、编号、坐标和参数值等内容着色。第三是作用域映射，尽量复用 VS Code 主题可识别的标准 TextMate 作用域，例如 \lstinline|entity.name|、\lstinline|constant.numeric|、\lstinline|support.type|。另外，这个扩展本身比较轻，不包含后台服务、数据库或独立执行程序，安装后由编辑器直接加载。
+当前版本与源码能够直接对应的功能主要包括以下几项。第一是文件识别，项目注册了23个语言ID，并将常见扩展名或文件名模式映射到对应语言。第二是语法高亮，不同文件格式分别定义匹配规则，对关键字、原子名、残基名、编号、坐标和参数值等内容着色。第三是作用域映射，尽量复用VSCode主题可识别的标准TextMate作用域，例如\lstinline|entity.name|、\lstinline|constant.numeric|、\lstinline|support.type|。此外，该扩展属于轻量级编辑器扩展，不包含后台服务、数据库或独立执行程序，安装后由编辑器直接加载。
 
 \subsection{支持范围}
 
-按照 \lstinline|package.json| 当前注册结果，本软件共提供 23 个语法定义，覆盖以下文件类型：
+按照\lstinline|package.json|当前注册结果，本软件共注册23个语言ID，对应23个语法定义文件，覆盖以下文件类型：
 
 \begin{table}[!h]
 \centering
 \caption{已注册的语言和文件类型}
 \begin{tabular}{p{2cm}p{11cm}}
 \toprule
-\textbf{类别} & \textbf{语言 ID 或扩展名} \\
+\textbf{类别} & \textbf{语言ID或扩展名} \\
 \midrule
 NAMD或CHARMM & rtf（\lstinline|.rtf|、\lstinline|.str|、\lstinline|.inp|、\lstinline|.prm|、\lstinline|.par|）、pdb（\lstinline|.pdb|）、psf（\lstinline|.psf|） \\
 Amber或AmberTools & in（\lstinline|.in|，并匹配 \lstinline|leaprc.*|）、prmtop（\lstinline|.prmtop|、\lstinline|.parm7|）、inpcrd（\lstinline|.inpcrd|、\lstinline|.rst7|）、prepin（\lstinline|.prepin|、\lstinline|.prepi|）、frcmod（\lstinline|.frcmod| 及若干参数文件名模式）、lib（\lstinline|.lib|、\lstinline|.off|）、ac（\lstinline|.ac|）、mc（\lstinline|.mc|） \\
@@ -64,7 +64,7 @@ Gromacs & gro、atp、arn、rtp、hdb、r2b、tdb、mtp、vsd \\
 
 \subsection{实现特点}
 
-本软件的实现特点可以直接从代码文件看出来。现在的组织方式基本是一种语言对应一个 \lstinline|.tmLanguage.json| 文件，后续维护时比较容易单独调整。各语法文件内部主要使用内联正则表达式描述文本结构，没有额外的编译步骤。高亮范围也是基于文本模式匹配来实现，不依赖外部命令，也不读取网络数据。换句话说，当前版本主要解决的是“阅读和编辑时更容易分辨字段”这个问题，不负责语义计算、参数求解或自动修复。
+本软件的实现特点可以直接从代码文件中对应出来。当前的组织方式基本是一种语言对应一个\lstinline|.tmLanguage.json|文件，后续维护时可按文件分别调整。各语法文件内部主要使用内联正则表达式描述文本结构，没有额外的编译步骤。高亮范围基于文本模式匹配实现，不依赖外部命令，也不读取网络数据。概括而言，当前版本主要解决阅读和编辑过程中的字段区分问题，不负责语义计算、参数求解或自动修复。
 
 \subsection{文档编写目的}
 

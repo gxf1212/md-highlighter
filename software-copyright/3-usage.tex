@@ -2,13 +2,14 @@
 
 \section{使用示例}
 
-md-highlighter 安装后会在 VS Code 中按文件类型自动加载相应语法文件。下面各节按仓库中已经存在的语法定义说明高亮范围，不另外引入未实现的功能。当前版本做的是文本匹配和作用域标注，不做分子结构计算，也不做力场参数求解。
+md-highlighter 安装后会在VSCode中按文件类型自动加载相应语法文件。下面各节按仓库中已经存在的语法定义说明高亮范围，不另外引入未实现的功能。软件实现的是文本匹配和作用域标注，不做分子结构计算，也不做力场参数求解。
 
 \subsection{NAMD/CHARMM 文件格式}
 
 \subsubsection{蛋白质数据库文件（PDB）}
 
-PDB 文件的高亮规则定义在 \lstinline|syntaxes/pdb.tmLanguage.json|。这一部分写得比较直接：先把 \lstinline|CRYST|、\lstinline|REMARK|、\lstinline|HEADER|、\lstinline|TITLE|、\lstinline|COMPND|、\lstinline|SOURCE|、\lstinline|JRNL|、\lstinline|CONECT| 这类记录当作说明性记录处理；再单独匹配 \lstinline|CRYST1|、\lstinline|TER|、\lstinline|END|、\lstinline|HELIX|、\lstinline|SHEET|、\lstinline|SSBOND|；对 \lstinline|ATOM| 和 \lstinline|HETATM| 行，则按固定列宽继续拆出原子序号、原子名、残基名、链标识、残基编号、坐标、占有率、温度因子、段名、电荷等字段。
+PDB 文件的高亮规则定义在 \lstinline|syntaxes/pdb.tmLanguage.json|。相关规则先将 \lstinline|CRYST|、\lstinline|REMARK|、\lstinline|HEADER|、\lstinline|TITLE|、\lstinline|COMPND|、\lstinline|SOURCE|、\lstinline|JRNL|、\lstinline|CONECT| 等记录作为说明性记录处理；再单独匹配 \lstinline|CRYST1|、\lstinline|TER|、\lstinline|END|、\lstinline|HELIX|、\lstinline|SHEET|、\lstinline|SSBOND|；对 \lstinline|ATOM| 和 \lstinline|HETATM| 行，则按固定列宽继续拆出原子序号、原子名、残基名、链标识、残基编号、坐标、占有率、温度因子、段名、电荷等字段。
+如图\ref{fig:pdb-highlighting}所示，PDB 文件中的记录头和原子数据列在编辑器中已有分层显示。
 
 \begin{figure}[!h]
     \centering
@@ -17,11 +18,12 @@ PDB 文件的高亮规则定义在 \lstinline|syntaxes/pdb.tmLanguage.json|。�
     \label{fig:pdb-highlighting}
 \end{figure}
 
-从实际显示看，记录名和数据行是分开处理的；原子记录内部又会按固定列位置区分原子序号、原子名、残基名、链 ID、三列坐标和元素符号等字段。这个格式最适合在编辑器里直接看文本布局，手动核对坐标列、残基编号和记录类型时会更顺手。
+从实际显示效果看，记录名与数据行分别处理；原子记录内部又按固定列位置区分原子序号、原子名、残基名、链ID、三列坐标和元素符号等字段。该规则可用于在编辑器中查看文本布局，并核对坐标列、残基编号和记录类型。
 
 \subsubsection{残基拓扑文件（RTF）}
 
 RTF 和部分 CHARMM 参数文件共用 \lstinline|syntaxes/rtf.tmLanguage.json|。这份语法文件里既有拓扑项，也兼顾了参数项。实际匹配内容包括以 \lstinline|!| 和 \lstinline|*| 开头的注释行，\lstinline|MASS|、\lstinline|RESI|、\lstinline|PRES|、\lstinline|ATOM|、\lstinline|BOND|、\lstinline|ANGLE|、\lstinline|DIHEDRAL|、\lstinline|IMPR|、\lstinline|PATCH|、\lstinline|LONEPAIR| 等关键字，以及这些关键字后面的质量编号、元素符号、残基名、电荷数值、原子名称和原子类型。
+如图\ref{fig:rtf-highlighting}所示，注释、关键字和参数列之间已经区分开。
 
 \begin{figure}[!h]
     \centering
@@ -30,11 +32,12 @@ RTF 和部分 CHARMM 参数文件共用 \lstinline|syntaxes/rtf.tmLanguage.json|
     \label{fig:rtf-highlighting}
 \end{figure}
 
-在该文件里，注释、拓扑关键字、残基名、电荷、原子名和参数区数据是分开显示的；\lstinline|MASS| 行以及 \lstinline|RESI/PRES| 行还有单独规则。实际使用时，这一类高亮更适合查看残基定义、键接关系以及力场项的文本组织方式，人工定位拓扑段落会方便一些。
+在该文件里，注释、拓扑关键字、残基名、电荷、原子名和参数区数据是分开显示的；\lstinline|MASS|行以及\lstinline|RESI/PRES|行还有单独规则。这类高亮可用于查看残基定义、键接关系以及力场项的文本组织方式，并定位拓扑段落。
 
 \subsubsection{蛋白质结构文件（PSF）}
 
-PSF 文件的高亮规则定义在 \lstinline|syntaxes/psf.tmLanguage.json|。这一部分没有写得很花，重点就是把 \lstinline|PSF| 文件头、说明性记录、各个 section 标题、总数值以及原子数据行中的字段区分开。实际用下来，比较有用的是长文件里 section 标题和数据主体不会混在一起。
+PSF 文件的高亮规则定义在 \lstinline|syntaxes/psf.tmLanguage.json|。该规则重点区分 \lstinline|PSF| 文件头、说明性记录、各个分段标题、总数值以及原子数据行中的字段。对于长文件而言，分段标题和数据主体可以分别显示。
+如图\ref{fig:psf-highlighting}所示，PSF 文件中标题区、分段标识和正文数据区能够分开显示。
 
 \begin{figure}[!h]
     \centering
@@ -43,11 +46,12 @@ PSF 文件的高亮规则定义在 \lstinline|syntaxes/psf.tmLanguage.json|。�
     \label{fig:psf-highlighting}
 \end{figure}
 
-这里的效果比较朴素，文件头、分段标识、计数字段和原子相关数据采用不同作用域。对较长的 PSF 文本来说，这样至少能先把 section 标题和数据区分开。
+其实现方式较为明确，文件头、分段标识、计数字段和原子相关数据采用不同作用域。对较长的PSF文本而言，可以先区分分段标题和数据区域。
 
 \subsubsection{CHARMM 参数文件（PRM）}
 
 扩展把 \lstinline|.prm| 文件也归入 \lstinline|rtf| 语言配置，因此它的语法高亮仍然来自 \lstinline|syntaxes/rtf.tmLanguage.json|。在该分析项中，主要是对 \lstinline|BONDS|、\lstinline|ANGLES|、\lstinline|DIHEDRALS|、\lstinline|IMPROPERS|、\lstinline|CMAP|、\lstinline|NONBONDED|、\lstinline|NBFIX| 等参数区名称做匹配，再把原子类型、浮点数参数和部分节标题分开显示。
+如\ref{fig:prm-highlighting}所示，参数区标题与数值列在当前版本里已经能够形成层次。
 
 \begin{figure}[!h]
     \centering
@@ -56,13 +60,14 @@ PSF 文件的高亮规则定义在 \lstinline|syntaxes/psf.tmLanguage.json|。�
     \label{fig:prm-highlighting}
 \end{figure}
 
-PRM 这部分主要是把参数区标题、原子类型字符串和数值参数拉开层次。当前版本里，它的作用还是偏基础，主要用于阅读和修改参数文本时区分节标题、类型名和数值列。
+PRM 部分主要区分参数区标题、原子类型字符串和数值参数。其作用主要体现在阅读和修改参数文本时，对节标题、类型名和数值列进行分层显示。
 
 \subsection{Amber/AmberTools 文件格式}
 
 \subsubsection{Amber 拓扑文件（PRMTOP）}
 
 PRMTOP 文件使用 \lstinline|syntaxes/prmtop.tmLanguage.json|。这份规则是按块写的。先识别 \lstinline|%VERSION|、\lstinline|%FLAG|、\lstinline|%FORMAT| 三类标记，再对 \lstinline|ATOM_NAME|、\lstinline|ATOMIC_NUMBER|、\lstinline|MASS|、\lstinline|RESIDUE_LABEL|、\lstinline|AMBER_ATOM_TYPE| 等数据块分别处理。实际输出为：格式字符串、原子名、原子序数、残基名、原子类型和数值项会落在不同作用域里。
+如图\ref{fig:prmtop-highlighting}所示，PRMTOP文件在编辑器中更接近按块阅读的效果。
 
 \begin{figure}[!h]
     \centering
@@ -71,11 +76,10 @@ PRMTOP 文件使用 \lstinline|syntaxes/prmtop.tmLanguage.json|。这份规则�
     \label{fig:prmtop-highlighting}
 \end{figure}
 
-实际显示时，\lstinline|%FLAG|/\lstinline|%FORMAT| 标记、格式说明、原子名块、残基标签块和数值块会被分层处理。对 PRMTOP 这类按块组织的数据文件来说，这样更容易人工定位常见 section。
+实际显示时，\lstinline|%FLAG|/\lstinline|%FORMAT|标记、格式说明、原子名块、残基标签块和数值块会被分层处理。对PRMTOP这类按块组织的数据文件来说，可以据此定位常见分段。
 
-\subsubsection{Amber 参数版本 7 格式（PARM7）}
-
-\lstinline|.parm7| 扩展名在 \lstinline|package.json| 中与 \lstinline|prmtop| 语言 ID 共用同一套语法定义，因此它的高亮方式和 PRMTOP 相同。当前版本没有为 \lstinline|.parm7| 另外再写一套规则，而是直接复用 \lstinline|syntaxes/prmtop.tmLanguage.json| 中的分块匹配逻辑。
+\lstinline|.parm7|扩展名在\lstinline|package.json|中与\lstinline|prmtop|语言ID共用同一套语法定义，因此它的高亮方式和PRMTOP相同。仓库中没有为\lstinline|.parm7|另外再写一套规则，而是直接复用\lstinline|syntaxes/prmtop.tmLanguage.json|中的分块匹配逻辑。
+如图\ref{fig:parm7-highlighting}所示，PARM7文件的显示层次与PRMTOP基本一致。
 
 \begin{figure}[!h]
     \centering
@@ -84,11 +88,12 @@ PRMTOP 文件使用 \lstinline|syntaxes/prmtop.tmLanguage.json|。这份规则�
     \label{fig:parm7-highlighting}
 \end{figure}
 
-因为直接复用了 PRMTOP 的规则，所以这里看到的也是同一套标记、字段块和数值高亮方式。适用范围也很直接，就是用 \lstinline|.parm7| 扩展名存放的 Amber 拓扑文件。
+因为直接复用了PRMTOP的规则，所以这里看到的也是同一套标记、字段块和数值高亮方式。对应的文件范围就是使用\lstinline|.parm7|扩展名的Amber拓扑文件。
 
 \subsubsection{Amber 库文件（LIB）}
 
-LIB/OFF 文件的语法定义位于 \lstinline|syntaxes/lib.tmLanguage.json|。这里的规则比较贴近文件本身的组织方式，主要识别 \lstinline|!entry| 记录、残基名、unit 类型、原子名、残基编号、原子编号、元素编号、电荷以及纯数字索引行。以 \lstinline|!entry| 开头的结构段单独处理，所以头部标识和后续数据行不会混在一层。
+LIB/OFF 文件的语法定义位于 \lstinline|syntaxes/lib.tmLanguage.json|。相关规则基本按照文件本身的组织方式编写，主要识别 \lstinline|!entry| 记录、残基名、unit 类型、原子名、残基编号、原子编号、元素编号、电荷以及纯数字索引行。以 \lstinline|!entry| 开头的结构段单独处理，因此头部标识和后续数据行不会处于同一层级。
+如图\ref{fig:lib-highlighting}所示，LIB文件里的条目头和原子数据区是可以分辨开的。
 
 \begin{figure}[!h]
     \centering
@@ -97,11 +102,12 @@ LIB/OFF 文件的语法定义位于 \lstinline|syntaxes/lib.tmLanguage.json|。�
     \label{fig:lib-highlighting}
 \end{figure}
 
-\lstinline|!entry| 关键字、残基名、原子名、编号和电荷字段会分别显示出来。看 tLeap 库文件时，这样比较容易顺着条目结构往下读，也方便找原子列表。
+\lstinline|!entry|关键字、残基名、原子名、编号和电荷字段会分别显示出来。查看tLeap库文件时，可按条目结构逐段阅读，并定位原子列表。
 
 \subsubsection{Amber 预处理输入文件（PREPIN）}
 
-PREPIN 文件的规则定义在 \lstinline|syntaxes/prepin.tmLanguage.json|。这一部分除了原子表，还把一些控制项一起写进去了。当前可识别 \lstinline|remark| 信息行、\lstinline|DU/ DUM| 占位原子、坐标类型 \lstinline|INT|/\lstinline|XYZ|、\lstinline|CORRECT|、\lstinline|CHANGE|、\lstinline|OMIT|、\lstinline|LOOP|、\lstinline|IMPROPER|、\lstinline|DONE|、\lstinline|STOP| 等控制关键字，以及原子编号、原子名、原子类型、树符号、电荷和浮点数。
+PREPIN 文件的规则定义在 \lstinline|syntaxes/prepin.tmLanguage.json|。除原子表外，该规则还包含若干控制项，能够识别 \lstinline|remark| 信息行、\lstinline|DU/ DUM| 占位原子、坐标类型 \lstinline|INT|/\lstinline|XYZ|、\lstinline|CORRECT|、\lstinline|CHANGE|、\lstinline|OMIT|、\lstinline|LOOP|、\lstinline|IMPROPER|、\lstinline|DONE|、\lstinline|STOP| 等控制关键字，以及原子编号、原子名、原子类型、树符号、电荷和浮点数。
+如图\ref{fig:prepin-highlighting}所示，说明段、控制项和原子表在显示上已有区分。
 
 \begin{figure}[!h]
     \centering
@@ -110,11 +116,12 @@ PREPIN 文件的规则定义在 \lstinline|syntaxes/prepin.tmLanguage.json|。�
     \label{fig:prepin-highlighting}
 \end{figure}
 
-说明行、控制关键字、原子信息列和电荷数值在当前版本里都有对应匹配。对于非标准残基预处理文件，这样的分段足够支持人工核对原子表和控制段。
+说明行、控制关键字、原子信息列和电荷数值在当前版本里都有对应匹配。对于非标准残基预处理文件，这样的分段可用于人工核对原子表和控制段。
 
 \subsubsection{Amber 力场修改文件（FRCMOD）}
 
-FRCMOD 文件的语法定义位于 \lstinline|syntaxes/frcmod.tmLanguage.json|。当前版本里，这个文件主要匹配 \lstinline|MASS|、\lstinline|BOND|、\lstinline|ANGLE|、\lstinline|DIHE|、\lstinline|IMPROPER|、\lstinline|NONBON|、\lstinline|CMAP| 等段标识，并对不同段中的原子类型组合、浮点参数和整数参数分别着色。
+FRCMOD 文件的语法定义位于 \lstinline|syntaxes/frcmod.tmLanguage.json|。该文件主要匹配 \lstinline|MASS|、\lstinline|BOND|、\lstinline|ANGLE|、\lstinline|DIHE|、\lstinline|IMPROPER|、\lstinline|NONBON|、\lstinline|CMAP| 等段标识，并对不同段中的原子类型组合、浮点参数和整数参数分别着色。
+如图\ref{fig:frcmod-highlighting}所示，各参数段之间的边界已经分开。
 
 \begin{figure}[!h]
     \centering
@@ -123,11 +130,12 @@ FRCMOD 文件的语法定义位于 \lstinline|syntaxes/frcmod.tmLanguage.json|�
     \label{fig:frcmod-highlighting}
 \end{figure}
 
-这个格式里，参数段标题和各类参数行的原子类型组合、数值项区分得比较清楚。实际用途主要还是人工查看新增或修改后的力场参数条目。
+在该格式中，参数段标题以及各类参数行中的原子类型组合、数值项能够区分显示。其主要用途仍是人工查看新增或修改后的力场参数条目。
 
 \subsubsection{AmberTools 输入脚本（TLEAP/相关 .in 文件）}
 
 \lstinline|syntaxes/in.tmLanguage.json| 用于 \lstinline|.in| 文件以及 \lstinline|leaprc.*| 模式文件。它同时照顾了 Amber MD 输入脚本、tleap 常用命令和部分 parmed 命令。代码里已经写进去的关键词包括 \lstinline|imin|、\lstinline|iwrap|、\lstinline|ntx|、\lstinline|cut|、\lstinline|nstlim|、\lstinline|temp0| 等 MD 参数名，也包括 \lstinline|source|、\lstinline|loadmol2|、\lstinline|loadpdb|、\lstinline|loadamberparams|、\lstinline|loadAmberPrep|、\lstinline|loadOFF|、\lstinline|addIons|、\lstinline|savepdb|、\lstinline|saveamberparm|、\lstinline|quit| 等 tleap 命令。
+如图\ref{fig:tleap-highlighting}所示，命令、参数名和注释在脚本中能够分层显示。
 
 \begin{figure}[!h]
     \centering
@@ -136,11 +144,12 @@ FRCMOD 文件的语法定义位于 \lstinline|syntaxes/frcmod.tmLanguage.json|�
     \label{fig:tleap-highlighting}
 \end{figure}
 
-在这类脚本里，注释、参数名、命令名、常见文件格式名、离子名和变量赋值行都会分开显示。写 Amber 输入文件和 tleap 脚本时，至少不会把命令和参数混成一片。
+在这类脚本里，注释、参数名、命令名、常见文件格式名、离子名和变量赋值行都会分开显示。编写Amber输入文件和tleap脚本时，命令和参数可按不同颜色层次区分。
 
 \subsubsection{Antechamber 主链文件（MC）}
 
-MC 文件使用 \lstinline|syntaxes/mc.tmLanguage.json|。当前规则识别 \lstinline|HEAD_NAME|、\lstinline|TAIL_NAME|、\lstinline|PRE_HEAD_TYPE|、\lstinline|POST_TAIL_TYPE|、\lstinline|CHARGE|、\lstinline|OMIT_NAME| 等字段名，并对 \lstinline|NAME| 行后的原子名、\lstinline|TYPE| 行后的原子类型以及数值项进行着色。
+MC 文件使用 \lstinline|syntaxes/mc.tmLanguage.json|。规则识别 \lstinline|HEAD_NAME|、\lstinline|TAIL_NAME|、\lstinline|PRE_HEAD_TYPE|、\lstinline|POST_TAIL_TYPE|、\lstinline|CHARGE|、\lstinline|OMIT_NAME| 等字段名，并对 \lstinline|NAME| 行后的原子名、\lstinline|TYPE| 行后的原子类型以及数值项进行着色。
+如图\ref{fig:mc-highlighting}所示，字段名和数据值在MC文件中已经分开。
 
 \begin{figure}[!h]
     \centering
@@ -149,11 +158,12 @@ MC 文件使用 \lstinline|syntaxes/mc.tmLanguage.json|。当前规则识别 \ls
     \label{fig:mc-highlighting}
 \end{figure}
 
-MC 文件里，字段关键字、原子名、原子类型和数值项用了不同作用域。它的用途也比较朴素，就是在查看主链定义文本时，能把名称字段和参数字段先分开。
+MC 文件里，字段关键字、原子名、原子类型和数值项用了不同作用域。它的主要作用是在查看主链定义文本时，把名称字段和参数字段先分开。
 
 \subsubsection{Antechamber 文件（AC）}
 
-AC 文件的语法定义位于 \lstinline|syntaxes/ac.tmLanguage.json|。当前实现识别 \lstinline|CHARGE|、\lstinline|Formula| 两类头部关键字；对 \lstinline|ATOM|/\lstinline|HETATM| 行按固定宽度拆分原子编号、原子名、残基名、残基编号、三维坐标、电荷和原子类型；对 \lstinline|BOND| 行则区分键序号、两端原子编号、键类型和两端原子名。
+AC 文件的语法定义位于 \lstinline|syntaxes/ac.tmLanguage.json|。这份规则识别 \lstinline|CHARGE|、\lstinline|Formula| 两类头部关键字；对 \lstinline|ATOM|/\lstinline|HETATM| 行按固定宽度拆分原子编号、原子名、残基名、残基编号、三维坐标、电荷和原子类型；对 \lstinline|BOND| 行则区分键序号、两端原子编号、键类型和两端原子名。
+如图\ref{fig:ac-highlighting}所示，AC文件里的头部、原子段和键段能够看出不同层次。
 
 \begin{figure}[!h]
     \centering
@@ -162,13 +172,14 @@ AC 文件的语法定义位于 \lstinline|syntaxes/ac.tmLanguage.json|。当前�
     \label{fig:ac-highlighting}
 \end{figure}
 
-头部说明、原子记录和键记录在这里分别用了独立的匹配范围。对 Antechamber 中间文件来说，这样看原子信息和键信息会更直接。
+头部说明、原子记录和键记录在这里分别用了独立的匹配范围。对Antechamber中间文件来说，可据此区分原子信息和键信息。
 
 \subsection{Gromacs 文件格式}
 
 \subsubsection{Gromacs 坐标文件（GRO）}
 
-GRO 文件的高亮规则定义在 \lstinline|syntaxes/gro.tmLanguage.json|。这份文件按列宽处理得比较明显：时间步字符串、标题行、总原子数行、盒子向量行先分出来，正文再按固定列宽区分残基编号、残基名、原子名、坐标列和速度列。代码里其实预留了原子编号字段的位置，但这一项当前的 \lstinline|match| 为空，所以现在的重点还是名称列和数值列。
+GRO 文件的高亮规则定义在 \lstinline|syntaxes/gro.tmLanguage.json|。相关规则按列宽处理：时间步字符串、标题行、总原子数行、盒子向量行先行区分，正文再按固定列宽区分残基编号、残基名、原子名、坐标列和速度列。代码中预留了原子编号字段的位置，但该项当前的\lstinline|match|为空，因此现阶段重点仍是名称列和数值列。
+如图\ref{fig:gro-highlighting}所示，GRO文件的列结构在编辑器里可以看出。
 
 \begin{figure}[!h]
     \centering
@@ -177,11 +188,12 @@ GRO 文件的高亮规则定义在 \lstinline|syntaxes/gro.tmLanguage.json|。�
     \label{fig:gro-highlighting}
 \end{figure}
 
-标题、总数、盒向量、残基名、原子名、坐标和速度列在显示上是分开的。GRO 文件本来就依赖列结构，这种高亮最有用的地方也正是在这里。
+标题、总数、盒向量、残基名、原子名、坐标和速度列在显示上是分开的。GRO文件本来就依赖列结构，这类高亮主要也是围绕列结构展开。
 
 \subsubsection{Gromacs 原子类型文件（ATP）}
 
-ATP 文件使用 \lstinline|syntaxes/atp.tmLanguage.json|。这部分规则比较短，主要处理分号注释、浮点数、一般原子类型字符串以及带 \lstinline|amber| 前缀的类型名。
+ATP 文件使用 \lstinline|syntaxes/atp.tmLanguage.json|。该规则内容较短，主要处理分号注释、浮点数、一般原子类型字符串以及带 \lstinline|amber| 前缀的类型名。
+如图\ref{fig:atp-highlighting}所示，ATP文件里类型名和数值列已经区分开。
 
 \begin{figure}[!h]
     \centering
@@ -190,35 +202,36 @@ ATP 文件使用 \lstinline|syntaxes/atp.tmLanguage.json|。这部分规则比�
     \label{fig:atp-highlighting}
 \end{figure}
 
-ATP 这部分没有很复杂的层级，主要就是把注释、类型名和参数数值分开。拿它来看原子类型表和对应参数，已经够用。
+ATP 这部分没有很复杂的层级，主要就是把注释、类型名和参数数值分开。用于查看原子类型表和对应参数时，可以先看名称列，再看数值列。
 
 \subsubsection{Gromacs 原子重命名文件（ARN）}
 
-ARN 文件的语法定义位于 \lstinline|syntaxes/arn.tmLanguage.json|。当前版本里，它识别分号注释、浮点数、行首的残基名、其后的原子名以及后续原子类型字符串。这个文件属于映射类文本，实现重点就是把名称列和数值列分开。
+ARN 文件的语法定义位于 \lstinline|syntaxes/arn.tmLanguage.json|。它识别分号注释、浮点数、行首的残基名、其后的原子名以及后续原子类型字符串。这个文件属于映射类文本，实现重点就是把名称列和数值列分开。
 
-ARN 文件中，注释、残基名、原子名和原子类型字符串是分别匹配的。这样写的好处不大不小，正好够用来人工检查重命名规则文本里的字段顺序。
+ARN 文件中，注释、残基名、原子名和原子类型字符串是分别匹配的。这种写法可用于人工检查重命名规则文本里的字段顺序。
 
 \subsubsection{Gromacs 残基类型文件（RTP）}
 
-RTP 文件使用 \lstinline|syntaxes/rtp.tmLanguage.json|。规则里识别分号注释、\lstinline|torsion| 和 \lstinline|un| 等特殊说明行、方括号 section 名、原子名、四元原子组、原子类型、电荷以及一般数值项。像 \lstinline|[ atoms ]|、\lstinline|[ bonds ]|、\lstinline|[ impropers ]| 这些 section 内常见字段，在当前版本里都做了区分。
+RTP 文件使用 \lstinline|syntaxes/rtp.tmLanguage.json|。规则里识别分号注释、\lstinline|torsion|和\lstinline|un|等特殊说明行、方括号分段名、原子名、四元原子组、原子类型、电荷以及一般数值项。像\lstinline|[ atoms ]|、\lstinline|[ bonds ]|、\lstinline|[ impropers ]|这些分段内常见字段，当前都做了区分。
 
-RTP 里能看到比较清楚的层次：section 名称、原子组、原子类型、电荷和数值参数是分开的。编辑或阅读 RTP 文本时，先找到 section，再看字段列，会比较顺。
+RTP 里能够看到较清楚的层次：分段名称、原子组、原子类型、电荷和数值参数是分开的。编辑或阅读RTP文本时，可以先定位分段，再查看字段列。
 
 \subsubsection{Gromacs 氢数据库文件（HDB）}
 
-HDB 文件的语法定义位于 \lstinline|syntaxes/hdb.tmLanguage.json|。当前规则识别分号注释、行首残基名、数量字段、原子名组以及数值项。HDB 的文本组织比较规整，所以这里主要还是靠列位置和行结构做匹配。
+HDB 文件的语法定义位于 \lstinline|syntaxes/hdb.tmLanguage.json|。规则识别分号注释、行首残基名、数量字段、原子名组以及数值项。HDB 的文本组织比较规整，所以这里主要还是靠列位置和行结构做匹配。
 
-HDB 里，残基名、计数字段、原子名组合和数值列是分别显示的。对这类加氢规则文件来说，能把条目结构看清楚就已经很实用。
+HDB 里，残基名、计数字段、原子名组合和数值列是分别显示的。对这类加氢规则文件来说，可据此查看条目结构。
 
 \subsubsection{Gromacs 残基到珠映射文件（R2B）}
 
-R2B 文件使用 \lstinline|syntaxes/r2b.tmLanguage.json|。当前实现较简单，主要对分号注释、字符串形式的残基名以及数值项进行区分。
+R2B 文件使用 \lstinline|syntaxes/r2b.tmLanguage.json|。实现较简单，主要对分号注释、字符串形式的残基名以及数值项进行区分。
 
-R2B 的高亮比较简单，注释、名称字段和数值字段是分开的。它更像一个轻量的映射表显示，不需要写得太复杂。
+R2B 的高亮规则相对简洁，注释、名称字段和数值字段分别显示，更接近轻量级映射表的展示方式。
 
 \subsubsection{Gromacs 终端数据库文件（TDB）}
 
-TDB 文件的语法定义位于 \lstinline|syntaxes/tdb.tmLanguage.json|。这一项支持分号注释、方括号 section 名、原子名、一组四到五个原子名的规则行、原子类型、原子质量、电荷以及一般数值项。当前版本在这类文件中的重点，还是把终端修饰规则里的名称字段和参数字段拆开。
+TDB 文件的语法定义位于 \lstinline|syntaxes/tdb.tmLanguage.json|。这一项支持分号注释、方括号分段名、原子名、一组四到五个原子名的规则行、原子类型、原子质量、电荷以及一般数值项。这里的重点还是把终端修饰规则里的名称字段和参数字段拆开。
+如图\ref{fig:mtp-tdb-highlighting}所示，其中(a)为MTP文件显示效果，(b)为TDB文件显示效果；两类文件都能把分段和参数列分开。
 
 \begin{figure}[!h]
     \centering
@@ -239,27 +252,28 @@ TDB 文件的语法定义位于 \lstinline|syntaxes/tdb.tmLanguage.json|。这�
     \label{fig:mtp-tdb-highlighting}
 \end{figure}
 
-在 TDB 里，section、原子名组、类型、质量和电荷用了不同作用域。浏览终端数据库文件时，规则段落的边界会更清楚一些。
+在TDB里，分段、原子名组、类型、质量和电荷用了不同作用域。浏览终端数据库文件时，规则段落的边界会更清楚一些。
 
 \subsubsection{Gromacs 突变拓扑文件（MTP）}
 
-MTP 文件使用 \lstinline|syntaxes/mtp.tmLanguage.json|。当前规则识别分号注释、以 \lstinline|default| 开头的关键字、方括号 section 名、原子名、原子类型、电荷和一般数值项。代码里对部分旋转相关行和四元原子组还写了专门模式。
+MTP 文件使用 \lstinline|syntaxes/mtp.tmLanguage.json|。规则识别分号注释、以\lstinline|default|开头的关键字、方括号分段名、原子名、原子类型、电荷和一般数值项。代码里对部分旋转相关行和四元原子组还写了专门模式。
 
-MTP 当前能把默认关键字、section、原子名、电荷和数值列分出层次。阅读突变拓扑文本时，先抓状态块，再看原子字段，会比较方便。
+MTP 当前能把默认关键字、分段、原子名、电荷和数值列分出层次。阅读突变拓扑文本时，可以先定位状态块，再查看原子字段。
 
 \subsubsection{Gromacs 虚拟位点定义文件（VSD）}
 
-VSD 文件的语法定义位于 \lstinline|syntaxes/vsd.tmLanguage.json|。这是 0.0.7 版本新增支持的文件类型。当前规则识别分号注释、关键字 \lstinline|planar|、方括号 section、原子名、原子类型和数值项，范围不大，但和当前代码是一致的。
+VSD 文件的语法定义位于 \lstinline|syntaxes/vsd.tmLanguage.json|。这是0.0.7版本新增支持的文件类型。规则识别分号注释、关键字\lstinline|planar|、方括号分段、原子名、原子类型和数值项，范围不大，但和当前代码是一致的。
 
-VSD 这部分的范围不大，关键字、section、原子名和参数值是分别显示的。对于当前版本来说，这样已经足够支撑查看虚拟位点定义文本中的名称列和参数列。
+VSD 这部分的范围不大，关键字、分段、原子名和参数值是分别显示的。用于查看虚拟位点定义文本中的名称列和参数列已经够用。
 
 \subsection{小分子文件格式}
 
 \subsubsection{MOL2 分子结构文件（MOL2）}
 
 MOL2 文件使用 \lstinline|syntaxes/mol2.tmLanguage.json|。这份语法和前面几类文件不太一样，实际是通过 \lstinline|repository.structure| 中的规则来工作。当前可识别注释行、以 \lstinline|@<TRIPOS>| 形式出现的结构段标识、原子编号、原子名、原子类型、残基编号、残基名、电荷和键类型。因为它用了 \lstinline|include| 引用内部仓库规则，所以文件结构看起来也和其他语法文件不完全一样。
+如图\ref{fig:mol2-sdf-highlighting}所示，其中(a)为MOL2文件显示效果，(b)为SDF文件显示效果。
 
-MOL2 里，结构段标识、原子名、原子类型、残基信息、电荷和键类型是分开显示的。这个格式最直接的用处，就是阅读小分子结构文本里的原子表和键表。
+MOL2 里，结构段标识、原子名、原子类型、残基信息、电荷和键类型是分开显示的。这个格式可用于阅读小分子结构文本里的原子表和键表。
 
 \subsubsection{结构数据文件（SDF）}
 
@@ -284,43 +298,44 @@ SDF 文件的语法定义位于 \lstinline|syntaxes/sdf.tmLanguage.json|。当�
     \label{fig:mol2-sdf-highlighting}
 \end{figure}
 
-SDF 里，文件头标记、坐标列、元素符号、键连信息、属性头和结束标识是分开显示的。实际看这种文件时，最有帮助的还是文本块边界和原子坐标区更容易看清。
+SDF 里，文件头标记、坐标列、元素符号、键连信息、属性头和结束标识是分开显示的。查看这类文件时，文本块边界和原子坐标区会更清楚。
 
 \subsection{增强采样文件格式}
 
-\subsubsection{PLUMED 输入文件}
+\subsubsection{PLUMED输入文件}
 
-PLUMED 文件使用 \lstinline|syntaxes/plumed.tmLanguage.json|。当前规则识别注释行、动作关键字 \lstinline|GROUP|、\lstinline|MOLINFO|、\lstinline|PRINT|、\lstinline|ANGLE|、\lstinline|TORSION|、\lstinline|DISTANCE|、\lstinline|COM|、\lstinline|GYRATION|、\lstinline|VOLUME|，偏置关键字 \lstinline|LOWER_WALLS| 和 \lstinline|UPPER_WALLS|，通用参数名 \lstinline|ATOMS|、\lstinline|ARG|、\lstinline|FILE|、\lstinline|STRIDE|、\lstinline|NDX_FILE|、\lstinline|NDX_GROUP|、\lstinline|RESTRAINT|、\lstinline|METAD|，以及参数值和数值项。
+PLUMED文件使用 \lstinline|syntaxes/plumed.tmLanguage.json|。当前规则识别注释行、动作关键字 \lstinline|GROUP|、\lstinline|MOLINFO|、\lstinline|PRINT|、\lstinline|ANGLE|、\lstinline|TORSION|、\lstinline|DISTANCE|、\lstinline|COM|、\lstinline|GYRATION|、\lstinline|VOLUME|，偏置关键字 \lstinline|LOWER_WALLS| 和 \lstinline|UPPER_WALLS|，通用参数名 \lstinline|ATOMS|、\lstinline|ARG|、\lstinline|FILE|、\lstinline|STRIDE|、\lstinline|NDX_FILE|、\lstinline|NDX_GROUP|、\lstinline|RESTRAINT|、\lstinline|METAD|，以及参数值和数值项。
+如图\ref{fig:plumed-highlighting}所示，PLUMED输入文件里的动作关键字和参数项已经能分层显示。
 
 \begin{figure}[!h]
     \centering
     \includegraphics[width=0.85\textwidth]{../images/plumed.png}
-    \caption{PLUMED 输入文件语法高亮演示（.plumed.dat 格式）}
+    \caption{PLUMED输入文件语法高亮演示（.plumed.dat 格式）}
     \label{fig:plumed-highlighting}
 \end{figure}
 
-PLUMED 的显示层次比较清楚，动作关键字、偏置关键字、参数名、变量名和数值项是分开的。编写或阅读输入脚本时，动作段和参数段不会搅在一起。
+PLUMED的显示层次已经分开，动作关键字、偏置关键字、参数名、变量名和数值项使用不同作用域。编写或阅读输入脚本时，可据此区分动作段和参数段。
 
 \subsection{实际用途}
 
 \subsubsection{文本阅读和人工检查}
 
-本软件的直接用途是提升文本可读性。对于列宽固定或字段密集的文件，语法高亮能帮助用户更快看出不同字段所在位置。例如：
+本软件的直接用途在于文本阅读和编辑辅助。对于列宽固定或字段密集的文件，语法高亮可以帮助用户区分不同字段所在位置。例如：
 \begin{itemize}
-    \item PDB、GRO、AC 这类固定列宽文件中，坐标列和名称列可较快分离
-    \item PRMTOP、LIB、TDB、RTP 这类分块或分段文件中，section 标识更容易定位
-    \item tleap、PLUMED 等脚本文件中，命令和参数名不容易混在一起
+    \item PDB、GRO、AC这类固定列宽文件中，坐标列和名称列可以分开查看
+    \item PRMTOP、LIB、TDB、RTP这类分块或分段文件中，可以先定位分段标识
+    \item tleap、PLUMED等脚本文件中，命令和参数名可以按不同颜色层次查看
 \end{itemize}
 
 这里的“检查”指人工阅读时的辅助，不等同于程序自动校验，也不表示软件能够给出结构正确性结论。
 
 \subsubsection{跨格式编辑场景}
 
-分子模拟工作流通常会同时涉及多种文本格式。md-highlighter 的作用不是串联这些格式之间的数据转换，而是在同一个编辑器中给不同文件提供尽量统一的可读性。当前版本适合以下编辑场景：
+分子模拟工作流通常会同时涉及多种文本格式。md-highlighter 的作用不是串联这些格式之间的数据转换，而是在同一个编辑器中为不同文件提供较一致的显示方式。当前版本可用于以下编辑场景：
 \begin{itemize}
-    \item 在同一 VS Code 会话中切换查看 PDB、PSF、PRM 等 NAMD/CHARMM 相关文件
-    \item 并列编辑 MOL2、PREPIN、FRCMOD、PRMTOP 等 Amber/AmberTools 文件
-    \item 查看 GRO、RTP、TDB、MTP、VSD 等 Gromacs 配置文本
+    \item 在同一VSCode会话中切换查看PDB、PSF、PRM等NAMD/CHARMM相关文件
+    \item 并列编辑MOL2、PREPIN、FRCMOD、PRMTOP等Amber/AmberTools文件
+    \item 查看GRO、RTP、TDB、MTP、VSD等Gromacs配置文本
     \item 编写 \lstinline|.plumed.dat| 文件时区分动作块和参数块
 \end{itemize}
 
@@ -338,4 +353,4 @@ PLUMED 的显示层次比较清楚，动作关键字、偏置关键字、参数�
 
 \subsection{总结}
 
-md-highlighter 当前版本的实现重心，是为分子动力学相关文本文件提供编辑器级语法高亮。源码中已注册 23 个语言 ID，并配套 23 个 \lstinline|tmLanguage| 语法文件。当前版本完成的是文件识别、文本匹配和作用域分配，不包含独立计算引擎、网络服务或数据库模块。
+md-highlighter 当前版本的实现重心，是为分子动力学相关文本文件提供编辑器级语法高亮。源码中已注册23个语言ID，并配套23个语法定义文件。当前版本完成的是文件识别、文本匹配和作用域分配，不包含独立计算引擎、网络服务或数据库模块。

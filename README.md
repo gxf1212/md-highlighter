@@ -1,24 +1,24 @@
 # md-highlighter README
 
-`md-highlighter` is a simple extension to highlight the most various file types about molecular modeling and molecular dynamics simulation. This extension provides comprehensive coverage of commonly used file formats under various popular tools, including Gromacs, Amber, AmberTools, NAMD, VMD, and more. It also performs detailed keyword parsing, helping users to locate and edit information within files more quickly. Users can even identify syntax errors quickly based on different display colors. Feel free to download and try it out, and don't hesitate to recommend it to your colleagues!
+`md-highlighter` is a VSCode extension for syntax highlighting of text files used in molecular modeling and molecular dynamics simulation. The current version focuses on file type registration, keyword matching, and TextMate scope assignment for supported formats. It is intended to make these files easier to read and edit in VSCode.
 
 ## Features
 
-Supported format: 
+Supported formats:
 
 - NAMD: rtf, pdb, prm, psf, str, inp
 - Amber: in, prmtop, inpcrd, prepin, frcmod, lib/off, ac, mc
-- Gromacs: gro, atp, arn, rtp, hdb, r2b, tdb, mtp (pmx), ...
-- small molecule: sdf, mol2 (modified from gromacs helper), ...
+- Gromacs: gro, atp, arn, rtp, hdb, r2b, tdb, mtp, vsd
+- small molecule: sdf, mol2
 - PLUMED: .plumed.dat
 
-For gromacs `.top`/`.itp` files, you may also install `gromacs-helper`. For VMD, install `TCL`. For Gaussian, install `Gaussian Input File (gjf)`. But maybe I make my own syntaxes.
+For Gromacs `.top`/`.itp` files, you may also install `gromacs-helper`.
 
 Tested in theme "Atom One Light".
 
 ## Gallery
 
-Install to explore more file types!
+Examples of highlighted files:
 
 ![ph-pdb](https://cdn.jsdelivr.net/gh/gxf1212/md-highlighter@master/images/pdb.png)
 
@@ -52,7 +52,7 @@ Install to explore more file types!
 - support.type.segment-name (except psf)
 - entity.name.function: a different kind of blue
 
-But different file types might rendered with different colors...
+Different file types may render differently under different themes.
 
 ## Known Issues
 
@@ -63,18 +63,18 @@ But different file types might rendered with different colors...
   - with `'`, `+`, `-` in them are matched by `\\S+` but not `[A-Z+-']`
   - not always start with numbers (`-?\\+?[A-Z]+[0-9]*[A-Z0-9_]*`)
   - MTP: the last word in rotations
-- Amber .in files include various types; so do Gromacs .itp file
+- Amber `.in` files include various types; so do Gromacs `.itp` files
 - PRMTOP: E-01, normal `constant`?
 - FRCMOD: I know atomtypes can only be 1/2 characters long. Matching with this may solve the mismatching problem
 - LIB: later section not read and implemented
 - MTP/RTP: cannot match the last atom name?
-- not fully tested files for OPLS series and more force field, where naming conventions might be different
+- not fully tested for OPLS series and some other force fields where naming conventions may differ
 
 TODO:
 
 - add self-defined colors for aminoacids types (polar, nonpolar, etc.)
 - add self-defined colors like pink, etc.
-- sdf file?
+- refine sdf file rules
 
 ## Release Notes
 
